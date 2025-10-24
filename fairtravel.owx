@@ -20,6 +20,31 @@
         <Class IRI="#Activity"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#activityName"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLocation"/>
+    </Declaration>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#activityName"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#activityName"/>
+        <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#activityName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Activity"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <Declaration>
         <Class IRI="#OutdoorActivity"/>
     </Declaration>
     <Declaration>
