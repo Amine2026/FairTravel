@@ -38,9 +38,9 @@
 ## 7. Team Class Assignments
 
 - **Amine:** Activity, Recommendation, Event
-- **Ali:** Accommodation, Booking, Review
-- **Oussema:** CarbonFootprint, SustainabilityPractice
-- **Hamza:** Location, Transport, Service
+- **Ali:** SustainabilityPractice, Accommodation, Booking
+- **Oussema:** Service, Review
+- **Hamza:** Location, Transport, CarbonFootprint
 - **Hiba:** Tourist, Guide, Restaurant
 
 ## 8. Ontology File Format (2025)
