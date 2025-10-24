@@ -3,13 +3,26 @@
 ## 1. Domain Scope
 - Eco-responsible tourism: activities, accommodations, carbon footprint, recommendations, locations, tourists
 
+
 ## 2. Main Classes (Concepts)
-- Activity (subclasses: Outdoor, Cultural, Sport)
 - Accommodation
+- Activity
+	- OutdoorActivity (subclass)
+	- CulturalActivity (subclass)
+	- SportActivity (subclass)
+- Booking
 - CarbonFootprint
-- Recommendation
+- Event
+- Guide
 - Location
+- Recommendation
+- Restaurant
+- Review
+- Service
+- SustainabilityPractice
 - Tourist
+- Transport
+- Award
 
 ## 3. Key Properties
 - activityName (data, Activity, functional, string)
