@@ -85,6 +85,31 @@
         <Class IRI="#Recommendation"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#recommendationText"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#forActivity"/>
+    </Declaration>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#recommendationText"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#recommendationText"/>
+        <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#recommendationText"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#forActivity"/>
+        <Class IRI="#Recommendation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#forActivity"/>
+        <Class IRI="#Activity"/>
+    </ObjectPropertyRange>
+    <Declaration>
         <Class IRI="#Restaurant"/>
     </Declaration>
     <Declaration>
