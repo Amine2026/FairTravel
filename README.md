@@ -42,5 +42,20 @@
 - **Hamza:** Location, Transport, Service
 - **Hiba:** Tourist, Guide, Restaurant
 
+## 8. Ontology File Format (2025)
+
+- Ontology now uses OWL/XML style (not RDF/XML)
+- Root element: `<Ontology>`
+- Uses `<Prefix>` for namespaces and `<Declaration>` for classes
+- Example:
+	```xml
+	<Ontology ...>
+		<Prefix name="" IRI="http://www.fairtravel.com/fairtravel#"/>
+		<Declaration>
+			<Class IRI="#Accommodation"/>
+		</Declaration>
+	</Ontology>
+	```
+
 ---
 This file is a quick reference. Update as your ontology grows!
