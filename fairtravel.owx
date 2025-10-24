@@ -20,6 +20,28 @@
         <Class IRI="#Activity"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#OutdoorActivity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#CulturalActivity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SportActivity"/>
+    </Declaration>
+
+    <SubClassOf>
+        <Class IRI="#OutdoorActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#CulturalActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SportActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <Declaration>
         <Class IRI="#Booking"/>
     </Declaration>
     <Declaration>
