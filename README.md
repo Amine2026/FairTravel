@@ -39,7 +39,7 @@
 
 - **Amine:** Activity, Recommendation, Event
 - **Ali:** SustainabilityPractice, Accommodation, Booking
-- **Oussema:** Service, Review
+- **Oussema:** Service, Review, Award
 - **Hamza:** Location, Transport, CarbonFootprint
 - **Hiba:** Tourist, Guide, Restaurant
 
