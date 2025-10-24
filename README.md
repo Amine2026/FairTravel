@@ -13,7 +13,6 @@
 - Tourist
 
 
-## 3. Key Properties
 - hasCarbonFootprint (object)
 - locatedIn (object)
 - hasName (data)
@@ -21,6 +20,15 @@
 - cfValue (data)
 - activityName (data, Activity, functional, string)
 - hasLocation (object, Activity → Location, non-functional)
+- hasCarbonFootprint (object)
+- locatedIn (object)
+- hasName (data)
+- hasDescription (data)
+- cfValue (data)
+- activityName (data, Activity, functional, string)
+- hasLocation (object, Activity → Location, non-functional)
+- recommendationText (data, Recommendation, functional, string)
+- forActivity (object, Recommendation → Activity, non-functional)
 
 ## 4. Modeling Rules
 - Use CamelCase for classes, lowerCamelCase for properties
