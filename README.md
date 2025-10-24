@@ -3,7 +3,6 @@
 ## 1. Domain Scope
 - Eco-responsible tourism: activities, accommodations, carbon footprint, recommendations, locations, tourists
 
-
 ## 2. Main Classes (Concepts)
 - Activity (subclasses: Outdoor, Cultural, Sport)
 - Accommodation
@@ -12,12 +11,7 @@
 - Location
 - Tourist
 
-
-- hasCarbonFootprint (object)
-- locatedIn (object)
-- hasName (data)
-- hasDescription (data)
-- cfValue (data)
+## 3. Key Properties
 - activityName (data, Activity, functional, string)
 - hasLocation (object, Activity → Location, non-functional)
 - hasCarbonFootprint (object)
@@ -29,6 +23,8 @@
 - hasLocation (object, Activity → Location, non-functional)
 - recommendationText (data, Recommendation, functional, string)
 - forActivity (object, Recommendation → Activity, non-functional)
+- eventDate (data, Event, functional, dateTime)
+- hasLocation (object, Event → Location, non-functional)
 
 ## 4. Modeling Rules
 - Use CamelCase for classes, lowerCamelCase for properties

@@ -76,6 +76,31 @@
         <Class IRI="#Event"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#eventDate"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasLocation"/>
+    </Declaration>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#eventDate"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#eventDate"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#eventDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Event"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <Declaration>
         <Class IRI="#Guide"/>
     </Declaration>
     <Declaration>
