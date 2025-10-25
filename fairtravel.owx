@@ -91,6 +91,9 @@
         <ObjectProperty IRI="#forActivity"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#guidedBy"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#hasAward"/>
     </Declaration>
     <Declaration>
@@ -109,10 +112,19 @@
         <ObjectProperty IRI="#usedByTourist"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#visitsRestaurant"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#worksAt"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#activityName"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#activityType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#averagePrice"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#awardCategory"/>
@@ -136,6 +148,9 @@
         <DataProperty IRI="#contactInfo"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#cuisineType"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#dateRecommended"/>
     </Declaration>
     <Declaration>
@@ -154,7 +169,13 @@
         <DataProperty IRI="#eventType"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#guideName"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#issuingOrganization"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#languageSpoken"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#locallyOwned"/>
@@ -182,6 +203,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#recommendationText"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#restaurantName"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#reviewDate"/>
@@ -214,16 +238,28 @@
         <DataProperty IRI="#sustainabilityScore"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#touristAge"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#touristName"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#useLocalProducts"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#validUntil"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#AliGuide"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#AlpinePark"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BioBistro"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#CarbonNeutral_Certification"/>
@@ -247,6 +283,9 @@
         <NamedIndividual IRI="#GuidedNatureWalk"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#HibaTourist"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#HikingRec"/>
     </Declaration>
     <Declaration>
@@ -261,23 +300,9 @@
     <Declaration>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </Declaration>
-        <Declaration><Class IRI="#Guide"/></Declaration>
-        <Declaration><Class IRI="#Restaurant"/></Declaration>
-        <Declaration><ObjectProperty IRI="#guidedBy"/></Declaration>
-        <Declaration><ObjectProperty IRI="#visitsRestaurant"/></Declaration>
-        <Declaration><ObjectProperty IRI="#worksAt"/></Declaration>
-        <Declaration><ObjectProperty IRI="#locatedIn"/></Declaration>
-        <Declaration><DataProperty IRI="#touristName"/></Declaration>
-        <Declaration><DataProperty IRI="#touristAge"/></Declaration>
-        <Declaration><DataProperty IRI="#guideName"/></Declaration>
-        <Declaration><DataProperty IRI="#languageSpoken"/></Declaration>
-        <Declaration><DataProperty IRI="#restaurantName"/></Declaration>
-        <Declaration><DataProperty IRI="#averagePrice"/></Declaration>
-        <Declaration><DataProperty IRI="#cuisineType"/></Declaration>
-        <Declaration><NamedIndividual IRI="#HibaTourist"/></Declaration>
-        <Declaration><NamedIndividual IRI="#AliGuide"/></Declaration>
-        <Declaration><NamedIndividual IRI="#BioBistro"/></Declaration>
-        <Declaration><NamedIndividual IRI="#TunisCity"/></Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#TunisCity"/>
+    </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
     </Declaration>
@@ -326,12 +351,20 @@
         <Class IRI="#Review"/>
     </DisjointClasses>
     <ClassAssertion>
+        <Class IRI="#Guide"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Location"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#LocalShop"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Restaurant"/>
+        <NamedIndividual IRI="#BioBistro"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Award"/>
@@ -362,6 +395,10 @@
         <NamedIndividual IRI="#GuidedNatureWalk"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Tourist"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Recommendation"/>
         <NamedIndividual IRI="#HikingRec"/>
     </ClassAssertion>
@@ -381,65 +418,15 @@
         <Class IRI="#ActivityReview"/>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </ClassAssertion>
-        <ClassAssertion><Class IRI="#Tourist"/><NamedIndividual IRI="#HibaTourist"/></ClassAssertion>
-        <ClassAssertion><Class IRI="#Guide"/><NamedIndividual IRI="#AliGuide"/></ClassAssertion>
-        <ClassAssertion><Class IRI="#Restaurant"/><NamedIndividual IRI="#BioBistro"/></ClassAssertion>
-        <ClassAssertion><Class IRI="#Location"/><NamedIndividual IRI="#TunisCity"/></ClassAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#guidedBy"/>
-            <NamedIndividual IRI="#HibaTourist"/>
-            <NamedIndividual IRI="#AliGuide"/>
-        </ObjectPropertyAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#visitsRestaurant"/>
-            <NamedIndividual IRI="#HibaTourist"/>
-            <NamedIndividual IRI="#BioBistro"/>
-        </ObjectPropertyAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#worksAt"/>
-            <NamedIndividual IRI="#AliGuide"/>
-            <NamedIndividual IRI="#BioBistro"/>
-        </ObjectPropertyAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#locatedIn"/>
-            <NamedIndividual IRI="#BioBistro"/>
-            <NamedIndividual IRI="#TunisCity"/>
-        </ObjectPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#touristName"/>
-            <NamedIndividual IRI="#HibaTourist"/>
-            <Literal>Hiba</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#touristAge"/>
-            <NamedIndividual IRI="#HibaTourist"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">24</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#guideName"/>
-            <NamedIndividual IRI="#AliGuide"/>
-            <Literal>Ali Ben Salah</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#languageSpoken"/>
-            <NamedIndividual IRI="#AliGuide"/>
-            <Literal>French</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#restaurantName"/>
-            <NamedIndividual IRI="#BioBistro"/>
-            <Literal>Bio Bistro Tunis</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#averagePrice"/>
-            <NamedIndividual IRI="#BioBistro"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">28.5</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#cuisineType"/>
-            <NamedIndividual IRI="#BioBistro"/>
-            <Literal>Vegetarian</Literal>
-        </DataPropertyAssertion>
+    <ClassAssertion>
+        <Class IRI="#Location"/>
+        <NamedIndividual IRI="#TunisCity"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksAt"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <NamedIndividual IRI="#BioBistro"/>
+    </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#offeredBy"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
@@ -449,6 +436,11 @@
         <ObjectProperty IRI="#usedByTourist"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
         <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <NamedIndividual IRI="#TunisCity"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasLocation"/>
@@ -471,6 +463,16 @@
         <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#visitsRestaurant"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <NamedIndividual IRI="#BioBistro"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#forActivity"/>
         <NamedIndividual IRI="#HikingRec"/>
         <NamedIndividual IRI="#MountainHiking"/>
@@ -485,6 +487,16 @@
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
         <NamedIndividual IRI="#JohnDoe"/>
     </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#guideName"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <Literal>Ali Ben Salah</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#languageSpoken"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <Literal>French</Literal>
+    </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#locallyOwned"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
@@ -519,6 +531,21 @@
         <DataProperty IRI="#useLocalProducts"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#averagePrice"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">28.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#cuisineType"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal>Vegetarian</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#restaurantName"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal>Bio Bistro Tunis</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#awardCategory"/>
@@ -709,6 +736,16 @@
         <DataProperty IRI="#duration"/>
         <NamedIndividual IRI="#GuidedNatureWalk"/>
         <Literal>2 hours</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#touristAge"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">24</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#touristName"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <Literal>Hiba</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#dateRecommended"/>
