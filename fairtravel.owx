@@ -16,7 +16,13 @@
         <Class IRI="#Accommodation"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#AccommodationReview"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Activity"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#ActivityReview"/>
     </Declaration>
     <Declaration>
         <Class IRI="#Award"/>
@@ -37,6 +43,12 @@
         <Class IRI="#Guide"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#InformationCenter"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#LocalShop"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#Location"/>
     </Declaration>
     <Declaration>
@@ -55,6 +67,9 @@
         <Class IRI="#Service"/>
     </Declaration>
     <Declaration>
+        <Class IRI="#ServiceReview"/>
+    </Declaration>
+    <Declaration>
         <Class IRI="#SportActivity"/>
     </Declaration>
     <Declaration>
@@ -67,25 +82,16 @@
         <Class IRI="#Transport"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#ActivityReview"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#AccommodationReview"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#ServiceReview"/>
-    </Declaration>
-    <Declaration>
         <Class IRI="#TransportReview"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#InformationCenter"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#LocalShop"/>
+        <ObjectProperty IRI="#complementsActivity"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#forActivity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#hasAward"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasLocation"/>
@@ -94,49 +100,40 @@
         <ObjectProperty IRI="#hasReview"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#reviewedBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#reviewsService"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#reviewsActivity"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#reviewsAccommodation"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#reviewsTransport"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#writtenBy"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#usedByTourist"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#complementsActivity"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#locatedInLocation"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#offeredBy"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#receivedBy"/>
+        <ObjectProperty IRI="#reviewedBy"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#awardedTo"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasAward"/>
+        <ObjectProperty IRI="#usedByTourist"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#activityName"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#activityType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#awardCategory"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#awardDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#awardDescription"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#awardLevel"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#awardName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#certificateNumber"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#contactInfo"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#dateRecommended"/>
@@ -148,16 +145,40 @@
         <DataProperty IRI="#duration"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#ecoFriendlyPractices"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#eventDate"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#eventType"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#issuingOrganization"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#locallyOwned"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#mentionsSustainability"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#openingHours"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#operatingHours"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#organizer"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#overallRating"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#price"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#priceRange"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#rating"/>
@@ -166,37 +187,16 @@
         <DataProperty IRI="#recommendationText"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#source"/>
+        <DataProperty IRI="#reviewDate"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#reviewText"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#reviewDate"/>
+        <DataProperty IRI="#reviewTitle"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#reviewerName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#serviceName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#serviceType"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#operatingHours"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#contactInfo"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#mentionsSustainability"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#overallRating"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#reviewTitle"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#reviewerType"/>
@@ -205,52 +205,46 @@
         <DataProperty IRI="#sentiment"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#serviceName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#serviceType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#source"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#sustainabilityRating"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#ecoFriendlyPractices"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#priceRange"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#useLocalProducts"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#openingHours"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#locallyOwned"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#sustainabilityScore"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#awardName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#awardCategory"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#awardDate"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#issuingOrganization"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#awardLevel"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#certificateNumber"/>
+        <DataProperty IRI="#useLocalProducts"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#validUntil"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#awardDescription"/>
+        <NamedIndividual IRI="#AlpinePark"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#AlpinePark"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#HikingRec"/>
@@ -259,35 +253,25 @@
         <NamedIndividual IRI="#MountainHiking"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+    </Declaration>
+    <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
     </Declaration>
     <SubClassOf>
-        <Class IRI="#CulturalActivity"/>
-        <Class IRI="#Activity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#OutdoorActivity"/>
-        <Class IRI="#Activity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#SportActivity"/>
-        <Class IRI="#Activity"/>
+        <Class IRI="#AccommodationReview"/>
+        <Class IRI="#Review"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#ActivityReview"/>
         <Class IRI="#Review"/>
     </SubClassOf>
     <SubClassOf>
-        <Class IRI="#AccommodationReview"/>
-        <Class IRI="#Review"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#ServiceReview"/>
-        <Class IRI="#Review"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#TransportReview"/>
-        <Class IRI="#Review"/>
+        <Class IRI="#CulturalActivity"/>
+        <Class IRI="#Activity"/>
     </SubClassOf>
     <SubClassOf>
         <Class IRI="#InformationCenter"/>
@@ -297,9 +281,57 @@
         <Class IRI="#LocalShop"/>
         <Class IRI="#Service"/>
     </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OutdoorActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#ServiceReview"/>
+        <Class IRI="#Review"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SportActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#TransportReview"/>
+        <Class IRI="#Review"/>
+    </SubClassOf>
+    <DisjointClasses>
+        <Class IRI="#Activity"/>
+        <Class IRI="#Event"/>
+    </DisjointClasses>
+    <DisjointClasses>
+        <Class IRI="#Recommendation"/>
+        <Class IRI="#Review"/>
+    </DisjointClasses>
     <ClassAssertion>
         <Class IRI="#Location"/>
         <NamedIndividual IRI="#AlpinePark"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#LocalShop"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Award"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Award"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#InformationCenter"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Award"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Recommendation"/>
@@ -309,6 +341,24 @@
         <Class IRI="#OutdoorActivity"/>
         <NamedIndividual IRI="#MountainHiking"/>
     </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#AccommodationReview"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ActivityReview"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasAward"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+    </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#forActivity"/>
         <NamedIndividual IRI="#HikingRec"/>
@@ -319,6 +369,211 @@
         <NamedIndividual IRI="#MountainHiking"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#locallyOwned"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#operatingHours"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal>09:00-20:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#priceRange"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal>€-€€</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#serviceName"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal>Artisan Market Medina</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#serviceType"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal>Local Handicraft Shop</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityScore"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">88</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#useLocalProducts"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardCategory"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>Climate Action</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDate"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-06-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDescription"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>Certified for achieving net-zero carbon emissions through reduction and offsetting</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardLevel"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>Certified</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardName"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>Carbon Neutral Certification</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#certificateNumber"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>CN-2025-9012</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#issuingOrganization"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal>The CarbonNeutral Protocol</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#validUntil"/>
+        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-06-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-11-15T10:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal>Festival</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal>GreenWorld Org</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardCategory"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>Sustainable Food Service</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDate"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-01-10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDescription"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>Recognition for using organic local products and minimizing environmental impact</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardLevel"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>Certified</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardName"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>EU Ecolabel Restaurant Certification</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#certificateNumber"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>EU-ECO-2025-TN-5678</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#issuingOrganization"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal>European Commission</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#validUntil"/>
+        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2027-01-10</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#contactInfo"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal>info@ecotourism-sousse.tn, +216 73 123 456</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#locallyOwned"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#operatingHours"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal>08:00-18:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#serviceName"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal>Eco Tourism Information Center</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#serviceType"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal>Tourist Information Center</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityScore"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">95</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardCategory"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>Environmental Sustainability</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDate"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2024-03-15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardDescription"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>Awarded for outstanding environmental practices and sustainable tourism management</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardLevel"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>Gold</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#awardName"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>Green Key Eco-Rating</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#certificateNumber"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>GK-2024-FR-1234</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#issuingOrganization"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal>Foundation for Environmental Education</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#validUntil"/>
+        <NamedIndividual IRI="#GreenKey_Award_2024"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-03-15</Literal>
+    </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#dateRecommended"/>
         <NamedIndividual IRI="#HikingRec"/>
@@ -359,208 +614,206 @@
         <NamedIndividual IRI="#MountainHiking"/>
         <Literal>4 hours</Literal>
     </DataPropertyAssertion>
-    <Declaration>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-    </Declaration>
-    <ClassAssertion>
-        <Class IRI="#Event"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-    </ClassAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#eventType"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-        <Literal>Festival</Literal>
+        <DataProperty IRI="#mentionsSustainability"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#organizer"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-        <Literal>GreenWorld Org</Literal>
+        <DataProperty IRI="#overallRating"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#price"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#eventDate"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-11-15T10:00:00</Literal>
+        <DataProperty IRI="#reviewDate"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-09-15</Literal>
     </DataPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasLocation"/>
-        <NamedIndividual IRI="#EcoFestival2025"/>
-        <NamedIndividual IRI="#AlpinePark"/>
-    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewText"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal>Excellent eco-hotel with solar panels and local organic breakfast</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewTitle"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal>Outstanding sustainable hotel</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewerName"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal>Alice Johnson</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sentiment"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal>positive</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityRating"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#mentionsSustainability"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#overallRating"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewDate"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-08-20</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewText"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal>Great walking tour through the old Medina, very informative guide</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewerName"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal>Bob Smith</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sentiment"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal>positive</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityRating"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#complementsActivity"/>
+        <Class IRI="#Service"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#forActivity"/>
         <Class IRI="#Recommendation"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Activity"/>
+        <ObjectProperty IRI="#hasAward"/>
+        <ObjectUnionOf>
+            <Class IRI="#Accommodation"/>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Service"/>
+        </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Event"/>
+        <ObjectUnionOf>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Event"/>
+            <Class IRI="#Service"/>
+        </ObjectUnionOf>
     </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasReview"/>
+        <ObjectUnionOf>
+            <Class IRI="#Accommodation"/>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Service"/>
+            <Class IRI="#Transport"/>
+        </ObjectUnionOf>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#offeredBy"/>
+        <Class IRI="#Service"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#reviewedBy"/>
+        <Class IRI="#Review"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#usedByTourist"/>
+        <Class IRI="#Service"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#complementsActivity"/>
+        <Class IRI="#Activity"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#forActivity"/>
         <Class IRI="#Activity"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasAward"/>
+        <Class IRI="#Award"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#hasLocation"/>
         <Class IRI="#Location"/>
     </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasReview"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasReview"/>
-        <Class IRI="#Accommodation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasReview"/>
-        <Class IRI="#Activity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasReview"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasReview"/>
         <Class IRI="#Review"/>
     </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#reviewedBy"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#reviewedBy"/>
-        <Class IRI="#Tourist"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#reviewsService"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#reviewsService"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#reviewsActivity"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#reviewsActivity"/>
-        <Class IRI="#Activity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#reviewsAccommodation"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#reviewsAccommodation"/>
-        <Class IRI="#Accommodation"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#reviewsTransport"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#reviewsTransport"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#writtenBy"/>
-        <Class IRI="#Review"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#writtenBy"/>
-        <Class IRI="#Tourist"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#usedByTourist"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#usedByTourist"/>
-        <Class IRI="#Tourist"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#complementsActivity"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#complementsActivity"/>
-        <Class IRI="#Activity"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#locatedInLocation"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#locatedInLocation"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#offeredBy"/>
-        <Class IRI="#Service"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#offeredBy"/>
         <Class IRI="#Accommodation"/>
     </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#receivedBy"/>
-        <Class IRI="#Award"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#receivedBy"/>
-        <ObjectUnionOf>
-            <Class IRI="#Accommodation"/>
-            <Class IRI="#Service"/>
-            <Class IRI="#Activity"/>
-        </ObjectUnionOf>
+        <ObjectProperty IRI="#reviewedBy"/>
+        <Class IRI="#Tourist"/>
     </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#awardedTo"/>
-        <Class IRI="#Award"/>
-    </ObjectPropertyDomain>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#awardedTo"/>
-        <ObjectUnionOf>
-            <Class IRI="#Accommodation"/>
-            <Class IRI="#Service"/>
-            <Class IRI="#Activity"/>
-        </ObjectUnionOf>
-    </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasAward"/>
-        <ObjectUnionOf>
-            <Class IRI="#Accommodation"/>
-            <Class IRI="#Service"/>
-            <Class IRI="#Activity"/>
-        </ObjectUnionOf>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasAward"/>
-        <Class IRI="#Award"/>
+        <ObjectProperty IRI="#usedByTourist"/>
+        <Class IRI="#Tourist"/>
     </ObjectPropertyRange>
     <FunctionalDataProperty>
         <DataProperty IRI="#activityName"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
+        <DataProperty IRI="#awardCategory"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#awardDate"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#awardDescription"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#awardLevel"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#awardName"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#certificateNumber"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
         <DataProperty IRI="#eventDate"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
-        <DataProperty IRI="#recommendationText"/>
+        <DataProperty IRI="#issuingOrganization"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#locallyOwned"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
         <DataProperty IRI="#mentionsSustainability"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
         <DataProperty IRI="#overallRating"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#recommendationText"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
         <DataProperty IRI="#reviewTitle"/>
@@ -578,31 +831,7 @@
         <DataProperty IRI="#useLocalProducts"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
-        <DataProperty IRI="#locallyOwned"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#awardName"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#awardCategory"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#awardDate"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#issuingOrganization"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#awardLevel"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#certificateNumber"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
         <DataProperty IRI="#validUntil"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#awardDescription"/>
     </FunctionalDataProperty>
     <DataPropertyDomain>
         <DataProperty IRI="#activityName"/>
@@ -611,6 +840,34 @@
     <DataPropertyDomain>
         <DataProperty IRI="#activityType"/>
         <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#awardCategory"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#awardDate"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#awardDescription"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#awardLevel"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#awardName"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#certificateNumber"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#contactInfo"/>
+        <Class IRI="#Service"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#dateRecommended"/>
@@ -625,6 +882,10 @@
         <Class IRI="#Activity"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#ecoFriendlyPractices"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#eventDate"/>
         <Class IRI="#Event"/>
     </DataPropertyDomain>
@@ -633,24 +894,103 @@
         <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#issuingOrganization"/>
+        <Class IRI="#Award"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#locallyOwned"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#mentionsSustainability"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#openingHours"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#operatingHours"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#organizer"/>
         <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#overallRating"/>
+        <Class IRI="#Review"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#price"/>
         <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#priceRange"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#rating"/>
-        <Class IRI="#Recommendation"/>
+        <ObjectUnionOf>
+            <Class IRI="#Recommendation"/>
+            <Class IRI="#Review"/>
+        </ObjectUnionOf>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#recommendationText"/>
         <Class IRI="#Recommendation"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#reviewDate"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#reviewText"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#reviewTitle"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#reviewerName"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#reviewerType"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#sentiment"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#serviceName"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#serviceType"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#source"/>
         <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#sustainabilityRating"/>
+        <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#sustainabilityScore"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#useLocalProducts"/>
+        <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#validUntil"/>
+        <Class IRI="#Award"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#activityName"/>
@@ -658,6 +998,34 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#activityType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#awardCategory"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#awardDate"/>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#awardDescription"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#awardLevel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#awardName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#certificateNumber"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#contactInfo"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
@@ -670,6 +1038,10 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#duration"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#ecoFriendlyPractices"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
@@ -681,12 +1053,40 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#issuingOrganization"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#locallyOwned"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#mentionsSustainability"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#openingHours"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#operatingHours"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#organizer"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#overallRating"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#price"/>
         <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#priceRange"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#rating"/>
@@ -697,549 +1097,57 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#reviewDate"/>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#reviewText"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#reviewTitle"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#reviewerName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#reviewerType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#sentiment"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#serviceName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#serviceType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#source"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewText"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewText"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewDate"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewDate"/>
-        <Datatype abbreviatedIRI="xsd:date"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewerName"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewerName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#serviceName"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#serviceName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#serviceType"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#serviceType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#operatingHours"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#operatingHours"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#contactInfo"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#contactInfo"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#mentionsSustainability"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#mentionsSustainability"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#overallRating"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#overallRating"/>
-        <Datatype abbreviatedIRI="xsd:integer"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewTitle"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewTitle"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewerType"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewerType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#sentiment"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#sentiment"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#sustainabilityRating"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#sustainabilityRating"/>
         <Datatype abbreviatedIRI="xsd:integer"/>
     </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#ecoFriendlyPractices"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#ecoFriendlyPractices"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#priceRange"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#priceRange"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#useLocalProducts"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#useLocalProducts"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#openingHours"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#openingHours"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#locallyOwned"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#locallyOwned"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#sustainabilityScore"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#sustainabilityScore"/>
         <Datatype abbreviatedIRI="xsd:integer"/>
     </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#awardName"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
     <DataPropertyRange>
-        <DataProperty IRI="#awardName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#awardCategory"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#awardCategory"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#awardDate"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#awardDate"/>
-        <Datatype abbreviatedIRI="xsd:date"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#issuingOrganization"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#issuingOrganization"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#awardLevel"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#awardLevel"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#certificateNumber"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#certificateNumber"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#validUntil"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#validUntil"/>
-        <Datatype abbreviatedIRI="xsd:date"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#awardDescription"/>
-        <Class IRI="#Award"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#awardDescription"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <Declaration>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-    </Declaration>
-    <ClassAssertion>
-        <Class IRI="#InformationCenter"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#LocalShop"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#AccommodationReview"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#ActivityReview"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-    </ClassAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#serviceName"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal>Eco Tourism Information Center</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#serviceType"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal>Tourist Information Center</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#operatingHours"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal>08:00-18:00</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#contactInfo"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal>info@ecotourism-sousse.tn, +216 73 123 456</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#locallyOwned"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sustainabilityScore"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">95</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#serviceName"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal>Artisan Market Medina</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#serviceType"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal>Local Handicraft Shop</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#operatingHours"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal>09:00-20:00</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#priceRange"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal>€-€€</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#useLocalProducts"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#locallyOwned"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sustainabilityScore"/>
-        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">88</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewText"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal>Excellent eco-hotel with solar panels and local organic breakfast</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#rating"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewerName"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal>Alice Johnson</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewDate"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-09-15</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewTitle"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal>Outstanding sustainable hotel</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#overallRating"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sustainabilityRating"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sentiment"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal>positive</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#mentionsSustainability"/>
-        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewText"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal>Great walking tour through the old Medina, very informative guide</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#rating"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewerName"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal>Bob Smith</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#reviewDate"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-08-20</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#overallRating"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sustainabilityRating"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">9</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#sentiment"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal>positive</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#mentionsSustainability"/>
-        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
-    </DataPropertyAssertion>
-    <Declaration>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-    </Declaration>
-    <ClassAssertion>
-        <Class IRI="#Award"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Award"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Award"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-    </ClassAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardName"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>Green Key Eco-Rating</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardCategory"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>Environmental Sustainability</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDate"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2024-03-15</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#issuingOrganization"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>Foundation for Environmental Education</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardLevel"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>Gold</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#certificateNumber"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>GK-2024-FR-1234</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#validUntil"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-03-15</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDescription"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-        <Literal>Awarded for outstanding environmental practices and sustainable tourism management</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardName"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>EU Ecolabel Restaurant Certification</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardCategory"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>Sustainable Food Service</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDate"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-01-10</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#issuingOrganization"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>European Commission</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardLevel"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>Certified</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#certificateNumber"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>EU-ECO-2025-TN-5678</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#validUntil"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2027-01-10</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDescription"/>
-        <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
-        <Literal>Recognition for using organic local products and minimizing environmental impact</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardName"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>Carbon Neutral Certification</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardCategory"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>Climate Action</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDate"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-06-01</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#issuingOrganization"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>The CarbonNeutral Protocol</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardLevel"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>Certified</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#certificateNumber"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>CN-2025-9012</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#validUntil"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-06-01</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#awardDescription"/>
-        <NamedIndividual IRI="#CarbonNeutral_Certification"/>
-        <Literal>Certified for achieving net-zero carbon emissions through reduction and offsetting</Literal>
-    </DataPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasAward"/>
-        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
-        <NamedIndividual IRI="#GreenKey_Award_2024"/>
-    </ObjectPropertyAssertion>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
 </Ontology>
 
 
