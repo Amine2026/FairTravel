@@ -1,0 +1,222 @@
+<?xml version="1.0"?>
+<Ontology xmlns="http://www.w3.org/2002/07/owl#"
+     xml:base="http://www.fairtravel.com/hiba"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     xmlns:owl="http://www.w3.org/2002/07/owl#"
+     ontologyIRI="http://www.fairtravel.com/hiba">
+
+    <Prefix name="" IRI="http://www.fairtravel.com/hiba#"/>
+    <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
+    <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
+    <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
+    <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
+    <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
+
+    <!-- Classes -->
+    <Declaration><Class IRI="#Tourist"/></Declaration>
+    <Declaration><Class IRI="#Guide"/></Declaration>
+    <Declaration><Class IRI="#Restaurant"/></Declaration>
+    <Declaration><Class IRI="#Location"/></Declaration>
+
+    <!-- Object properties -->
+    <Declaration><ObjectProperty IRI="#guidedBy"/></Declaration>
+    <Declaration><ObjectProperty IRI="#visitsRestaurant"/></Declaration>
+    <Declaration><ObjectProperty IRI="#worksAt"/></Declaration>
+    <Declaration><ObjectProperty IRI="#locatedIn"/></Declaration>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#guidedBy"/>
+        <Class IRI="#Tourist"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#guidedBy"/>
+        <Class IRI="#Guide"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#visitsRestaurant"/>
+        <Class IRI="#Tourist"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#visitsRestaurant"/>
+        <Class IRI="#Restaurant"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#worksAt"/>
+        <Class IRI="#Guide"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#worksAt"/>
+        <Class IRI="#Restaurant"/>
+    </ObjectPropertyRange>
+
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedIn"/>
+        <Class IRI="#Restaurant"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#locatedIn"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+
+    <!-- Data properties -->
+    <Declaration><DataProperty IRI="#touristName"/></Declaration>
+    <Declaration><DataProperty IRI="#touristAge"/></Declaration>
+    <Declaration><DataProperty IRI="#guideName"/></Declaration>
+    <Declaration><DataProperty IRI="#languageSpoken"/></Declaration>
+    <Declaration><DataProperty IRI="#restaurantName"/></Declaration>
+    <Declaration><DataProperty IRI="#averagePrice"/></Declaration>
+    <Declaration><DataProperty IRI="#cuisineType"/></Declaration>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#touristName"/>
+        <Class IRI="#Tourist"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#touristName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#touristAge"/>
+        <Class IRI="#Tourist"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#touristAge"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#guideName"/>
+        <Class IRI="#Guide"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#guideName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#languageSpoken"/>
+        <Class IRI="#Guide"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#languageSpoken"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#restaurantName"/>
+        <Class IRI="#Restaurant"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#restaurantName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#averagePrice"/>
+        <Class IRI="#Restaurant"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#averagePrice"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+
+    <DataPropertyDomain>
+        <DataProperty IRI="#cuisineType"/>
+        <Class IRI="#Restaurant"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#cuisineType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+
+    <!-- Functional data properties -->
+    <FunctionalDataProperty><DataProperty IRI="#touristName"/></FunctionalDataProperty>
+    <FunctionalDataProperty><DataProperty IRI="#guideName"/></FunctionalDataProperty>
+    <FunctionalDataProperty><DataProperty IRI="#restaurantName"/></FunctionalDataProperty>
+
+    <!-- Individuals -->
+    <Declaration><NamedIndividual IRI="#HibaTourist"/></Declaration>
+    <ClassAssertion><Class IRI="#Tourist"/><NamedIndividual IRI="#HibaTourist"/></ClassAssertion>
+
+    <Declaration><NamedIndividual IRI="#AliGuide"/></Declaration>
+    <ClassAssertion><Class IRI="#Guide"/><NamedIndividual IRI="#AliGuide"/></ClassAssertion>
+
+    <Declaration><NamedIndividual IRI="#BioBistro"/></Declaration>
+    <ClassAssertion><Class IRI="#Restaurant"/><NamedIndividual IRI="#BioBistro"/></ClassAssertion>
+
+    <Declaration><NamedIndividual IRI="#TunisCity"/></Declaration>
+    <ClassAssertion><Class IRI="#Location"/><NamedIndividual IRI="#TunisCity"/></ClassAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ObjectPropertyAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#visitsRestaurant"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <NamedIndividual IRI="#BioBistro"/>
+    </ObjectPropertyAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#worksAt"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <NamedIndividual IRI="#BioBistro"/>
+    </ObjectPropertyAssertion>
+
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <NamedIndividual IRI="#TunisCity"/>
+    </ObjectPropertyAssertion>
+
+    <!-- Data assertions -->
+    <DataPropertyAssertion>
+        <DataProperty IRI="#touristName"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <Literal>Hiba</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#touristAge"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">24</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#guideName"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <Literal>Ali Ben Salah</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#languageSpoken"/>
+        <NamedIndividual IRI="#AliGuide"/>
+        <Literal>French</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#restaurantName"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal>Bio Bistro Tunis</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#averagePrice"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">28.5</Literal>
+    </DataPropertyAssertion>
+
+    <DataPropertyAssertion>
+        <DataProperty IRI="#cuisineType"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <Literal>Vegetarian</Literal>
+    </DataPropertyAssertion>
+
+</Ontology>
