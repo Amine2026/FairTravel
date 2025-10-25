@@ -26,17 +26,19 @@
 
 ## 3. Key Properties
 - activityName (data, Activity, functional, string)
-- hasLocation (object, Activity → Location, non-functional)
-- hasCarbonFootprint (object)
-- locatedIn (object)
-- hasName (data)
-- hasDescription (data)
-- cfValue (data)
-- activityName (data, Activity, functional, string)
+- activityType (data, Activity, string)
+- duration (data, Activity, string)
+- difficultyLevel (data, Activity, string)
 - hasLocation (object, Activity → Location, non-functional)
 - recommendationText (data, Recommendation, functional, string)
+- rating (data, Recommendation, integer)
+- source (data, Recommendation, string)
+- dateRecommended (data, Recommendation, date)
 - forActivity (object, Recommendation → Activity, non-functional)
 - eventDate (data, Event, functional, dateTime)
+- eventType (data, Event, string)
+- organizer (data, Event, string)
+- price (data, Event, float)
 - hasLocation (object, Event → Location, non-functional)
 
 ## 4. Modeling Rules
