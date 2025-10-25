@@ -163,9 +163,6 @@
         <DataProperty IRI="#mentionsSustainability"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#openingHours"/>
-    </Declaration>
-    <Declaration>
         <DataProperty IRI="#operatingHours"/>
     </Declaration>
     <Declaration>
@@ -197,9 +194,6 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#reviewerName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#reviewerType"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#sentiment"/>
@@ -238,6 +232,9 @@
         <NamedIndividual IRI="#EcoFestival2025"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
     </Declaration>
     <Declaration>
@@ -247,7 +244,13 @@
         <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#HikingRec"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#JohnDoe"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#MountainHiking"/>
@@ -322,6 +325,10 @@
         <NamedIndividual IRI="#EcoFestival2025"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Accommodation"/>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Award"/>
         <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
     </ClassAssertion>
@@ -334,9 +341,42 @@
         <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#OutdoorActivity"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Recommendation"/>
         <NamedIndividual IRI="#HikingRec"/>
     </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Tourist"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+    </ClassAssertion>
+        <ObjectPropertyAssertion>
+            <ObjectProperty IRI="#usedByTourist"/>
+            <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+            <NamedIndividual IRI="#JohnDoe"/>
+        </ObjectPropertyAssertion>
+        <ObjectPropertyAssertion>
+            <ObjectProperty IRI="#reviewedBy"/>
+            <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+            <NamedIndividual IRI="#JohnDoe"/>
+        </ObjectPropertyAssertion>
+        <ObjectPropertyAssertion>
+            <ObjectProperty IRI="#hasLocation"/>
+            <NamedIndividual IRI="#JohnDoe"/>
+            <NamedIndividual IRI="#AlpinePark"/>
+        </ObjectPropertyAssertion>
+        <DataPropertyAssertion>
+            <DataProperty IRI="#contactInfo"/>
+            <NamedIndividual IRI="#JohnDoe"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">john.doe@email.com</Literal>
+        </DataPropertyAssertion>
+        <DataPropertyAssertion>
+            <DataProperty IRI="#activityName"/>
+            <NamedIndividual IRI="#JohnDoe"/>
+            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#string">EcoTourist</Literal>
+        </DataPropertyAssertion>
     <ClassAssertion>
         <Class IRI="#OutdoorActivity"/>
         <NamedIndividual IRI="#MountainHiking"/>
@@ -350,9 +390,29 @@
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#offeredBy"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usedByTourist"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasLocation"/>
         <NamedIndividual IRI="#EcoFestival2025"/>
         <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReview"/>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#complementsActivity"/>
+        <NamedIndividual IRI="#EcoTourismCenter_Sousse"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasAward"/>
@@ -368,6 +428,11 @@
         <ObjectProperty IRI="#hasLocation"/>
         <NamedIndividual IRI="#MountainHiking"/>
         <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#reviewedBy"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <NamedIndividual IRI="#JohnDoe"/>
     </ObjectPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#locallyOwned"/>
@@ -575,6 +640,26 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-03-15</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#activityName"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+        <Literal>Guided Nature Walk</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityType"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+        <Literal>Outdoor</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#difficultyLevel"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+        <Literal>Easy</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+        <Literal>2 hours</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#dateRecommended"/>
         <NamedIndividual IRI="#HikingRec"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-10-01</Literal>
@@ -613,6 +698,11 @@
         <DataProperty IRI="#duration"/>
         <NamedIndividual IRI="#MountainHiking"/>
         <Literal>4 hours</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#ecoFriendlyPractices"/>
+        <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+        <Literal>Great</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#mentionsSustainability"/>
@@ -819,9 +909,6 @@
         <DataProperty IRI="#reviewTitle"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
-        <DataProperty IRI="#reviewerType"/>
-    </FunctionalDataProperty>
-    <FunctionalDataProperty>
         <DataProperty IRI="#sentiment"/>
     </FunctionalDataProperty>
     <FunctionalDataProperty>
@@ -906,10 +993,6 @@
         <Class IRI="#Review"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#openingHours"/>
-        <Class IRI="#Service"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
         <DataProperty IRI="#operatingHours"/>
         <Class IRI="#Service"/>
     </DataPropertyDomain>
@@ -954,10 +1037,6 @@
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#reviewerName"/>
-        <Class IRI="#Review"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#reviewerType"/>
         <Class IRI="#Review"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
@@ -1065,10 +1144,6 @@
         <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
     <DataPropertyRange>
-        <DataProperty IRI="#openingHours"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
         <DataProperty IRI="#operatingHours"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
@@ -1110,10 +1185,6 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#reviewerName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#reviewerType"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
