@@ -5,19 +5,41 @@
 
 
 ## 2. Main Classes (Concepts)
-- Activity (subclasses: Outdoor, Cultural, Sport)
 - Accommodation
+- Activity
+	- OutdoorActivity (subclass)
+	- CulturalActivity (subclass)
+	- SportActivity (subclass)
+- Booking
 - CarbonFootprint
-- Recommendation
+- Event
+- Guide
 - Location
+- Recommendation
+- Restaurant
+- Review
+- Service
+- SustainabilityPractice
 - Tourist
+- Transport
+- Award
 
 ## 3. Key Properties
-- hasCarbonFootprint (object)
-- locatedIn (object)
-- hasName (data)
-- hasDescription (data)
-- cfValue (data)
+- activityName (data, Activity, functional, string)
+- activityType (data, Activity, string)
+- duration (data, Activity, string)
+- difficultyLevel (data, Activity, string)
+- hasLocation (object, Activity → Location, non-functional)
+- recommendationText (data, Recommendation, functional, string)
+- rating (data, Recommendation, integer)
+- source (data, Recommendation, string)
+- dateRecommended (data, Recommendation, date)
+- forActivity (object, Recommendation → Activity, non-functional)
+- eventDate (data, Event, functional, dateTime)
+- eventType (data, Event, string)
+- organizer (data, Event, string)
+- price (data, Event, float)
+- hasLocation (object, Event → Location, non-functional)
 
 ## 4. Modeling Rules
 - Use CamelCase for classes, lowerCamelCase for properties
@@ -39,7 +61,7 @@
 
 - **Amine:** Activity, Recommendation, Event
 - **Ali:** SustainabilityPractice, Accommodation, Booking
-- **Oussema:** Service, Review
+- **Oussema:** Service, Review, Award
 - **Hamza:** Location, Transport, CarbonFootprint
 - **Hiba:** Tourist, Guide, Restaurant
 
@@ -58,5 +80,39 @@
 	</Ontology>
 	```
 
----
+## 9. Example Individuals Added
+
+- **Activity:** MountainHiking (OutdoorActivity) with properties: activityName, activityType, duration, difficultyLevel, hasLocation (AlpinePark)
+- **Recommendation:** HikingRec linked to MountainHiking, with recommendationText, rating, source, dateRecommended
+- **Event:** EcoFestival2025 with eventType, organizer, price, eventDate, hasLocation (AlpinePark)
+
+## 10. Recommended Tech Stack
+
+- Front-end: React
+- Back-end: Python (Flask) + RDFLib
+- SPARQL endpoint: Apache Jena Fuseki
+- API communication: REST/JSON
+
+The OWL file acts as the semantic database, queried and updated via SPARQL.
+
+## 11. Fuseki Setup & SPARQL Querying
+
+- Installed Apache Jena Fuseki and created an in-memory dataset.
+- Exported ontology from Protégé as Turtle (.ttl) and uploaded to Fuseki.
+- Ran SPARQL queries to list classes, retrieve individuals, and filter properties:
+		- List all classes:
+			```sparql
+			PREFIX owl: <http://www.w3.org/2002/07/owl#>
+			SELECT ?class WHERE { ?class a owl:Class . }
+			```
+		- Get all properties of MountainHiking:
+			```sparql
+			SELECT ?property ?value WHERE { :MountainHiking ?property ?value . }
+			```
+		- Find all Recommendations and their texts:
+			```sparql
+			SELECT ?rec ?text WHERE { ?rec a :Recommendation . ?rec :recommendationText ?text . }
+			```
+- Verified results in Fuseki web UI.
+
 This file is a quick reference. Update as your ontology grows!
