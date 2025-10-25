@@ -95,4 +95,24 @@
 
 The OWL file acts as the semantic database, queried and updated via SPARQL.
 
+## 11. Fuseki Setup & SPARQL Querying
+
+- Installed Apache Jena Fuseki and created an in-memory dataset.
+- Exported ontology from Protégé as Turtle (.ttl) and uploaded to Fuseki.
+- Ran SPARQL queries to list classes, retrieve individuals, and filter properties:
+		- List all classes:
+			```sparql
+			PREFIX owl: <http://www.w3.org/2002/07/owl#>
+			SELECT ?class WHERE { ?class a owl:Class . }
+			```
+		- Get all properties of MountainHiking:
+			```sparql
+			SELECT ?property ?value WHERE { :MountainHiking ?property ?value . }
+			```
+		- Find all Recommendations and their texts:
+			```sparql
+			SELECT ?rec ?text WHERE { ?rec a :Recommendation . ?rec :recommendationText ?text . }
+			```
+- Verified results in Fuseki web UI.
+
 This file is a quick reference. Update as your ontology grows!
