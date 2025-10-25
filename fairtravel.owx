@@ -1,18 +1,17 @@
 <?xml version="1.0"?>
 <Ontology xmlns="http://www.w3.org/2002/07/owl#"
-    xml:base="http://www.fairtravel.com/fairtravel"
-    xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
-    xmlns:xml="http://www.w3.org/XML/1998/namespace"
-    xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
-    xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-    ontologyIRI="http://www.fairtravel.com/fairtravel">
+     xml:base="http://www.fairtravel.com/fairtravel"
+     xmlns:rdf="http://www.w3.org/1999/02/22-rdf-syntax-ns#"
+     xmlns:xml="http://www.w3.org/XML/1998/namespace"
+     xmlns:xsd="http://www.w3.org/2001/XMLSchema#"
+     xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+     ontologyIRI="http://www.fairtravel.com/fairtravel">
     <Prefix name="" IRI="http://www.fairtravel.com/fairtravel#"/>
     <Prefix name="owl" IRI="http://www.w3.org/2002/07/owl#"/>
     <Prefix name="rdf" IRI="http://www.w3.org/1999/02/22-rdf-syntax-ns#"/>
     <Prefix name="xml" IRI="http://www.w3.org/XML/1998/namespace"/>
     <Prefix name="xsd" IRI="http://www.w3.org/2001/XMLSchema#"/>
     <Prefix name="rdfs" IRI="http://www.w3.org/2000/01/rdf-schema#"/>
-
     <Declaration>
         <Class IRI="#Accommodation"/>
     </Declaration>
@@ -20,85 +19,8 @@
         <Class IRI="#Activity"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#activityType"/>
+        <Class IRI="#Award"/>
     </Declaration>
-    <Declaration>
-        <DataProperty IRI="#duration"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#difficultyLevel"/>
-    </Declaration>
-    <DataPropertyDomain>
-        <DataProperty IRI="#activityType"/>
-        <Class IRI="#Activity"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#activityType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#duration"/>
-        <Class IRI="#Activity"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#duration"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#difficultyLevel"/>
-        <Class IRI="#Activity"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#difficultyLevel"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <Declaration>
-        <DataProperty IRI="#activityName"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasLocation"/>
-    </Declaration>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#activityName"/>
-    </FunctionalDataProperty>
-    <DataPropertyDomain>
-        <DataProperty IRI="#activityName"/>
-        <Class IRI="#Activity"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#activityName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Activity"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <Declaration>
-        <Class IRI="#OutdoorActivity"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#CulturalActivity"/>
-    </Declaration>
-    <Declaration>
-        <Class IRI="#SportActivity"/>
-    </Declaration>
-
-    <SubClassOf>
-        <Class IRI="#OutdoorActivity"/>
-        <Class IRI="#Activity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#CulturalActivity"/>
-        <Class IRI="#Activity"/>
-    </SubClassOf>
-    <SubClassOf>
-        <Class IRI="#SportActivity"/>
-        <Class IRI="#Activity"/>
-    </SubClassOf>
     <Declaration>
         <Class IRI="#Booking"/>
     </Declaration>
@@ -106,66 +28,11 @@
         <Class IRI="#CarbonFootprint"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Event"/>
+        <Class IRI="#CulturalActivity"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#eventType"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#organizer"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#price"/>
-    </Declaration>
-    <DataPropertyDomain>
-        <DataProperty IRI="#eventType"/>
         <Class IRI="#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#eventType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#organizer"/>
-        <Class IRI="#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#organizer"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#price"/>
-        <Class IRI="#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#price"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <Declaration>
-        <DataProperty IRI="#eventDate"/>
     </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasLocation"/>
-    </Declaration>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#eventDate"/>
-    </FunctionalDataProperty>
-    <DataPropertyDomain>
-        <DataProperty IRI="#eventDate"/>
-        <Class IRI="#Event"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#eventDate"/>
-        <Datatype abbreviatedIRI="xsd:dateTime"/>
-    </DataPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Event"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
     <Declaration>
         <Class IRI="#Guide"/>
     </Declaration>
@@ -173,66 +40,11 @@
         <Class IRI="#Location"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Recommendation"/>
+        <Class IRI="#OutdoorActivity"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#rating"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#source"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#dateRecommended"/>
-    </Declaration>
-    <DataPropertyDomain>
-        <DataProperty IRI="#rating"/>
         <Class IRI="#Recommendation"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#rating"/>
-        <Datatype abbreviatedIRI="xsd:integer"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#source"/>
-        <Class IRI="#Recommendation"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#source"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyDomain>
-        <DataProperty IRI="#dateRecommended"/>
-        <Class IRI="#Recommendation"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#dateRecommended"/>
-        <Datatype abbreviatedIRI="xsd:date"/>
-    </DataPropertyRange>
-    <Declaration>
-        <DataProperty IRI="#recommendationText"/>
     </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#forActivity"/>
-    </Declaration>
-    <FunctionalDataProperty>
-        <DataProperty IRI="#recommendationText"/>
-    </FunctionalDataProperty>
-    <DataPropertyDomain>
-        <DataProperty IRI="#recommendationText"/>
-        <Class IRI="#Recommendation"/>
-    </DataPropertyDomain>
-    <DataPropertyRange>
-        <DataProperty IRI="#recommendationText"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#forActivity"/>
-        <Class IRI="#Recommendation"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#forActivity"/>
-        <Class IRI="#Activity"/>
-    </ObjectPropertyRange>
     <Declaration>
         <Class IRI="#Restaurant"/>
     </Declaration>
@@ -241,6 +53,9 @@
     </Declaration>
     <Declaration>
         <Class IRI="#Service"/>
+    </Declaration>
+    <Declaration>
+        <Class IRI="#SportActivity"/>
     </Declaration>
     <Declaration>
         <Class IRI="#SustainabilityPractice"/>
@@ -252,8 +67,293 @@
         <Class IRI="#Transport"/>
     </Declaration>
     <Declaration>
-        <Class IRI="#Award"/>
+        <ObjectProperty IRI="#forActivity"/>
     </Declaration>
-
-    <!-- Generated by the OWL API (refactored to OWL/XML style) -->
+    <Declaration>
+        <ObjectProperty IRI="#hasLocation"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#activityName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#activityType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#dateRecommended"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#difficultyLevel"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#duration"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#eventDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#eventType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#organizer"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#price"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#rating"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#recommendationText"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#source"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#HikingRec"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MountainHiking"/>
+    </Declaration>
+    <Declaration>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </Declaration>
+    <SubClassOf>
+        <Class IRI="#CulturalActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#OutdoorActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <SubClassOf>
+        <Class IRI="#SportActivity"/>
+        <Class IRI="#Activity"/>
+    </SubClassOf>
+    <ClassAssertion>
+        <Class IRI="#Location"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Recommendation"/>
+        <NamedIndividual IRI="#HikingRec"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#OutdoorActivity"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+    </ClassAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#forActivity"/>
+        <NamedIndividual IRI="#HikingRec"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateRecommended"/>
+        <NamedIndividual IRI="#HikingRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-10-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#HikingRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#recommendationText"/>
+        <NamedIndividual IRI="#HikingRec"/>
+        <Literal>Best for adventure seekers!</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#source"/>
+        <NamedIndividual IRI="#HikingRec"/>
+        <Literal>TravelGuide2025</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityName"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <Literal>Mountain Hiking</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityType"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <Literal>Outdoor</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#difficultyLevel"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <Literal>Hard</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <Literal>4 hours</Literal>
+    </DataPropertyAssertion>
+    <Declaration>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+    </Declaration>
+    <ClassAssertion>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+    </ClassAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal>Festival</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal>GreenWorld Org</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-11-15T10:00:00</Literal>
+    </DataPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasLocation"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#forActivity"/>
+        <Class IRI="#Recommendation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Activity"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Event"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#forActivity"/>
+        <Class IRI="#Activity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasLocation"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#activityName"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#eventDate"/>
+    </FunctionalDataProperty>
+    <FunctionalDataProperty>
+        <DataProperty IRI="#recommendationText"/>
+    </FunctionalDataProperty>
+    <DataPropertyDomain>
+        <DataProperty IRI="#activityName"/>
+        <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#activityType"/>
+        <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#dateRecommended"/>
+        <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#difficultyLevel"/>
+        <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#duration"/>
+        <Class IRI="#Activity"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#eventDate"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#eventType"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#organizer"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#price"/>
+        <Class IRI="#Event"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#rating"/>
+        <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#recommendationText"/>
+        <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#source"/>
+        <Class IRI="#Recommendation"/>
+    </DataPropertyDomain>
+    <DataPropertyRange>
+        <DataProperty IRI="#activityName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#activityType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#dateRecommended"/>
+        <Datatype abbreviatedIRI="xsd:date"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#difficultyLevel"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#duration"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#eventDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#eventType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#organizer"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#price"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#rating"/>
+        <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#recommendationText"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#source"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
 </Ontology>
+
+
+
+<!-- Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi -->
+

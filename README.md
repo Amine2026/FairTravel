@@ -80,9 +80,13 @@
 	</Ontology>
 	```
 
-This file is a quick reference. Update as your ontology grows!
+## 9. Example Individuals Added
 
-## 9. Recommended Tech Stack
+- **Activity:** MountainHiking (OutdoorActivity) with properties: activityName, activityType, duration, difficultyLevel, hasLocation (AlpinePark)
+- **Recommendation:** HikingRec linked to MountainHiking, with recommendationText, rating, source, dateRecommended
+- **Event:** EcoFestival2025 with eventType, organizer, price, eventDate, hasLocation (AlpinePark)
+
+## 10. Recommended Tech Stack
 
 - Front-end: React
 - Back-end: Python (Flask) + RDFLib
@@ -90,3 +94,5 @@ This file is a quick reference. Update as your ontology grows!
 - API communication: REST/JSON
 
 The OWL file acts as the semantic database, queried and updated via SPARQL.
+
+This file is a quick reference. Update as your ontology grows!
