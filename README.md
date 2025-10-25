@@ -78,5 +78,13 @@
 	</Ontology>
 	```
 
----
 This file is a quick reference. Update as your ontology grows!
+
+## 9. Recommended Tech Stack
+
+- Front-end: React
+- Back-end: Python (Flask) + RDFLib
+- SPARQL endpoint: Apache Jena Fuseki
+- API communication: REST/JSON
+
+The OWL file acts as the semantic database, queried and updated via SPARQL.
