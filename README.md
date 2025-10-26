@@ -155,3 +155,12 @@ This file is a quick reference. Update as your ontology grows!
 - Users can ask natural language questions (e.g., "Show me all activities in AlpinePark") via the `/api/ai-query` endpoint.
 - The backend uses Groq AI to translate questions into SPARQL queries, automatically handling ontology structure (subclasses, URIs, etc.).
 - Results are fetched from Fuseki and returned as JSON.
+
+## 13. Activity CRUD API
+- The backend now supports full CRUD (Create, Read, Update, Delete) operations for activities via REST endpoints.
+- Endpoints:
+  - POST /activities (create)
+  - GET /activities (list/read)
+  - PUT /activities/<activity_uri> (update)
+  - DELETE /activities/<activity_uri> (delete)
+- Data is stored and managed in the Fuseki triple store using SPARQL.

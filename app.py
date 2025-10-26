@@ -1,5 +1,6 @@
 from flask import Flask, jsonify, request
 import os
+from urllib.parse import unquote
 from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
 from groq import Groq
@@ -9,6 +10,7 @@ CORS(app)
 
 # Change this to your Fuseki SPARQL endpoint
 FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
+FUSEKI_UPDATE_URL = "http://localhost:3030/FairTravel/update"
 
 # Endpoint to get details for a specific event
 @app.route('/event-details')
@@ -236,6 +238,90 @@ Question: {question}"""
         'sparql_query': sparql_query,
         'results': results
     })
+
+# CRUD endpoints for Activity
+@app.route('/activities', methods=['POST'])
+def create_activity():
+    data = request.get_json()
+    name = data.get('name')
+    activity_type = data.get('type', 'Activity')
+    location = data.get('location')
+    # Generate a URI for the new activity
+    activity_uri = f"http://www.fairtravel.com/fairtravel#{name}"
+    # Build SPARQL INSERT DATA query
+    sparql_insert = f'''
+    PREFIX : <http://www.fairtravel.com/fairtravel#>
+    INSERT DATA {{
+      :{name} a :{activity_type} ;
+        :activityName "{name}" ;
+        :locatedIn :{location} .
+    }}
+    '''
+    sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+    sparql.setQuery(sparql_insert)
+    sparql.method = 'POSTDIRECTLY'  # Use POSTDIRECTLY for SPARQL update/insert
+    try:
+        sparql.query()
+        return jsonify({'message': 'Activity created', 'uri': activity_uri}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/activities/<path:activity_uri>', methods=['PUT'])
+def update_activity(activity_uri):
+    data = request.get_json()
+    name = data.get('name')
+    activity_type = data.get('type', 'Activity')
+    location = data.get('location')
+    # URL decode and extract local name from URI
+    decoded_uri = unquote(activity_uri)
+    local_name = decoded_uri.split('#')[-1]
+    sparql_update = f'''
+    PREFIX : <http://www.fairtravel.com/fairtravel#>
+    DELETE {{
+      :{local_name} :activityName ?oldName .
+      :{local_name} :locatedIn ?oldLocation .
+      :{local_name} a ?oldType .
+    }}
+    INSERT {{
+      :{local_name} a :{activity_type} .
+      :{local_name} :activityName "{name}" .
+      :{local_name} :locatedIn :{location} .
+    }}
+    WHERE {{
+      OPTIONAL {{ :{local_name} :activityName ?oldName }}
+      OPTIONAL {{ :{local_name} :locatedIn ?oldLocation }}
+      OPTIONAL {{ :{local_name} a ?oldType }}
+    }}
+    '''
+    sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+    sparql.setQuery(sparql_update)
+    sparql.setMethod('POST')
+    try:
+        sparql.query()
+        return jsonify({'message': 'Activity updated', 'uri': activity_uri}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+@app.route('/activities/<path:activity_uri>', methods=['DELETE'])
+def delete_activity(activity_uri):
+    # URL decode and extract local name from URI
+    from urllib.parse import unquote
+    decoded_uri = unquote(activity_uri)
+    local_name = decoded_uri.split('#')[-1]
+    sparql_delete = f'''
+    PREFIX : <http://www.fairtravel.com/fairtravel#>
+    DELETE WHERE {{
+      :{local_name} ?p ?o .
+    }}
+    '''
+    sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+    sparql.setQuery(sparql_delete)
+    sparql.setMethod('POST')
+    try:
+        sparql.query()
+        return jsonify({'message': 'Activity deleted', 'uri': decoded_uri}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
     app.run(debug=True)
