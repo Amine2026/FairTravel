@@ -1,14 +1,57 @@
 
-from flask import Flask, jsonify
+from flask import Flask, jsonify, request
 from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
-
 
 app = Flask(__name__)
 CORS(app)
 
 # Change this to your Fuseki SPARQL endpoint
 FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
+
+# Endpoint to get details for a specific event
+@app.route('/event-details')
+def event_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery(f"""
+        SELECT ?property ?value WHERE {{ <{uri}> ?property ?value . }}
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    details = { r['property']['value']: r['value']['value'] for r in results['results']['bindings'] }
+    return jsonify(details)
+
+# Endpoint to get details for a specific recommendation
+@app.route('/recommendation-details')
+def recommendation_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery(f"""
+        SELECT ?property ?value WHERE {{ <{uri}> ?property ?value . }}
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    details = { r['property']['value']: r['value']['value'] for r in results['results']['bindings'] }
+    return jsonify(details)
+
+@app.route('/activity-details')
+def activity_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery(f"""
+        SELECT ?property ?value WHERE {{ <{uri}> ?property ?value . }}
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    details = { r['property']['value']: r['value']['value'] for r in results['results']['bindings'] }
+    return jsonify(details)
 
 @app.route('/classes')
 def get_classes():

@@ -134,10 +134,11 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 
 
 ## Recent Changes
-
 - Added Flask API endpoints for activities, recommendations, and events, including subclass support for activities.
 - Enabled CORS in Flask backend for frontend-backend communication.
 - Created React frontend with an ActivitiesList component that fetches activities from the Flask API.
 - Added RecommendationsList and EventsList React components to display recommendations and events from the backend.
+- Added detail endpoints in Flask for activities, events, and recommendations.
+- Integrated detail views in React: click an activity, event, or recommendation to see its properties.
 
 This file is a quick reference. Update as your ontology grows!
