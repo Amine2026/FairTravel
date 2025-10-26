@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function EventsList() {
   const [events, setEvents] = useState([]);
-  const [selectedUri, setSelectedUri] = useState(null);
   const [search, setSearch] = useState("");
   const [detailsMap, setDetailsMap] = useState({});
   const [typeFilter, setTypeFilter] = useState("");

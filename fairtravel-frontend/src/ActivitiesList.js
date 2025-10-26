@@ -5,7 +5,6 @@ import { Link } from 'react-router-dom';
 
 function ActivitiesList() {
   const [activities, setActivities] = useState([]);
-  const [selectedUri, setSelectedUri] = useState(null);
   const [search, setSearch] = useState("");
   const [detailsMap, setDetailsMap] = useState({});
   const [typeFilter, setTypeFilter] = useState("");

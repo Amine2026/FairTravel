@@ -4,7 +4,6 @@ import { Link } from 'react-router-dom';
 
 function RecommendationsList() {
   const [recommendations, setRecommendations] = useState([]);
-  const [selectedUri, setSelectedUri] = useState(null);
   const [search, setSearch] = useState("");
   const [detailsMap, setDetailsMap] = useState({});
   const [ratingFilter, setRatingFilter] = useState("");
