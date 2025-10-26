@@ -1,0 +1,837 @@
+@prefix : <http://www.fairtravel.com/fairtravel#> .
+@prefix owl: <http://www.w3.org/2002/07/owl#> .
+@prefix rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#> .
+@prefix xml: <http://www.w3.org/XML/1998/namespace> .
+@prefix xsd: <http://www.w3.org/2001/XMLSchema#> .
+@prefix rdfs: <http://www.w3.org/2000/01/rdf-schema#> .
+@base <http://www.fairtravel.com/fairtravel#> .
+
+<http://www.fairtravel.com/fairtravel> rdf:type owl:Ontology .
+
+#################################################################
+#    Datatypes
+#################################################################
+
+###  http://www.w3.org/2001/XMLSchema#date
+xsd:date rdf:type rdfs:Datatype .
+
+
+#################################################################
+#    Object Properties
+#################################################################
+
+###  http://www.fairtravel.com/fairtravel#bookedBy
+:bookedBy rdf:type owl:ObjectProperty ;
+          rdfs:domain :Booking ;
+          rdfs:range :Tourist .
+
+
+###  http://www.fairtravel.com/fairtravel#complementsActivity
+:complementsActivity rdf:type owl:ObjectProperty ;
+                     rdfs:domain :Service ;
+                     rdfs:range :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#forAccommodation
+:forAccommodation rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Booking ;
+                  rdfs:range :Accommodation .
+
+
+###  http://www.fairtravel.com/fairtravel#forActivity
+:forActivity rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Booking
+                                         :Recommendation
+                                       )
+                         ] ;
+             rdfs:range :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#guidedBy
+:guidedBy rdf:type owl:ObjectProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#hasAward
+:hasAward rdf:type owl:ObjectProperty ;
+          rdfs:domain [ rdf:type owl:Class ;
+                        owl:unionOf ( :Accommodation
+                                      :Activity
+                                      :Service
+                                    )
+                      ] ;
+          rdfs:range :Award .
+
+
+###  http://www.fairtravel.com/fairtravel#hasLocation
+:hasLocation rdf:type owl:ObjectProperty ;
+             rdfs:domain [ rdf:type owl:Class ;
+                           owl:unionOf ( :Activity
+                                         :Event
+                                         :Service
+                                       )
+                         ] ;
+             rdfs:range :Location .
+
+
+###  http://www.fairtravel.com/fairtravel#hasReview
+:hasReview rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Accommodation
+                                       :Activity
+                                       :Service
+                                       :Transport
+                                     )
+                       ] ;
+           rdfs:range :Review .
+
+
+###  http://www.fairtravel.com/fairtravel#hasSustainabilityPractice
+:hasSustainabilityPractice rdf:type owl:ObjectProperty ;
+                           rdfs:domain :Accommodation ;
+                           rdfs:range :SustainabilityPractice .
+
+
+###  http://www.fairtravel.com/fairtravel#offeredBy
+:offeredBy rdf:type owl:ObjectProperty ;
+           rdfs:domain :Service ;
+           rdfs:range :Accommodation .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewedBy
+:reviewedBy rdf:type owl:ObjectProperty ;
+            rdfs:domain :Review ;
+            rdfs:range :Tourist .
+
+
+###  http://www.fairtravel.com/fairtravel#usedByTourist
+:usedByTourist rdf:type owl:ObjectProperty ;
+               rdfs:domain :Service ;
+               rdfs:range :Tourist .
+
+
+###  http://www.fairtravel.com/fairtravel#visitsRestaurant
+:visitsRestaurant rdf:type owl:ObjectProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#worksAt
+:worksAt rdf:type owl:ObjectProperty .
+
+
+#################################################################
+#    Data properties
+#################################################################
+
+###  http://www.fairtravel.com/fairtravel#accommodationName
+:accommodationName rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :Accommodation ;
+                   rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#activityName
+:activityName rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Activity ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#activityType
+:activityType rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Activity ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#availabilityStatus
+:availabilityStatus rdf:type owl:DatatypeProperty ;
+                    rdfs:domain :Accommodation ;
+                    rdfs:range xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#averagePrice
+:averagePrice rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#awardCategory
+:awardCategory rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Award ;
+               rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#awardDate
+:awardDate rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Award ;
+           rdfs:range xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#awardDescription
+:awardDescription rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Award ;
+                  rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#awardLevel
+:awardLevel rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Award ;
+            rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#awardName
+:awardName rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Award ;
+           rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#bookingDate
+:bookingDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Booking ;
+             rdfs:range xsd:dateTime .
+
+
+###  http://www.fairtravel.com/fairtravel#bookingID
+:bookingID rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Booking ;
+           rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#capacity
+:capacity rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Accommodation ;
+          rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#certificateNumber
+:certificateNumber rdf:type owl:DatatypeProperty ,
+                            owl:FunctionalProperty ;
+                   rdfs:domain :Award ;
+                   rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#checkInDate
+:checkInDate rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Booking ;
+             rdfs:range xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#checkOutDate
+:checkOutDate rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Booking ;
+              rdfs:range xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#contactInfo
+:contactInfo rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Service ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#cuisineType
+:cuisineType rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#dateRecommended
+:dateRecommended rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Recommendation ;
+                 rdfs:range xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#description
+:description rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Accommodation ,
+                         :SustainabilityPractice ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#difficultyLevel
+:difficultyLevel rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :Activity ;
+                 rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#duration
+:duration rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Activity ;
+          rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#ecoFriendlyPractices
+:ecoFriendlyPractices rdf:type owl:DatatypeProperty ;
+                      rdfs:domain :Review ;
+                      rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#eventDate
+:eventDate rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Event ;
+           rdfs:range xsd:dateTime .
+
+
+###  http://www.fairtravel.com/fairtravel#eventType
+:eventType rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Event ;
+           rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#guideName
+:guideName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#impactLevel
+:impactLevel rdf:type owl:DatatypeProperty ;
+             rdfs:domain :SustainabilityPractice ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#issuingOrganization
+:issuingOrganization rdf:type owl:DatatypeProperty ,
+                              owl:FunctionalProperty ;
+                     rdfs:domain :Award ;
+                     rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#languageSpoken
+:languageSpoken rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#locallyOwned
+:locallyOwned rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Service ;
+              rdfs:range xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#mentionsSustainability
+:mentionsSustainability rdf:type owl:DatatypeProperty ,
+                                 owl:FunctionalProperty ;
+                        rdfs:domain :Review ;
+                        rdfs:range xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#openingHours
+:openingHours rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Service ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#operatingHours
+:operatingHours rdf:type owl:DatatypeProperty ;
+                rdfs:domain :Service ;
+                rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#organizer
+:organizer rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Event ;
+           rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#overallRating
+:overallRating rdf:type owl:DatatypeProperty ,
+                        owl:FunctionalProperty ;
+               rdfs:domain :Review ;
+               rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#paymentStatus
+:paymentStatus rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Activity ;
+               rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#practiceName
+:practiceName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :SustainabilityPractice ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#practiceType
+:practiceType rdf:type owl:DatatypeProperty ;
+              rdfs:domain :SustainabilityPractice ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#price
+:price rdf:type owl:DatatypeProperty ;
+       rdfs:domain :Event ;
+       rdfs:range xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#pricePerNight
+:pricePerNight rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Accommodation ;
+               rdfs:range xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#priceRange
+:priceRange rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Service ;
+            rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#rating
+:rating rdf:type owl:DatatypeProperty ;
+        rdfs:domain [ rdf:type owl:Class ;
+                      owl:unionOf ( :Recommendation
+                                    :Review
+                                  )
+                    ] ;
+        rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#recommendationText
+:recommendationText rdf:type owl:DatatypeProperty ,
+                             owl:FunctionalProperty ;
+                    rdfs:domain :Recommendation ;
+                    rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#restaurantName
+:restaurantName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewDate
+:reviewDate rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Review ;
+            rdfs:range xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewText
+:reviewText rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Review ;
+            rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewTitle
+:reviewTitle rdf:type owl:DatatypeProperty ,
+                      owl:FunctionalProperty ;
+             rdfs:domain :Review ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewerName
+:reviewerName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Review ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#reviewerType
+:reviewerType rdf:type owl:DatatypeProperty ,
+                       owl:FunctionalProperty ;
+              rdfs:domain :Review ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#sentiment
+:sentiment rdf:type owl:DatatypeProperty ,
+                    owl:FunctionalProperty ;
+           rdfs:domain :Review ;
+           rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#serviceName
+:serviceName rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Service ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#serviceType
+:serviceType rdf:type owl:DatatypeProperty ;
+             rdfs:domain :Service ;
+             rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#source
+:source rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Recommendation ;
+        rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#starRating
+:starRating rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Accommodation ;
+            rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#sustainabilityRating
+:sustainabilityRating rdf:type owl:DatatypeProperty ,
+                               owl:FunctionalProperty ;
+                      rdfs:domain :Review ;
+                      rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#sustainabilityScore
+:sustainabilityScore rdf:type owl:DatatypeProperty ;
+                     rdfs:domain :Service ;
+                     rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#totalPrice
+:totalPrice rdf:type owl:DatatypeProperty ;
+            rdfs:domain :Booking ;
+            rdfs:range xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#touristAge
+:touristAge rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#touristName
+:touristName rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#useLocalProducts
+:useLocalProducts rdf:type owl:DatatypeProperty ,
+                           owl:FunctionalProperty ;
+                  rdfs:domain :Service ;
+                  rdfs:range xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#validUntil
+:validUntil rdf:type owl:DatatypeProperty ,
+                     owl:FunctionalProperty ;
+            rdfs:domain :Award ;
+            rdfs:range xsd:date .
+
+
+#################################################################
+#    Classes
+#################################################################
+
+###  http://www.fairtravel.com/fairtravel#Accommodation
+:Accommodation rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#AccommodationReview
+:AccommodationReview rdf:type owl:Class ;
+                     rdfs:subClassOf :Review .
+
+
+###  http://www.fairtravel.com/fairtravel#Activity
+:Activity rdf:type owl:Class ;
+          owl:disjointWith :Event .
+
+
+###  http://www.fairtravel.com/fairtravel#ActivityReview
+:ActivityReview rdf:type owl:Class ;
+                rdfs:subClassOf :Review .
+
+
+###  http://www.fairtravel.com/fairtravel#Award
+:Award rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Booking
+:Booking rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#CarbonFootprint
+:CarbonFootprint rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#CulturalActivity
+:CulturalActivity rdf:type owl:Class ;
+                  rdfs:subClassOf :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#Event
+:Event rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Guide
+:Guide rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#InformationCenter
+:InformationCenter rdf:type owl:Class ;
+                   rdfs:subClassOf :Service .
+
+
+###  http://www.fairtravel.com/fairtravel#LocalShop
+:LocalShop rdf:type owl:Class ;
+           rdfs:subClassOf :Service .
+
+
+###  http://www.fairtravel.com/fairtravel#Location
+:Location rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#OutdoorActivity
+:OutdoorActivity rdf:type owl:Class ;
+                 rdfs:subClassOf :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#Recommendation
+:Recommendation rdf:type owl:Class ;
+                owl:disjointWith :Review .
+
+
+###  http://www.fairtravel.com/fairtravel#Restaurant
+:Restaurant rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Review
+:Review rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Service
+:Service rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#ServiceReview
+:ServiceReview rdf:type owl:Class ;
+               rdfs:subClassOf :Review .
+
+
+###  http://www.fairtravel.com/fairtravel#SportActivity
+:SportActivity rdf:type owl:Class ;
+               rdfs:subClassOf :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#SustainabilityPractice
+:SustainabilityPractice rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Tourist
+:Tourist rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#Transport
+:Transport rdf:type owl:Class .
+
+
+###  http://www.fairtravel.com/fairtravel#TransportReview
+:TransportReview rdf:type owl:Class ;
+                 rdfs:subClassOf :Review .
+
+
+#################################################################
+#    Individuals
+#################################################################
+
+###  http://www.fairtravel.com/fairtravel#AliGuide
+:AliGuide rdf:type owl:NamedIndividual ,
+                   :Guide ;
+          :worksAt :BioBistro ;
+          :guideName "Ali Ben Salah" ;
+          :languageSpoken "French" .
+
+
+###  http://www.fairtravel.com/fairtravel#AliceTourist
+:AliceTourist rdf:type owl:NamedIndividual .
+
+
+###  http://www.fairtravel.com/fairtravel#AlpinePark
+:AlpinePark rdf:type owl:NamedIndividual ,
+                     :Location .
+
+
+###  http://www.fairtravel.com/fairtravel#ArtisanMarket_Medina
+:ArtisanMarket_Medina rdf:type owl:NamedIndividual ,
+                               :LocalShop ;
+                      :offeredBy :EcoHotel_Verde ;
+                      :usedByTourist :JohnDoe ;
+                      :locallyOwned "true"^^xsd:boolean ;
+                      :operatingHours "09:00-20:00" ;
+                      :priceRange "€-€€" ;
+                      :serviceName "Artisan Market Medina" ;
+                      :serviceType "Local Handicraft Shop" ;
+                      :sustainabilityScore 88 ;
+                      :useLocalProducts "true"^^xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#BioBistro
+:BioBistro rdf:type owl:NamedIndividual ,
+                    :Restaurant ;
+           :hasLocation :TunisCity ;
+           :averagePrice "28.5"^^xsd:float ;
+           :cuisineType "Vegetarian" ;
+           :restaurantName "Bio Bistro Tunis" .
+
+
+###  http://www.fairtravel.com/fairtravel#Booking1234
+:Booking1234 rdf:type owl:NamedIndividual ,
+                      :Booking ;
+             :bookedBy :AliceTourist ;
+             :forAccommodation :GreenValleyEcoLodge ;
+             :bookingDate "2025-03-12T10:30:00"^^xsd:dateTime ;
+             :bookingID "B1234" ;
+             :totalPrice "360.0"^^xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#CarbonNeutral_Certification
+:CarbonNeutral_Certification rdf:type owl:NamedIndividual ,
+                                      :Award ;
+                             :awardCategory "Climate Action" ;
+                             :awardDate "2025-06-01"^^xsd:date ;
+                             :awardDescription "Certified for achieving net-zero carbon emissions through reduction and offsetting" ;
+                             :awardLevel "Certified" ;
+                             :awardName "Carbon Neutral Certification" ;
+                             :certificateNumber "CN-2025-9012" ;
+                             :issuingOrganization "The CarbonNeutral Protocol" ;
+                             :validUntil "2026-06-01"^^xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#EcoFestival2025
+:EcoFestival2025 rdf:type owl:NamedIndividual ,
+                          :Event ;
+                 :hasLocation :AlpinePark ;
+                 :eventDate "2025-11-15T10:00:00"^^xsd:dateTime ;
+                 :eventType "Festival" ;
+                 :organizer "GreenWorld Org" ;
+                 :price "15.0"^^xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#EcoHotel_Verde
+:EcoHotel_Verde rdf:type owl:NamedIndividual ,
+                         :Accommodation ;
+                :hasReview :Review_EcoHotel_Verde_001 .
+
+
+###  http://www.fairtravel.com/fairtravel#EcoLabel_Restaurant_2025
+:EcoLabel_Restaurant_2025 rdf:type owl:NamedIndividual ,
+                                   :Award ;
+                          :awardCategory "Sustainable Food Service" ;
+                          :awardDate "2025-01-10"^^xsd:date ;
+                          :awardDescription "Recognition for using organic local products and minimizing environmental impact" ;
+                          :awardLevel "Certified" ;
+                          :awardName "EU Ecolabel Restaurant Certification" ;
+                          :certificateNumber "EU-ECO-2025-TN-5678" ;
+                          :issuingOrganization "European Commission" ;
+                          :validUntil "2027-01-10"^^xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#EcoTourismCenter_Sousse
+:EcoTourismCenter_Sousse rdf:type owl:NamedIndividual ,
+                                  :InformationCenter ;
+                         :complementsActivity :GuidedNatureWalk ;
+                         :hasAward :GreenKey_Award_2024 ;
+                         :contactInfo "info@ecotourism-sousse.tn, +216 73 123 456" ;
+                         :locallyOwned "true"^^xsd:boolean ;
+                         :operatingHours "08:00-18:00" ;
+                         :serviceName "Eco Tourism Information Center" ;
+                         :serviceType "Tourist Information Center" ;
+                         :sustainabilityScore 95 .
+
+
+###  http://www.fairtravel.com/fairtravel#GreenKey_Award_2024
+:GreenKey_Award_2024 rdf:type owl:NamedIndividual ,
+                              :Award ;
+                     :awardCategory "Environmental Sustainability" ;
+                     :awardDate "2024-03-15"^^xsd:date ;
+                     :awardDescription "Awarded for outstanding environmental practices and sustainable tourism management" ;
+                     :awardLevel "Gold" ;
+                     :awardName "Green Key Eco-Rating" ;
+                     :certificateNumber "GK-2024-FR-1234" ;
+                     :issuingOrganization "Foundation for Environmental Education" ;
+                     :validUntil "2026-03-15"^^xsd:date .
+
+
+###  http://www.fairtravel.com/fairtravel#GreenValleyEcoLodge
+:GreenValleyEcoLodge rdf:type owl:NamedIndividual ,
+                              :Accommodation ;
+                     :hasLocation :AlpinePark ;
+                     :hasSustainabilityPractice :SolarEnergyUse ;
+                     :accommodationName "Green Valley Eco Lodge" ;
+                     :pricePerNight "120.0"^^xsd:float ;
+                     :starRating 4 .
+
+
+###  http://www.fairtravel.com/fairtravel#GuidedNatureWalk
+:GuidedNatureWalk rdf:type owl:NamedIndividual ,
+                           :OutdoorActivity ;
+                  :activityName "Guided Nature Walk" ;
+                  :activityType "Outdoor" ;
+                  :difficultyLevel "Easy" ;
+                  :duration "2 hours" .
+
+
+###  http://www.fairtravel.com/fairtravel#HibaTourist
+:HibaTourist rdf:type owl:NamedIndividual ,
+                      :Tourist ;
+             :guidedBy :AliGuide ;
+             :visitsRestaurant :BioBistro ;
+             :touristAge 24 ;
+             :touristName "Hiba" .
+
+
+###  http://www.fairtravel.com/fairtravel#HikingRec
+:HikingRec rdf:type owl:NamedIndividual ,
+                    :Recommendation ;
+           :forActivity :MountainHiking ;
+           :dateRecommended "2025-10-01"^^xsd:date ;
+           :rating 5 ;
+           :recommendationText "Best for adventure seekers!" ;
+           :source "TravelGuide2025" .
+
+
+###  http://www.fairtravel.com/fairtravel#JohnDoe
+:JohnDoe rdf:type owl:NamedIndividual ,
+                  :Tourist .
+
+
+###  http://www.fairtravel.com/fairtravel#MountainHiking
+:MountainHiking rdf:type owl:NamedIndividual ,
+                         :OutdoorActivity ;
+                :hasLocation :AlpinePark ;
+                :activityName "Mountain Hiking" ;
+                :activityType "Outdoor" ;
+                :difficultyLevel "Hard" ;
+                :duration "4 hours" .
+
+
+###  http://www.fairtravel.com/fairtravel#Review_EcoHotel_Verde_001
+:Review_EcoHotel_Verde_001 rdf:type owl:NamedIndividual ,
+                                    :AccommodationReview ;
+                           :reviewedBy :JohnDoe ;
+                           :ecoFriendlyPractices "Great" ;
+                           :mentionsSustainability "true"^^xsd:boolean ;
+                           :overallRating 9 ;
+                           :rating 9 ;
+                           :reviewDate "2025-09-15"^^xsd:date ;
+                           :reviewText "Excellent eco-hotel with solar panels and local organic breakfast" ;
+                           :reviewTitle "Outstanding sustainable hotel" ;
+                           :reviewerName "Alice Johnson" ;
+                           :sentiment "positive" ;
+                           :sustainabilityRating 8 .
+
+
+###  http://www.fairtravel.com/fairtravel#Review_Walking_Tour_001
+:Review_Walking_Tour_001 rdf:type owl:NamedIndividual ,
+                                  :ActivityReview ;
+                         :mentionsSustainability "false"^^xsd:boolean ;
+                         :overallRating 8 ;
+                         :rating 8 ;
+                         :reviewDate "2025-08-20"^^xsd:date ;
+                         :reviewText "Great walking tour through the old Medina, very informative guide" ;
+                         :reviewerName "Bob Smith" ;
+                         :sentiment "positive" ;
+                         :sustainabilityRating 9 .
+
+
+###  http://www.fairtravel.com/fairtravel#SolarEnergyUse
+:SolarEnergyUse rdf:type owl:NamedIndividual ,
+                         :SustainabilityPractice ;
+                :impactLevel "High" ;
+                :practiceName "Solar Energy Use" ;
+                :practiceType "Renewable Energy" .
+
+
+###  http://www.fairtravel.com/fairtravel#TunisCity
+:TunisCity rdf:type owl:NamedIndividual ,
+                    :Location .
+
+
+###  http://www.fairtravel.com/fairtravel#WasteReductionProgram
+:WasteReductionProgram rdf:type owl:NamedIndividual ,
+                                :SustainabilityPractice ;
+                       :impactLevel "Medium" ;
+                       :practiceName "Waste Reduction Program" ;
+                       :practiceType "Waste Management" .
+
+
+###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi
