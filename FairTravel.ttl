@@ -63,17 +63,6 @@ xsd:date rdf:type rdfs:Datatype .
           rdfs:range :Award .
 
 
-###  http://www.fairtravel.com/fairtravel#hasLocation
-:hasLocation rdf:type owl:ObjectProperty ;
-             rdfs:domain [ rdf:type owl:Class ;
-                           owl:unionOf ( :Activity
-                                         :Event
-                                         :Service
-                                       )
-                         ] ;
-             rdfs:range :Location .
-
-
 ###  http://www.fairtravel.com/fairtravel#hasReview
 :hasReview rdf:type owl:ObjectProperty ;
            rdfs:domain [ rdf:type owl:Class ;
@@ -90,6 +79,17 @@ xsd:date rdf:type rdfs:Datatype .
 :hasSustainabilityPractice rdf:type owl:ObjectProperty ;
                            rdfs:domain :Accommodation ;
                            rdfs:range :SustainabilityPractice .
+
+
+###  http://www.fairtravel.com/fairtravel#locatedIn
+:locatedIn rdf:type owl:ObjectProperty ;
+           rdfs:domain [ rdf:type owl:Class ;
+                         owl:unionOf ( :Activity
+                                       :Event
+                                       :Service
+                                     )
+                       ] ;
+           rdfs:range :Location .
 
 
 ###  http://www.fairtravel.com/fairtravel#offeredBy
@@ -647,7 +647,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#BioBistro
 :BioBistro rdf:type owl:NamedIndividual ,
                     :Restaurant ;
-           :hasLocation :TunisCity ;
+           :locatedIn :TunisCity ;
            :averagePrice "28.5"^^xsd:float ;
            :cuisineType "Vegetarian" ;
            :restaurantName "Bio Bistro Tunis" .
@@ -679,7 +679,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#EcoFestival2025
 :EcoFestival2025 rdf:type owl:NamedIndividual ,
                           :Event ;
-                 :hasLocation :AlpinePark ;
+                 :locatedIn :AlpinePark ;
                  :eventDate "2025-11-15T10:00:00"^^xsd:dateTime ;
                  :eventType "Festival" ;
                  :organizer "GreenWorld Org" ;
@@ -734,8 +734,8 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#GreenValleyEcoLodge
 :GreenValleyEcoLodge rdf:type owl:NamedIndividual ,
                               :Accommodation ;
-                     :hasLocation :AlpinePark ;
                      :hasSustainabilityPractice :SolarEnergyUse ;
+                     :locatedIn :AlpinePark ;
                      :accommodationName "Green Valley Eco Lodge" ;
                      :pricePerNight "120.0"^^xsd:float ;
                      :starRating 4 .
@@ -777,7 +777,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#MountainHiking
 :MountainHiking rdf:type owl:NamedIndividual ,
                          :OutdoorActivity ;
-                :hasLocation :AlpinePark ;
+                :locatedIn :AlpinePark ;
                 :activityName "Mountain Hiking" ;
                 :activityType "Outdoor" ;
                 :difficultyLevel "Hard" ;

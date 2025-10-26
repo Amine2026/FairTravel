@@ -148,3 +148,10 @@ This file is a quick reference. Update as your ontology grows!
 
 ## API Features
 - Added an AI API endpoint (`/api/ai-query`) in the Flask backend to accept user questions for future natural language query processing.
+- The backend integrates with Groq's AI API to translate user questions into SPARQL queries. Set your Groq API key as an environment variable before running the app:
+  `$env:GROQ_API_KEY = "your_actual_groq_api_key"`
+
+## 12. AI-powered Semantic Search
+- Users can ask natural language questions (e.g., "Show me all activities in AlpinePark") via the `/api/ai-query` endpoint.
+- The backend uses Groq AI to translate questions into SPARQL queries, automatically handling ontology structure (subclasses, URIs, etc.).
+- Results are fetched from Fuseki and returned as JSON.

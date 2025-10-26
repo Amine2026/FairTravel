@@ -1,7 +1,8 @@
-
 from flask import Flask, jsonify, request
+import os
 from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
+from groq import Groq
 
 app = Flask(__name__)
 CORS(app)
@@ -166,11 +167,74 @@ def sustainability_practice_details():
 def ai_query():
     data = request.get_json()
     question = data.get('question', '')
-    # Placeholder: return dummy response
+
+    # Get Groq API key from environment variable for security
+    GROQ_API_KEY = os.getenv('GROQ_API_KEY', 'YOUR_GROQ_API_KEY_HERE')
+    
+    # Initialize Groq client
+    client = Groq(api_key=GROQ_API_KEY)
+
+    # Prompt for Groq to generate a SPARQL query from the user's question
+    prompt = f"""Generate a SPARQL query for the FairTravel ontology.
+
+Prefixes:
+PREFIX : <http://www.fairtravel.com/fairtravel#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+
+Key rules:
+- Activity has subclasses. Use: ?type rdfs:subClassOf* :Activity . ?activity a ?type .
+- Use :locatedIn to link Activity to Location
+- Location names are URIs (e.g., "AlpinePark" becomes :AlpinePark)
+
+Output only the SPARQL query, no explanations or code blocks.
+
+Question: {question}"""
+
+    try:
+        chat_completion = client.chat.completions.create(
+            messages=[
+                {
+                    "role": "system",
+                    "content": "You are a semantic web assistant specializing in SPARQL query generation."
+                },
+                {
+                    "role": "user",
+                    "content": prompt
+                }
+            ],
+            model="llama-3.3-70b-versatile",
+            max_tokens=512
+        )
+        sparql_query = chat_completion.choices[0].message.content.strip()
+        
+        # Remove markdown code block markers if present
+        if '```' in sparql_query:
+            # Extract content between code block markers
+            lines = sparql_query.split('\n')
+            cleaned_lines = []
+            in_code_block = False
+            for line in lines:
+                if line.strip().startswith('```'):
+                    in_code_block = not in_code_block
+                    continue
+                if in_code_block or not '```' in sparql_query:
+                    cleaned_lines.append(line)
+            sparql_query = '\n'.join(cleaned_lines).strip()
+        
+        # Query Fuseki with the generated SPARQL
+        sparql = SPARQLWrapper(FUSEKI_URL)
+        sparql.setQuery(sparql_query)
+        sparql.setReturnFormat(JSON)
+        fuseki_results = sparql.query().convert()
+        results = fuseki_results['results']['bindings']
+    except Exception as e:
+        sparql_query = f"Error: {str(e)}"
+        results = []
+
     return jsonify({
         'question': question,
-        'sparql_query': 'SELECT * WHERE { ?s ?p ?o }',
-        'results': []
+        'sparql_query': sparql_query,
+        'results': results
     })
 
 if __name__ == '__main__':

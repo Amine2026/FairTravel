@@ -88,10 +88,10 @@
         <ObjectProperty IRI="#bookedBy"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#forAccommodation"/>
+        <ObjectProperty IRI="#complementsActivity"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#complementsActivity"/>
+        <ObjectProperty IRI="#forAccommodation"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#forActivity"/>
@@ -103,13 +103,13 @@
         <ObjectProperty IRI="#hasAward"/>
     </Declaration>
     <Declaration>
-        <ObjectProperty IRI="#hasLocation"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#hasReview"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#hasSustainabilityPractice"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#locatedIn"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#offeredBy"/>
@@ -121,13 +121,13 @@
         <ObjectProperty IRI="#usedByTourist"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#accommodationName"/>
-    </Declaration>
-    <Declaration>
         <ObjectProperty IRI="#visitsRestaurant"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#worksAt"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#accommodationName"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#activityName"/>
@@ -178,16 +178,13 @@
         <DataProperty IRI="#contactInfo"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#description"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#certificateNumber"/>
-    </Declaration>
-    <Declaration>
         <DataProperty IRI="#cuisineType"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#dateRecommended"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#description"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#difficultyLevel"/>
@@ -205,10 +202,10 @@
         <DataProperty IRI="#eventType"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#impactLevel"/>
+        <DataProperty IRI="#guideName"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#guideName"/>
+        <DataProperty IRI="#impactLevel"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#issuingOrganization"/>
@@ -313,10 +310,10 @@
         <DataProperty IRI="#validUntil"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#AliceTourist"/>
+        <NamedIndividual IRI="#AliGuide"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#AliGuide"/>
+        <NamedIndividual IRI="#AliceTourist"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#AlpinePark"/>
@@ -325,10 +322,10 @@
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#Booking1234"/>
+        <NamedIndividual IRI="#BioBistro"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#BioBistro"/>
+        <NamedIndividual IRI="#Booking1234"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#CarbonNeutral_Certification"/>
@@ -376,10 +373,10 @@
         <NamedIndividual IRI="#SolarEnergyUse"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#WasteReductionProgram"/>
+        <NamedIndividual IRI="#TunisCity"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#TunisCity"/>
+        <NamedIndividual IRI="#WasteReductionProgram"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
@@ -441,12 +438,12 @@
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Booking"/>
-        <NamedIndividual IRI="#Booking1234"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#Restaurant"/>
         <NamedIndividual IRI="#BioBistro"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Booking"/>
+        <NamedIndividual IRI="#Booking1234"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Award"/>
@@ -509,22 +506,12 @@
         <NamedIndividual IRI="#SolarEnergyUse"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#SustainabilityPractice"/>
-        <NamedIndividual IRI="#WasteReductionProgram"/>
-    </ClassAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#bookedBy"/>
-        <NamedIndividual IRI="#Booking1234"/>
-        <NamedIndividual IRI="#AliceTourist"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#forAccommodation"/>
-        <NamedIndividual IRI="#Booking1234"/>
-        <NamedIndividual IRI="#GreenValleyEcoLodge"/>
-    </ObjectPropertyAssertion>
-    <ClassAssertion>
         <Class IRI="#Location"/>
         <NamedIndividual IRI="#TunisCity"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#SustainabilityPractice"/>
+        <NamedIndividual IRI="#WasteReductionProgram"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#worksAt"/>
@@ -542,12 +529,22 @@
         <NamedIndividual IRI="#JohnDoe"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasLocation"/>
+        <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#BioBistro"/>
         <NamedIndividual IRI="#TunisCity"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasLocation"/>
+        <ObjectProperty IRI="#bookedBy"/>
+        <NamedIndividual IRI="#Booking1234"/>
+        <NamedIndividual IRI="#AliceTourist"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#forAccommodation"/>
+        <NamedIndividual IRI="#Booking1234"/>
+        <NamedIndividual IRI="#GreenValleyEcoLodge"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#EcoFestival2025"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
@@ -567,14 +564,14 @@
         <NamedIndividual IRI="#GreenKey_Award_2024"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasLocation"/>
-        <NamedIndividual IRI="#GreenValleyEcoLodge"/>
-        <NamedIndividual IRI="#AlpinePark"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasSustainabilityPractice"/>
         <NamedIndividual IRI="#GreenValleyEcoLodge"/>
         <NamedIndividual IRI="#SolarEnergyUse"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#GreenValleyEcoLodge"/>
+        <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#guidedBy"/>
@@ -592,7 +589,7 @@
         <NamedIndividual IRI="#MountainHiking"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasLocation"/>
+        <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#MountainHiking"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
@@ -647,21 +644,6 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#bookingDate"/>
-        <NamedIndividual IRI="#Booking1234"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-03-12T10:30:00</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#bookingID"/>
-        <NamedIndividual IRI="#Booking1234"/>
-        <Literal>B1234</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#totalPrice"/>
-        <NamedIndividual IRI="#Booking1234"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">360.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#averagePrice"/>
         <NamedIndividual IRI="#BioBistro"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">28.5</Literal>
@@ -675,6 +657,21 @@
         <DataProperty IRI="#restaurantName"/>
         <NamedIndividual IRI="#BioBistro"/>
         <Literal>Bio Bistro Tunis</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#bookingDate"/>
+        <NamedIndividual IRI="#Booking1234"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-03-12T10:30:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#bookingID"/>
+        <NamedIndividual IRI="#Booking1234"/>
+        <Literal>B1234</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#totalPrice"/>
+        <NamedIndividual IRI="#Booking1234"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">360.0</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#awardCategory"/>
@@ -1079,14 +1076,6 @@
         </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasLocation"/>
-        <ObjectUnionOf>
-            <Class IRI="#Activity"/>
-            <Class IRI="#Event"/>
-            <Class IRI="#Service"/>
-        </ObjectUnionOf>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasReview"/>
         <ObjectUnionOf>
             <Class IRI="#Accommodation"/>
@@ -1098,6 +1087,14 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#hasSustainabilityPractice"/>
         <Class IRI="#Accommodation"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#locatedIn"/>
+        <ObjectUnionOf>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Event"/>
+            <Class IRI="#Service"/>
+        </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#offeredBy"/>
@@ -1132,16 +1129,16 @@
         <Class IRI="#Award"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasLocation"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
         <ObjectProperty IRI="#hasReview"/>
         <Class IRI="#Review"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasSustainabilityPractice"/>
         <Class IRI="#SustainabilityPractice"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#locatedIn"/>
+        <Class IRI="#Location"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#offeredBy"/>
