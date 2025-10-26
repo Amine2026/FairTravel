@@ -164,3 +164,21 @@ This file is a quick reference. Update as your ontology grows!
   - PUT /activities/<activity_uri> (update)
   - DELETE /activities/<activity_uri> (delete)
 - Data is stored and managed in the Fuseki triple store using SPARQL.
+
+## 14. Recommendation CRUD API
+- The backend supports full CRUD (Create, Read, Update, Delete) operations for recommendations via REST endpoints.
+- Endpoints:
+  - POST /recommendations (create)
+  - GET /recommendations (list/read)
+  - PUT /recommendations/<recommendation_uri> (update)
+  - DELETE /recommendations/<recommendation_uri> (delete)
+- Data is stored and managed in the Fuseki triple store using SPARQL.
+
+## 15. Event CRUD API
+- The backend supports full CRUD (Create, Read, Update, Delete) operations for events via REST endpoints.
+- Endpoints:
+  - POST /events (create)
+  - GET /events (list/read)
+  - PUT /events/<event_uri> (update)
+  - DELETE /events/<event_uri> (delete)
+- Data is stored and managed in the Fuseki triple store using SPARQL.
