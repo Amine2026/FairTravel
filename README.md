@@ -115,4 +115,11 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 			```
 - Verified results in Fuseki web UI.
 
+## Flask API Setup (Brief)
+
+- Install Flask and SPARQLWrapper:
+	`pip install flask SPARQLWrapper`
+- Create a simple Flask app to query Fuseki and return results as JSON.
+- Example endpoint: `/classes` returns ontology classes from Fuseki.
+
 This file is a quick reference. Update as your ontology grows!
