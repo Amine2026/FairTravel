@@ -140,5 +140,6 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 - Added RecommendationsList and EventsList React components to display recommendations and events from the backend.
 - Added detail endpoints in Flask for activities, events, and recommendations.
 - Integrated detail views in React: click an activity, event, or recommendation to see its properties.
+- Added search bars to Activities, Events, and Recommendations pages for easy filtering in the frontend.
 
 This file is a quick reference. Update as your ontology grows!
