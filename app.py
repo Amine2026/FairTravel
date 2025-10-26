@@ -4,7 +4,7 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 app = Flask(__name__)
 
 # Change this to your Fuseki SPARQL endpoint
-FUSEKI_URL = "http://localhost:3030/dataset/sparql"
+FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
 
 @app.route('/classes')
 def get_classes():
@@ -15,7 +15,8 @@ def get_classes():
     """)
     sparql.setReturnFormat(JSON)
     results = sparql.query().convert()
-    classes = [r['class']['value'] for r in results['results']['bindings']]
+    # Only keep URIs (named classes), filter out blank nodes
+    classes = [r['class']['value'] for r in results['results']['bindings'] if r['class']['type'] == 'uri']
     return jsonify(classes)
 
 if __name__ == '__main__':
