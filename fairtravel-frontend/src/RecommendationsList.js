@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import RecommendationDetails from './RecommendationDetails';
+import { Link } from 'react-router-dom';
 
 function RecommendationsList() {
   const [recommendations, setRecommendations] = useState([]);
@@ -63,16 +63,19 @@ function RecommendationsList() {
         </select>
       </div>
       <ul style={{paddingLeft:0, listStyle:'none'}}>
-        {filteredRecommendations.map(rec => (
-          <li key={rec} style={{marginBottom:'0.5rem'}}>
-            <button style={{background: 'none', border: 'none', color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}} onClick={() => setSelectedUri(rec)}>
-              {rec}
-            </button>
-          </li>
-        ))}
+          {filteredRecommendations.map(rec => (
+            <li key={rec} style={{marginBottom:'0.5rem'}}>
+              <Link
+                to={`/recommendations/${encodeURIComponent(rec)}`}
+                style={{color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}}
+              >
+                {rec}
+              </Link>
+            </li>
+          ))}
       </ul>
       <div style={{marginTop:'1.5rem'}}>
-        <RecommendationDetails uri={selectedUri} />
+        {/* Details now shown in RecommendationDetails route */}
       </div>
     </div>
   );

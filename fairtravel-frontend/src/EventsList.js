@@ -1,6 +1,6 @@
 
 import React, { useEffect, useState } from 'react';
-import EventDetails from './EventDetails';
+import { Link } from 'react-router-dom';
 
 function EventsList() {
   const [events, setEvents] = useState([]);
@@ -73,16 +73,19 @@ function EventsList() {
         </select>
       </div>
       <ul style={{paddingLeft:0, listStyle:'none'}}>
-        {filteredEvents.map(event => (
-          <li key={event} style={{marginBottom:'0.5rem'}}>
-            <button style={{background: 'none', border: 'none', color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}} onClick={() => setSelectedUri(event)}>
-              {event}
-            </button>
-          </li>
-        ))}
+          {filteredEvents.map(event => (
+            <li key={event} style={{marginBottom:'0.5rem'}}>
+              <Link
+                to={`/events/${encodeURIComponent(event)}`}
+                style={{color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}}
+              >
+                {event}
+              </Link>
+            </li>
+          ))}
       </ul>
       <div style={{marginTop:'1.5rem'}}>
-        <EventDetails uri={selectedUri} />
+        {/* Details now shown in EventDetails route */}
       </div>
     </div>
   );

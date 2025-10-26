@@ -2,9 +2,13 @@
 
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
+
 import ActivitiesList from './ActivitiesList';
 import RecommendationsList from './RecommendationsList';
 import EventsList from './EventsList';
+import ActivityDetails from './ActivityDetails';
+import RecommendationDetails from './RecommendationDetails';
+import EventDetails from './EventDetails';
 
 function App() {
   return (
@@ -18,9 +22,12 @@ function App() {
         </nav>
         <Routes>
           <Route path="/activities" element={<ActivitiesList />} />
-          <Route path="/recommendations" element={<RecommendationsList />} />
-          <Route path="/events" element={<EventsList />} />
-          <Route path="/" element={<ActivitiesList />} />
+          <Route path="/activities/:id" element={<ActivityDetails />} />
+            <Route path="/recommendations" element={<RecommendationsList />} />
+              <Route path="/recommendations/:id/*" element={<RecommendationDetails />} />
+            <Route path="/events" element={<EventsList />} />
+              <Route path="/events/:id/*" element={<EventDetails />} />
+            <Route path="/" element={<ActivitiesList />} />
         </Routes>
       </div>
     </Router>
@@ -28,3 +35,4 @@ function App() {
 }
 
 export default App;
+

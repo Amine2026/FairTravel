@@ -1,15 +1,19 @@
+
 import React, { useEffect, useState } from 'react';
+import { useParams } from 'react-router-dom';
 
 function ActivityDetails({ uri }) {
+  const params = useParams();
+  const activityUri = uri || (params.id ? decodeURIComponent(params.id) : null);
   const [details, setDetails] = useState(null);
   const [error, setError] = useState(null);
   const [loading, setLoading] = useState(false);
 
   useEffect(() => {
-    if (!uri) return;
+    if (!activityUri) return;
     setLoading(true);
     setError(null);
-    fetch(`http://localhost:5000/activity-details?uri=${encodeURIComponent(uri)}`)
+    fetch(`http://localhost:5000/activity-details?uri=${encodeURIComponent(activityUri)}`)
       .then(response => {
         if (!response.ok) throw new Error('Failed to fetch details');
         return response.json();
@@ -17,9 +21,9 @@ function ActivityDetails({ uri }) {
       .then(data => setDetails(data))
       .catch(err => setError(err.message))
       .finally(() => setLoading(false));
-  }, [uri]);
+  }, [activityUri]);
 
-  if (!uri) return null;
+  if (!activityUri) return null;
   if (loading) return <div>Loading details...</div>;
   if (error) return <div style={{color:'red'}}>Error: {error}</div>;
   if (!details) return null;

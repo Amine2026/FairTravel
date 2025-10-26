@@ -1,7 +1,7 @@
 
 
 import React, { useEffect, useState } from 'react';
-import ActivityDetails from './ActivityDetails';
+import { Link } from 'react-router-dom';
 
 function ActivitiesList() {
   const [activities, setActivities] = useState([]);
@@ -66,15 +66,15 @@ function ActivitiesList() {
       <ul style={{paddingLeft:0, listStyle:'none'}}>
         {filteredActivities.map(activity => (
           <li key={activity} style={{marginBottom:'0.5rem'}}>
-            <button style={{background: 'none', border: 'none', color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}} onClick={() => setSelectedUri(activity)}>
+            <Link
+              to={`/activities/${encodeURIComponent(activity)}`}
+              style={{color: '#1976d2', textDecoration: 'underline', cursor: 'pointer', fontSize:'1rem'}}
+            >
               {activity}
-            </button>
+            </Link>
           </li>
         ))}
       </ul>
-      <div style={{marginTop:'1.5rem'}}>
-        <ActivityDetails uri={selectedUri} />
-      </div>
     </div>
   );
 }
