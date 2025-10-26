@@ -137,5 +137,29 @@ def get_bookings():
 def get_sustainability_practices():
     return jsonify(list_entities('SustainabilityPractice'))
 
+def get_details(uri):
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery(f"""
+        SELECT ?property ?value WHERE {{ <{uri}> ?property ?value . }}
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    details = { r['property']['value']: r['value']['value'] for r in results['results']['bindings'] }
+    return details
+
+@app.route('/accommodation-details')
+def accommodation_details():
+    return jsonify(get_details(request.args.get('uri')))
+
+@app.route('/booking-details')
+def booking_details():
+    return jsonify(get_details(request.args.get('uri')))
+
+@app.route('/sustainability-details')
+def sustainability_practice_details():
+    return jsonify(get_details(request.args.get('uri')))
+
 if __name__ == '__main__':
     app.run(debug=True)
