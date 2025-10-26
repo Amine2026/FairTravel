@@ -281,6 +281,7 @@ def create_activity():
     INSERT DATA {{
       :{name} a :{activity_type} ;
         :activityName "{name}" ;
+        :activityType "{activity_type}" ;
         :locatedIn :{location} .
     }}
     '''
@@ -306,16 +307,19 @@ def update_activity(activity_uri):
     PREFIX : <http://www.fairtravel.com/fairtravel#>
     DELETE {{
       :{local_name} :activityName ?oldName .
+      :{local_name} :activityType ?oldTypeProp .
       :{local_name} :locatedIn ?oldLocation .
       :{local_name} a ?oldType .
     }}
     INSERT {{
       :{local_name} a :{activity_type} .
       :{local_name} :activityName "{name}" .
+      :{local_name} :activityType "{activity_type}" .
       :{local_name} :locatedIn :{location} .
     }}
     WHERE {{
       OPTIONAL {{ :{local_name} :activityName ?oldName }}
+      OPTIONAL {{ :{local_name} :activityType ?oldTypeProp }}
       OPTIONAL {{ :{local_name} :locatedIn ?oldLocation }}
       OPTIONAL {{ :{local_name} a ?oldType }}
     }}

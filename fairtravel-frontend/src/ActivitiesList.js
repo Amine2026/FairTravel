@@ -1,5 +1,3 @@
-
-
 import React, { useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 
@@ -38,9 +36,97 @@ function ActivitiesList() {
     return matchesSearch && matchesType && matchesDifficulty;
   });
 
+  // Activity creation form state
+  const [form, setForm] = useState({
+    name: '',
+    type: '',
+    location: ''
+  });
+  const [creating, setCreating] = useState(false);
+  const [error, setError] = useState('');
+
+  const handleFormChange = e => {
+    setForm({ ...form, [e.target.name]: e.target.value });
+  };
+
+  const handleCreate = async e => {
+    e.preventDefault();
+    setCreating(true);
+    setError('');
+    try {
+      const res = await fetch('http://localhost:5000/activities', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(form)
+      });
+      if (!res.ok) throw new Error('Failed to create');
+      setForm({ name: '', type: '', location: '' });
+      setCreating(false);
+      window.location.reload();
+    } catch (err) {
+      setError('Error creating activity');
+      setCreating(false);
+    }
+  };
+
+  const handleDelete = async activity => {
+    if (!window.confirm('Delete this activity?')) return;
+    const encoded = encodeURIComponent(activity);
+    await fetch(`http://localhost:5000/activities/${encoded}`, { method: 'DELETE' });
+    window.location.reload();
+  };
+
+  const [editingUri, setEditingUri] = useState(null);
+  const [editForm, setEditForm] = useState({ name: '', type: '', location: '' });
+  const [updating, setUpdating] = useState(false);
+  const [updateError, setUpdateError] = useState('');
+
+  const startEdit = (activity) => {
+    const details = detailsMap[activity] || {};
+    setEditingUri(activity);
+    setEditForm({
+      name: activity.split('#')[1] || '',
+      type: details['http://www.fairtravel.com/fairtravel#activityType'] || '',
+      location: details['http://www.fairtravel.com/fairtravel#locatedIn'] ? details['http://www.fairtravel.com/fairtravel#locatedIn'].split('#')[1] : ''
+    });
+  };
+
+  const handleEditFormChange = e => {
+    setEditForm({ ...editForm, [e.target.name]: e.target.value });
+  };
+
+  const handleUpdate = async e => {
+    e.preventDefault();
+    setUpdating(true);
+    setUpdateError('');
+    try {
+      const encoded = encodeURIComponent(editingUri);
+      const res = await fetch(`http://localhost:5000/activities/${encoded}`, {
+        method: 'PUT',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify(editForm)
+      });
+      if (!res.ok) throw new Error('Failed to update');
+      setEditingUri(null);
+      setUpdating(false);
+      window.location.reload();
+    } catch (err) {
+      setUpdateError('Error updating activity');
+      setUpdating(false);
+    }
+  };
+
   return (
     <div style={{maxWidth:600, margin:'2rem auto', padding:'1rem', background:'#f9f9f9', borderRadius:8, boxShadow:'0 2px 8px #ddd'}}>
       <h2 style={{marginBottom:'1rem'}}>Activities</h2>
+      <form onSubmit={handleCreate} style={{marginBottom:'2rem', background:'#eef', padding:'1rem', borderRadius:6}}>
+        <h3>Add Activity</h3>
+        <input name="name" value={form.name} onChange={handleFormChange} placeholder="Name" required style={{marginRight:8}} />
+        <input name="type" value={form.type} onChange={handleFormChange} placeholder="Type" required style={{marginRight:8}} />
+        <input name="location" value={form.location} onChange={handleFormChange} placeholder="Location" required style={{marginRight:8}} />
+        <button type="submit" disabled={creating}>Create</button>
+        {error && <div style={{color:'red'}}>{error}</div>}
+      </form>
       <input
         type="text"
         placeholder="Search activities..."
@@ -71,6 +157,18 @@ function ActivitiesList() {
             >
               {activity}
             </Link>
+            <button onClick={() => handleDelete(activity)} style={{marginLeft:12, color:'red'}}>Delete</button>
+            <button onClick={() => startEdit(activity)} style={{marginLeft:8}}>Edit</button>
+            {editingUri === activity && (
+              <form onSubmit={handleUpdate} style={{marginTop:'1rem', background:'#ffe', padding:'1rem', borderRadius:6}}>
+                <input name="name" value={editForm.name} onChange={handleEditFormChange} placeholder="Name" required style={{marginRight:8}} />
+                <input name="type" value={editForm.type} onChange={handleEditFormChange} placeholder="Type" required style={{marginRight:8}} />
+                <input name="location" value={editForm.location} onChange={handleEditFormChange} placeholder="Location" required style={{marginRight:8}} />
+                <button type="submit" disabled={updating}>Update</button>
+                <button type="button" onClick={() => setEditingUri(null)} style={{marginLeft:8}}>Cancel</button>
+                {updateError && <div style={{color:'red'}}>{updateError}</div>}
+              </form>
+            )}
           </li>
         ))}
       </ul>
