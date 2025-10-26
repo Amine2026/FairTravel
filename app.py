@@ -110,5 +110,32 @@ def get_events():
     events = [r['event']['value'] for r in results['results']['bindings'] if r['event']['type'] == 'uri']
     return jsonify(events)
 
+
+#========================================================================
+# Accommodation, Booking and Sustainability practice
+#========================================================================
+
+def list_entities(class_name):
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery(f"""
+        PREFIX : <http://www.fairtravel.com/fairtravel#>
+        SELECT ?entity WHERE {{ ?entity a :{class_name} . }}
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    return [r['entity']['value'] for r in results['results']['bindings'] if r['entity']['type'] == 'uri']
+
+@app.route('/accommodations')
+def get_accommodations():
+    return jsonify(list_entities('Accommodation'))
+
+@app.route('/bookings')
+def get_bookings():
+    return jsonify(list_entities('Booking'))
+
+@app.route('/sustainability-practices')
+def get_sustainability_practices():
+    return jsonify(list_entities('SustainabilityPractice'))
+
 if __name__ == '__main__':
     app.run(debug=True)
