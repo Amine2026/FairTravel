@@ -58,7 +58,6 @@
 - Use version control for every major change
 
 ## 7. Team Class Assignments
-
 - **Amine:** Activity, Recommendation, Event
 - **Ali:** SustainabilityPractice, Accommodation, Booking
 - **Oussema:** Service, Review, Award
@@ -66,7 +65,6 @@
 - **Hiba:** Tourist, Guide, Restaurant
 
 ## 8. Ontology File Format (2025)
-
 - Ontology now uses OWL/XML style (not RDF/XML)
 - Root element: `<Ontology>`
 - Uses `<Prefix>` for namespaces and `<Declaration>` for classes
@@ -81,13 +79,11 @@
 	```
 
 ## 9. Example Individuals Added
-
 - **Activity:** MountainHiking (OutdoorActivity) with properties: activityName, activityType, duration, difficultyLevel, hasLocation (AlpinePark)
 - **Recommendation:** HikingRec linked to MountainHiking, with recommendationText, rating, source, dateRecommended
 - **Event:** EcoFestival2025 with eventType, organizer, price, eventDate, hasLocation (AlpinePark)
 
 ## 10. Recommended Tech Stack
-
 - Front-end: React
 - Back-end: Python (Flask) + RDFLib
 - SPARQL endpoint: Apache Jena Fuseki
@@ -96,7 +92,6 @@
 The OWL file acts as the semantic database, queried and updated via SPARQL.
 
 ## 11. Fuseki Setup & SPARQL Querying
-
 - Installed Apache Jena Fuseki and created an in-memory dataset.
 - Exported ontology from Protégé as Turtle (.ttl) and uploaded to Fuseki.
 - Ran SPARQL queries to list classes, retrieve individuals, and filter properties:
@@ -116,8 +111,6 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 - Verified results in Fuseki web UI.
 
 ## Flask API Setup (Brief)
-
-
 - Install Flask and SPARQLWrapper:
 	`pip install flask SPARQLWrapper`
 - Flask API endpoints:
@@ -126,5 +119,17 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 	- `/recommendations`: returns all recommendations
 	- `/events`: returns all events
 	- All endpoints query Fuseki and return results as JSON.
+
+
+## React Frontend Setup (Brief)
+- You can use either `pnpm` or `npm` for React setup:
+	- To use pnpm (recommended for speed):
+		- Install pnpm globally: `npm install -g pnpm`
+		- Create React app: `pnpx create-react-app fairtravel-frontend`
+		- Start frontend: `cd fairtravel-frontend && pnpm start`
+	- Or use npm:
+		- Create React app: `npx create-react-app fairtravel-frontend`
+		- Start frontend: `cd fairtravel-frontend && npm start`
+	- The frontend will run at http://localhost:3000 and can fetch data from the Flask API.
 
 This file is a quick reference. Update as your ontology grows!
