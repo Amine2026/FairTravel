@@ -191,6 +191,448 @@ def booking_details():
 def sustainability_practice_details():
     return jsonify(get_details(request.args.get('uri')))
 
+#========================================================================
+# CRUD Operations for Service, Review and Award
+#========================================================================
+
+# URL for SPARQL UPDATE operations
+FUSEKI_UPDATE_URL = "http://localhost:3030/FairTravel/update"
+
+# ==================== SERVICE CRUD ====================
+
+# READ - List all services (including subclasses)
+@app.route('/services', methods=['GET'])
+def get_services():
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery("""
+        PREFIX : <http://www.fairtravel.com/fairtravel#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?service WHERE {
+          ?type rdfs:subClassOf* :Service .
+          ?service a ?type .
+        }
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    services = [r['service']['value'] for r in results['results']['bindings'] if r['service']['type'] == 'uri']
+    return jsonify(services)
+
+# READ - Get service details
+@app.route('/service-details', methods=['GET'])
+def service_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    return jsonify(get_details(uri))
+
+# CREATE - Add new service
+@app.route('/services', methods=['POST'])
+def create_service():
+    try:
+        data = request.get_json()
+        service_id = data.get('id')
+        service_type = data.get('type', 'Service')  # Service, InformationCenter, LocalShop
+        properties = data.get('properties', {})
+        
+        if not service_id:
+            return jsonify({'error': 'Service ID is required'}), 400
+        
+        # Build the INSERT query
+        triples = [f":{service_id} a :{service_type} ."]
+        
+        # Add data properties
+        if 'serviceName' in properties:
+            triples.append(f':{service_id} :serviceName "{properties["serviceName"]}" .')
+        if 'serviceType' in properties:
+            triples.append(f':{service_id} :serviceType "{properties["serviceType"]}" .')
+        if 'operatingHours' in properties:
+            triples.append(f':{service_id} :operatingHours "{properties["operatingHours"]}" .')
+        if 'contactInfo' in properties:
+            triples.append(f':{service_id} :contactInfo "{properties["contactInfo"]}" .')
+        if 'priceRange' in properties:
+            triples.append(f':{service_id} :priceRange "{properties["priceRange"]}" .')
+        if 'sustainabilityScore' in properties:
+            triples.append(f':{service_id} :sustainabilityScore {properties["sustainabilityScore"]} .')
+        if 'locallyOwned' in properties:
+            triples.append(f':{service_id} :locallyOwned {str(properties["locallyOwned"]).lower()} .')
+        if 'useLocalProducts' in properties:
+            triples.append(f':{service_id} :useLocalProducts {str(properties["useLocalProducts"]).lower()} .')
+        
+        # Add object properties
+        if 'locatedIn' in properties:
+            triples.append(f':{service_id} :locatedIn :{properties["locatedIn"]} .')
+        
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Service created successfully', 'id': service_id}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# UPDATE - Modify service
+@app.route('/services/<service_id>', methods=['PUT'])
+def update_service(service_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+        
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+        
+        # Build DELETE and INSERT queries
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+        
+        for prop, value in properties.items():
+            delete_triples.append(f':{service_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{service_id} :{prop} ?old_{prop} }}')
+            
+            if isinstance(value, bool):
+                insert_triples.append(f':{service_id} :{prop} {str(value).lower()}')
+            elif isinstance(value, int):
+                insert_triples.append(f':{service_id} :{prop} {value}')
+            elif prop in ['locatedIn', 'offeredBy']:
+                insert_triples.append(f':{service_id} :{prop} :{value}')
+            else:
+                insert_triples.append(f':{service_id} :{prop} "{value}"')
+        
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Service updated successfully', 'id': service_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# DELETE - Remove service
+@app.route('/services/<service_id>', methods=['DELETE'])
+def delete_service(service_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{service_id} ?p ?o .
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Service deleted successfully', 'id': service_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# ==================== REVIEW CRUD ====================
+
+# READ - List all reviews (including subclasses)
+@app.route('/reviews', methods=['GET'])
+def get_reviews():
+    sparql = SPARQLWrapper(FUSEKI_URL)
+    sparql.setQuery("""
+        PREFIX : <http://www.fairtravel.com/fairtravel#>
+        PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
+        SELECT ?review WHERE {
+          ?type rdfs:subClassOf* :Review .
+          ?review a ?type .
+        }
+    """)
+    sparql.setReturnFormat(JSON)
+    results = sparql.query().convert()
+    reviews = [r['review']['value'] for r in results['results']['bindings'] if r['review']['type'] == 'uri']
+    return jsonify(reviews)
+
+# READ - Get review details
+@app.route('/review-details', methods=['GET'])
+def review_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    return jsonify(get_details(uri))
+
+# CREATE - Add new review
+@app.route('/reviews', methods=['POST'])
+def create_review():
+    try:
+        data = request.get_json()
+        review_id = data.get('id')
+        review_type = data.get('type', 'Review')  # Review, ActivityReview, AccommodationReview, ServiceReview, TransportReview
+        properties = data.get('properties', {})
+        
+        if not review_id:
+            return jsonify({'error': 'Review ID is required'}), 400
+        
+        # Build the INSERT query
+        triples = [f":{review_id} a :{review_type} ."]
+        
+        # Add data properties
+        if 'rating' in properties:
+            triples.append(f':{review_id} :rating {properties["rating"]} .')
+        if 'reviewText' in properties:
+            triples.append(f':{review_id} :reviewText "{properties["reviewText"]}" .')
+        if 'reviewDate' in properties:
+            triples.append(f':{review_id} :reviewDate "{properties["reviewDate"]}" .')
+        if 'reviewerName' in properties:
+            triples.append(f':{review_id} :reviewerName "{properties["reviewerName"]}" .')
+        if 'sustainabilityRating' in properties:
+            triples.append(f':{review_id} :sustainabilityRating {properties["sustainabilityRating"]} .')
+        if 'mentionsSustainability' in properties:
+            triples.append(f':{review_id} :mentionsSustainability {str(properties["mentionsSustainability"]).lower()} .')
+        if 'verified' in properties:
+            triples.append(f':{review_id} :verified {str(properties["verified"]).lower()} .')
+        
+        # Add object properties
+        if 'writtenBy' in properties:
+            triples.append(f':{review_id} :writtenBy :{properties["writtenBy"]} .')
+        if 'reviewsActivity' in properties:
+            triples.append(f':{review_id} :reviewsActivity :{properties["reviewsActivity"]} .')
+        if 'reviewsAccommodation' in properties:
+            triples.append(f':{review_id} :reviewsAccommodation :{properties["reviewsAccommodation"]} .')
+        if 'reviewsService' in properties:
+            triples.append(f':{review_id} :reviewsService :{properties["reviewsService"]} .')
+        
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Review created successfully', 'id': review_id}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# UPDATE - Modify review
+@app.route('/reviews/<review_id>', methods=['PUT'])
+def update_review(review_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+        
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+        
+        # Build DELETE and INSERT queries
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+        
+        for prop, value in properties.items():
+            delete_triples.append(f':{review_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{review_id} :{prop} ?old_{prop} }}')
+            
+            if isinstance(value, bool):
+                insert_triples.append(f':{review_id} :{prop} {str(value).lower()}')
+            elif isinstance(value, int):
+                insert_triples.append(f':{review_id} :{prop} {value}')
+            elif prop in ['writtenBy', 'reviewsActivity', 'reviewsAccommodation', 'reviewsService', 'reviewsTransport']:
+                insert_triples.append(f':{review_id} :{prop} :{value}')
+            else:
+                insert_triples.append(f':{review_id} :{prop} "{value}"')
+        
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Review updated successfully', 'id': review_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# DELETE - Remove review
+@app.route('/reviews/<review_id>', methods=['DELETE'])
+def delete_review(review_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{review_id} ?p ?o .
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Review deleted successfully', 'id': review_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# ==================== AWARD CRUD ====================
+
+# READ - List all awards
+@app.route('/awards', methods=['GET'])
+def get_awards():
+    return jsonify(list_entities('Award'))
+
+# READ - Get award details
+@app.route('/award-details', methods=['GET'])
+def award_details():
+    uri = request.args.get('uri')
+    if not uri:
+        return jsonify({'error': 'Missing uri parameter'}), 400
+    return jsonify(get_details(uri))
+
+# CREATE - Add new award
+@app.route('/awards', methods=['POST'])
+def create_award():
+    try:
+        data = request.get_json()
+        award_id = data.get('id')
+        properties = data.get('properties', {})
+        
+        if not award_id:
+            return jsonify({'error': 'Award ID is required'}), 400
+        
+        # Build the INSERT query
+        triples = [f":{award_id} a :Award ."]
+        
+        # Add data properties
+        if 'awardName' in properties:
+            triples.append(f':{award_id} :awardName "{properties["awardName"]}" .')
+        if 'awardType' in properties:
+            triples.append(f':{award_id} :awardType "{properties["awardType"]}" .')
+        if 'awardedBy' in properties:
+            triples.append(f':{award_id} :awardedBy "{properties["awardedBy"]}" .')
+        if 'dateAwarded' in properties:
+            triples.append(f':{award_id} :dateAwarded "{properties["dateAwarded"]}" .')
+        if 'description' in properties:
+            triples.append(f':{award_id} :description "{properties["description"]}" .')
+        if 'level' in properties:
+            triples.append(f':{award_id} :level "{properties["level"]}" .')
+        if 'validUntil' in properties:
+            triples.append(f':{award_id} :validUntil "{properties["validUntil"]}" .')
+        
+        # Add object properties
+        if 'receivedBy' in properties:
+            triples.append(f':{award_id} :receivedBy :{properties["receivedBy"]} .')
+        
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Award created successfully', 'id': award_id}), 201
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# UPDATE - Modify award
+@app.route('/awards/<award_id>', methods=['PUT'])
+def update_award(award_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+        
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+        
+        # Build DELETE and INSERT queries
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+        
+        for prop, value in properties.items():
+            delete_triples.append(f':{award_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{award_id} :{prop} ?old_{prop} }}')
+            
+            if prop in ['receivedBy']:
+                insert_triples.append(f':{award_id} :{prop} :{value}')
+            else:
+                insert_triples.append(f':{award_id} :{prop} "{value}"')
+        
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Award updated successfully', 'id': award_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+# DELETE - Remove award
+@app.route('/awards/<award_id>', methods=['DELETE'])
+def delete_award(award_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{award_id} ?p ?o .
+            }}
+        """
+        
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+        
+        return jsonify({'message': 'Award deleted successfully', 'id': award_id}), 200
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
 # AI API endpoint for natural language queries
 @app.route('/api/ai-query', methods=['POST'])
 def ai_query():

@@ -14,6 +14,15 @@ import BookingDetails from './BookingDetails';
 import SustainabilityPracticesList from './SustainabilityPracticesList';
 import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
 import AiQueryBox from './AiQueryBox';
+import ServicesList from './ServicesList';
+import ServiceDetails from './ServiceDetails';
+import ServiceForm from './ServiceForm';
+import ReviewsList from './ReviewsList';
+import ReviewDetails from './ReviewDetails';
+import ReviewForm from './ReviewForm';
+import AwardsList from './AwardsList';
+import AwardDetails from './AwardDetails';
+import AwardForm from './AwardForm';
 
 function App() {
   return (
@@ -69,6 +78,27 @@ function App() {
           >
             Sustainability
           </Link>
+
+          <Link
+            to="/services"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Services
+          </Link>
+
+          <Link
+            to="/reviews"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Reviews
+          </Link>
+
+          <Link
+            to="/awards"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Awards
+          </Link>
         </nav>
 
         <Routes>
@@ -85,6 +115,24 @@ function App() {
             <Route path="/bookings/:id" element={<BookingDetails />} />
             <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
             <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
+            
+            {/* Services Routes */}
+            <Route path="/services" element={<ServicesList />} />
+            <Route path="/services/new" element={<ServiceForm />} />
+            <Route path="/services/:id" element={<ServiceDetails />} />
+            <Route path="/services/:id/edit" element={<ServiceForm />} />
+            
+            {/* Reviews Routes */}
+            <Route path="/reviews" element={<ReviewsList />} />
+            <Route path="/reviews/new" element={<ReviewForm />} />
+            <Route path="/reviews/:id" element={<ReviewDetails />} />
+            <Route path="/reviews/:id/edit" element={<ReviewForm />} />
+            
+            {/* Awards Routes */}
+            <Route path="/awards" element={<AwardsList />} />
+            <Route path="/awards/new" element={<AwardForm />} />
+            <Route path="/awards/:id" element={<AwardDetails />} />
+            <Route path="/awards/:id/edit" element={<AwardForm />} />
         </Routes>
         <AiQueryBox />
       </div>
