@@ -1,5 +1,3 @@
-
-
 import React from 'react';
 import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
 
@@ -15,6 +13,7 @@ import BookingsList from './BookingsList';
 import BookingDetails from './BookingDetails';
 import SustainabilityPracticesList from './SustainabilityPracticesList';
 import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
+import AiQueryBox from './AiQueryBox';
 
 function App() {
   return (
@@ -87,6 +86,7 @@ function App() {
             <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
             <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
         </Routes>
+        <AiQueryBox />
       </div>
     </Router>
   );
