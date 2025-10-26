@@ -145,3 +145,6 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 -- UI/UX improvements: readable labels, card layouts, dropdown filters, loading/error states.
 
 This file is a quick reference. Update as your ontology grows!
+
+## API Features
+- Added an AI API endpoint (`/api/ai-query`) in the Flask backend to accept user questions for future natural language query processing.

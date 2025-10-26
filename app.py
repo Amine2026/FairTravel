@@ -161,5 +161,17 @@ def booking_details():
 def sustainability_practice_details():
     return jsonify(get_details(request.args.get('uri')))
 
+# AI API endpoint for natural language queries
+@app.route('/api/ai-query', methods=['POST'])
+def ai_query():
+    data = request.get_json()
+    question = data.get('question', '')
+    # Placeholder: return dummy response
+    return jsonify({
+        'question': question,
+        'sparql_query': 'SELECT * WHERE { ?s ?p ?o }',
+        'results': []
+    })
+
 if __name__ == '__main__':
     app.run(debug=True)
