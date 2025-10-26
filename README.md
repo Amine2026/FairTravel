@@ -132,4 +132,11 @@ The OWL file acts as the semantic database, queried and updated via SPARQL.
 		- Start frontend: `cd fairtravel-frontend && npm start`
 	- The frontend will run at http://localhost:3000 and can fetch data from the Flask API.
 
+
+## Recent Changes (since last git push)
+
+- Added Flask API endpoints for activities, recommendations, and events, including subclass support for activities.
+- Enabled CORS in Flask backend for frontend-backend communication.
+- Created React frontend with an ActivitiesList component that fetches activities from the Flask API.
+
 This file is a quick reference. Update as your ontology grows!

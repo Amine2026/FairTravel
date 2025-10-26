@@ -1,7 +1,11 @@
+
 from flask import Flask, jsonify
 from SPARQLWrapper import SPARQLWrapper, JSON
+from flask_cors import CORS
+
 
 app = Flask(__name__)
+CORS(app)
 
 # Change this to your Fuseki SPARQL endpoint
 FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
