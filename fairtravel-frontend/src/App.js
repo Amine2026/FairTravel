@@ -23,6 +23,9 @@ import ReviewForm from './ReviewForm';
 import AwardsList from './AwardsList';
 import AwardDetails from './AwardDetails';
 import AwardForm from './AwardForm';
+import AccommodationForm from './AccommodationForm';
+import SustainabilityPracticeForm from './SustainabilityPracticeForm';
+import BookingForm from './BookingForm';
 
 function App() {
   return (
@@ -111,10 +114,13 @@ function App() {
             <Route path="/" element={<ActivitiesList />} />
             <Route path="/accommodations" element={<AccommodationsList />} />
             <Route path="/accommodations/:id" element={<AccommodationDetails />} />
+            <Route path="/accommodations/new" element={<AccommodationForm />} />
             <Route path="/bookings" element={<BookingsList />} />
             <Route path="/bookings/:id" element={<BookingDetails />} />
+            <Route path="/bookings/new" element={<BookingForm />} />
             <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
             <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
+            <Route path="/sustainability-practices/new" element={<SustainabilityPracticeForm />} />
             
             {/* Services Routes */}
             <Route path="/services" element={<ServicesList />} />
