@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './FormStyles.css';
 
 function ReviewForm() {
   const navigate = useNavigate();
@@ -8,22 +9,22 @@ function ReviewForm() {
 
   const [formData, setFormData] = useState({
     id: '',
-    type: 'Review',
-    rating: 5,
+    reviewTitle: '',
+    reviewedBy: '',
     reviewText: '',
+    reviewRating: 5,
     reviewDate: new Date().toISOString().split('T')[0],
-    reviewerName: '',
-    sustainabilityRating: 5,
-    mentionsSustainability: false,
-    verified: false,
-    writtenBy: '',
-    reviewsActivity: '',
-    reviewsAccommodation: '',
-    reviewsService: ''
+    reviewsEntity: '',
+    // Champs avancés
+    reviewerType: '',
+    overallRating: 5,
+    sentiment: 'neutral',
+    ecoFriendlyPractices: ''
   });
 
   const [loading, setLoading] = useState(false);
-
+  const [error, setError] = useState('');
+  const [advancedMode, setAdvancedMode] = useState(false);
   useEffect(() => {
     if (isEdit) {
       const uri = decodeURIComponent(id);
@@ -33,42 +34,53 @@ function ReviewForm() {
           const extractedId = uri.split('#')[1];
           setFormData({
             id: extractedId,
-            type: data['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']?.split('#')[1] || 'Review',
-            rating: parseInt(data['http://www.fairtravel.com/fairtravel#rating']) || 5,
+            reviewTitle: data['http://www.fairtravel.com/fairtravel#reviewTitle'] || '',
+            reviewedBy: data['http://www.fairtravel.com/fairtravel#reviewedBy']?.split('#')[1] || '',
             reviewText: data['http://www.fairtravel.com/fairtravel#reviewText'] || '',
+            reviewRating: parseInt(data['http://www.fairtravel.com/fairtravel#reviewRating']) || 5,
             reviewDate: data['http://www.fairtravel.com/fairtravel#reviewDate'] || new Date().toISOString().split('T')[0],
-            reviewerName: data['http://www.fairtravel.com/fairtravel#reviewerName'] || '',
-            sustainabilityRating: parseInt(data['http://www.fairtravel.com/fairtravel#sustainabilityRating']) || 5,
-            mentionsSustainability: data['http://www.fairtravel.com/fairtravel#mentionsSustainability'] === 'true',
-            verified: data['http://www.fairtravel.com/fairtravel#verified'] === 'true',
-            writtenBy: data['http://www.fairtravel.com/fairtravel#writtenBy']?.split('#')[1] || '',
-            reviewsActivity: data['http://www.fairtravel.com/fairtravel#reviewsActivity']?.split('#')[1] || '',
-            reviewsAccommodation: data['http://www.fairtravel.com/fairtravel#reviewsAccommodation']?.split('#')[1] || '',
-            reviewsService: data['http://www.fairtravel.com/fairtravel#reviewsService']?.split('#')[1] || ''
+            reviewsEntity: data['http://www.fairtravel.com/fairtravel#reviewsEntity']?.split('#')[1] || '',
+            // Champs avancés
+            reviewerType: data['http://www.fairtravel.com/fairtravel#reviewerType'] || '',
+            overallRating: parseInt(data['http://www.fairtravel.com/fairtravel#overallRating']) || 5,
+            sentiment: data['http://www.fairtravel.com/fairtravel#sentiment'] || 'neutral',
+            ecoFriendlyPractices: data['http://www.fairtravel.com/fairtravel#ecoFriendlyPractices'] || ''
           });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+          console.error('Error:', error);
+          setError('Erreur lors du chargement de l\'avis');
+        });
     }
   }, [id, isEdit]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     const properties = {
-      rating: parseInt(formData.rating),
+      reviewTitle: formData.reviewTitle,
+      reviewedBy: formData.reviewedBy,
       reviewText: formData.reviewText,
+      reviewRating: parseInt(formData.reviewRating),
       reviewDate: formData.reviewDate,
-      reviewerName: formData.reviewerName,
-      sustainabilityRating: parseInt(formData.sustainabilityRating),
-      mentionsSustainability: formData.mentionsSustainability,
-      verified: formData.verified
+      reviewsEntity: formData.reviewsEntity
     };
 
-    if (formData.writtenBy) properties.writtenBy = formData.writtenBy;
-    if (formData.reviewsActivity) properties.reviewsActivity = formData.reviewsActivity;
-    if (formData.reviewsAccommodation) properties.reviewsAccommodation = formData.reviewsAccommodation;
-    if (formData.reviewsService) properties.reviewsService = formData.reviewsService;
+    // Ajouter les champs avancés s'ils sont remplis
+    if (formData.reviewerType) properties.reviewerType = formData.reviewerType;
+    if (formData.overallRating) properties.overallRating = parseInt(formData.overallRating);
+    if (formData.sentiment) properties.sentiment = formData.sentiment;
+    if (formData.ecoFriendlyPractices) properties.ecoFriendlyPractices = formData.ecoFriendlyPractices;
 
     try {
       let response;
@@ -79,275 +91,230 @@ function ReviewForm() {
           body: JSON.stringify({ properties })
         });
       } else {
+        const reviewId = `Review_${formData.reviewTitle.replace(/\s+/g, '_')}_${Date.now()}`;
         response = await fetch('http://localhost:5000/reviews', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            id: formData.id,
-            type: formData.type,
+            id: reviewId,
+            type: 'Review',
             properties
           })
         });
       }
 
       if (response.ok) {
-        alert(isEdit ? 'Avis modifié avec succès' : 'Avis créé avec succès');
         navigate('/reviews');
       } else {
-        const error = await response.json();
-        alert('Erreur: ' + (error.error || 'Une erreur est survenue'));
+        const errorData = await response.json();
+        setError(errorData.error || 'Erreur lors de la sauvegarde');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Erreur lors de la sauvegarde');
+      setError('Erreur de connexion au serveur');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
-  const renderStars = (count) => {
-    // Ensure count is a valid number between 0 and 5
-    const validCount = Math.max(0, Math.min(5, parseInt(count) || 0));
-    return '★'.repeat(validCount) + '☆'.repeat(5 - validCount);
-  };
-
   return (
-    <div style={{maxWidth:600, margin:'2rem auto', padding:'1.5rem', background:'white', borderRadius:8, boxShadow:'0 2px 8px #ddd'}}>
-      <h2>{isEdit ? 'Modifier l\'Avis' : 'Nouvel Avis'}</h2>
-      
-      <form onSubmit={handleSubmit}>
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            ID de l'Avis *
-          </label>
-          <input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            required
-            disabled={isEdit}
-            placeholder="ex: Review_MountainHiking_001"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
+    <div className="form-container">
+      <div className="form-header">
+        <h2>{isEdit ? 'Modifier l\'Avis' : 'Nouvel Avis'}</h2>
+        <p className="form-subtitle">Partagez votre expérience</p>
+      </div>
 
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Type d'Avis *
-          </label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            required
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          >
-            <option value="Review">Review</option>
-            <option value="ActivityReview">Activity Review</option>
-            <option value="AccommodationReview">Accommodation Review</option>
-            <option value="ServiceReview">Service Review</option>
-            <option value="TransportReview">Transport Review</option>
-          </select>
+      {error && (
+        <div className="alert alert-error">
+          {error}
         </div>
+      )}
 
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Note Globale * {renderStars(formData.rating)}
-          </label>
-          <input
-            type="range"
-            name="rating"
-            value={formData.rating}
-            onChange={handleChange}
-            min="1"
-            max="5"
-            required
-            style={{width:'100%'}}
-          />
-          <div style={{textAlign:'center', color:'#666'}}>{formData.rating}/5</div>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Note de Durabilité * {renderStars(formData.sustainabilityRating)}
-          </label>
-          <input
-            type="range"
-            name="sustainabilityRating"
-            value={formData.sustainabilityRating}
-            onChange={handleChange}
-            min="1"
-            max="5"
-            required
-            style={{width:'100%'}}
-          />
-          <div style={{textAlign:'center', color:'#666'}}>{formData.sustainabilityRating}/5</div>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Texte de l'Avis *
-          </label>
-          <textarea
-            name="reviewText"
-            value={formData.reviewText}
-            onChange={handleChange}
-            required
-            rows={4}
-            placeholder="Partagez votre expérience..."
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc', fontFamily:'inherit'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Nom du Critique *
-          </label>
-          <input
-            type="text"
-            name="reviewerName"
-            value={formData.reviewerName}
-            onChange={handleChange}
-            required
-            placeholder="ex: Jean Dupont"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Date de l'Avis *
-          </label>
-          <input
-            type="date"
-            name="reviewDate"
-            value={formData.reviewDate}
-            onChange={handleChange}
-            required
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Écrit par (Tourist ID)
-          </label>
-          <input
-            type="text"
-            name="writtenBy"
-            value={formData.writtenBy}
-            onChange={handleChange}
-            placeholder="ex: Tourist_001"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Concerne l'Activité (Activity ID)
-          </label>
-          <input
-            type="text"
-            name="reviewsActivity"
-            value={formData.reviewsActivity}
-            onChange={handleChange}
-            placeholder="ex: MountainHiking"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Concerne l'Hébergement (Accommodation ID)
-          </label>
-          <input
-            type="text"
-            name="reviewsAccommodation"
-            value={formData.reviewsAccommodation}
-            onChange={handleChange}
-            placeholder="ex: EcoHotel_Verde_001"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Concerne le Service (Service ID)
-          </label>
-          <input
-            type="text"
-            name="reviewsService"
-            value={formData.reviewsService}
-            onChange={handleChange}
-            placeholder="ex: EcoTourismCenter_Sousse"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
-            <input
-              type="checkbox"
-              name="mentionsSustainability"
-              checked={formData.mentionsSustainability}
-              onChange={handleChange}
-            />
-            <span>Mentionne la durabilité</span>
-          </label>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
-            <input
-              type="checkbox"
-              name="verified"
-              checked={formData.verified}
-              onChange={handleChange}
-            />
-            <span>Avis vérifié</span>
-          </label>
-        </div>
-
-        <div style={{display:'flex', gap:'1rem', marginTop:'1.5rem'}}>
+      <form onSubmit={handleSubmit} className="modern-form">
+        <div className="advanced-mode-toggle">
           <button
-            type="submit"
-            disabled={loading}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#1976d2',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight:'bold'
-            }}
+            type="button"
+            onClick={() => setAdvancedMode(!advancedMode)}
+            className="btn-toggle"
           >
-            {loading ? 'Sauvegarde...' : (isEdit ? 'Modifier' : 'Créer')}
+            {advancedMode ? '📝 Mode Simple' : '⚙️ Mode Avancé'}
           </button>
+        </div>
+
+        <div className="form-grid">
+          <div className="form-group full-width">
+            <label>
+              Titre de l'avis <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="reviewTitle"
+              value={formData.reviewTitle}
+              onChange={handleChange}
+              placeholder="Un titre accrocheur pour votre avis"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Auteur <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="reviewedBy"
+              value={formData.reviewedBy}
+              onChange={handleChange}
+              placeholder="Votre nom ou ID"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Entité évaluée <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="reviewsEntity"
+              value={formData.reviewsEntity}
+              onChange={handleChange}
+              placeholder="Ex: EcoHotel_Verde_001"
+              required
+            />
+            <small>L'hôtel, activité ou service que vous évaluez</small>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Note <span className="required">*</span>
+            </label>
+            <div className="rating-input">
+              <input
+                type="range"
+                name="reviewRating"
+                value={formData.reviewRating}
+                onChange={handleChange}
+                min="1"
+                max="5"
+                step="1"
+                required
+              />
+              <div className="rating-display">
+                <span className="rating-value">{formData.reviewRating}</span>
+                <span className="rating-stars">
+                  {'★'.repeat(formData.reviewRating)}{'☆'.repeat(5 - formData.reviewRating)}
+                </span>
+              </div>
+            </div>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Date <span className="required">*</span>
+            </label>
+            <input
+              type="date"
+              name="reviewDate"
+              value={formData.reviewDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group full-width">
+            <label>
+              Votre avis <span className="required">*</span>
+            </label>
+            <textarea
+              name="reviewText"
+              value={formData.reviewText}
+              onChange={handleChange}
+              rows={5}
+              placeholder="Décrivez votre expérience en détail..."
+              required
+            />
+          </div>
+
+          {/* Champs avancés - Affichés seulement en mode avancé */}
+          {advancedMode && (
+            <>
+              <div className="form-group">
+                <label>Type d'auteur</label>
+                <select
+                  name="reviewerType"
+                  value={formData.reviewerType}
+                  onChange={handleChange}
+                >
+                  <option value="">Sélectionnez</option>
+                  <option value="Tourist">Touriste</option>
+                  <option value="LocalGuide">Guide Local</option>
+                  <option value="TravelExpert">Expert Voyage</option>
+                  <option value="LocalResident">Résident Local</option>
+                </select>
+              </div>
+
+              <div className="form-group">
+                <label>Note globale (1-10)</label>
+                <input
+                  type="number"
+                  name="overallRating"
+                  value={formData.overallRating}
+                  onChange={handleChange}
+                  min="1"
+                  max="10"
+                />
+              </div>
+
+              <div className="form-group">
+                <label>Sentiment</label>
+                <select
+                  name="sentiment"
+                  value={formData.sentiment}
+                  onChange={handleChange}
+                >
+                  <option value="positive">Positif</option>
+                  <option value="neutral">Neutre</option>
+                  <option value="negative">Négatif</option>
+                </select>
+              </div>
+
+              <div className="form-group full-width">
+                <label>Pratiques écologiques observées</label>
+                <textarea
+                  name="ecoFriendlyPractices"
+                  value={formData.ecoFriendlyPractices}
+                  onChange={handleChange}
+                  rows={3}
+                  placeholder="Ex: Panneaux solaires, produits locaux, recyclage..."
+                />
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="form-actions">
           <button
             type="button"
             onClick={() => navigate('/reviews')}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#666',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor:'pointer'
-            }}
+            className="btn btn-secondary"
+            disabled={loading}
           >
             Annuler
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span className="spinner"></span>
+                Sauvegarde...
+              </>
+            ) : (
+              isEdit ? 'Modifier' : 'Créer l\'avis'
+            )}
           </button>
         </div>
       </form>

@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './FormStyles.css';
 
 function ServiceForm() {
   const navigate = useNavigate();
@@ -8,19 +9,24 @@ function ServiceForm() {
 
   const [formData, setFormData] = useState({
     id: '',
-    type: 'Service',
     serviceName: '',
     serviceType: '',
+    priceRange: '',
+    providedBy: '',
+    // Champs avancés
     operatingHours: '',
     contactInfo: '',
-    priceRange: '',
     sustainabilityScore: '',
     locallyOwned: false,
     useLocalProducts: false,
-    locatedIn: ''
+    locatedIn: '',
+    complementsActivity: '',
+    offeredBy: ''
   });
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+  const [advancedMode, setAdvancedMode] = useState(false);
 
   useEffect(() => {
     if (isEdit) {
@@ -31,40 +37,57 @@ function ServiceForm() {
           const extractedId = uri.split('#')[1];
           setFormData({
             id: extractedId,
-            type: data['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']?.split('#')[1] || 'Service',
             serviceName: data['http://www.fairtravel.com/fairtravel#serviceName'] || '',
             serviceType: data['http://www.fairtravel.com/fairtravel#serviceType'] || '',
+            priceRange: data['http://www.fairtravel.com/fairtravel#priceRange'] || '',
+            providedBy: data['http://www.fairtravel.com/fairtravel#providedBy']?.split('#')[1] || '',
+            // Champs avancés
             operatingHours: data['http://www.fairtravel.com/fairtravel#operatingHours'] || '',
             contactInfo: data['http://www.fairtravel.com/fairtravel#contactInfo'] || '',
-            priceRange: data['http://www.fairtravel.com/fairtravel#priceRange'] || '',
             sustainabilityScore: data['http://www.fairtravel.com/fairtravel#sustainabilityScore'] || '',
             locallyOwned: data['http://www.fairtravel.com/fairtravel#locallyOwned'] === 'true',
             useLocalProducts: data['http://www.fairtravel.com/fairtravel#useLocalProducts'] === 'true',
-            locatedIn: data['http://www.fairtravel.com/fairtravel#locatedIn']?.split('#')[1] || ''
+            locatedIn: data['http://www.fairtravel.com/fairtravel#locatedIn']?.split('#')[1] || '',
+            complementsActivity: data['http://www.fairtravel.com/fairtravel#complementsActivity']?.split('#')[1] || '',
+            offeredBy: data['http://www.fairtravel.com/fairtravel#offeredBy']?.split('#')[1] || ''
           });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+          console.error('Error:', error);
+          setError('Erreur lors du chargement du service');
+        });
     }
   }, [id, isEdit]);
+
+  const handleChange = (e) => {
+    const { name, value, type, checked } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: type === 'checkbox' ? checked : value
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     const properties = {
       serviceName: formData.serviceName,
       serviceType: formData.serviceType,
-      operatingHours: formData.operatingHours,
-      contactInfo: formData.contactInfo,
       priceRange: formData.priceRange,
-      sustainabilityScore: parseInt(formData.sustainabilityScore) || 0,
-      locallyOwned: formData.locallyOwned,
-      useLocalProducts: formData.useLocalProducts
+      providedBy: formData.providedBy
     };
 
-    if (formData.locatedIn) {
-      properties.locatedIn = formData.locatedIn;
-    }
+    // Ajouter les champs avancés s'ils sont remplis
+    if (formData.operatingHours) properties.operatingHours = formData.operatingHours;
+    if (formData.contactInfo) properties.contactInfo = formData.contactInfo;
+    if (formData.sustainabilityScore) properties.sustainabilityScore = parseInt(formData.sustainabilityScore);
+    if (formData.locallyOwned) properties.locallyOwned = formData.locallyOwned;
+    if (formData.useLocalProducts) properties.useLocalProducts = formData.useLocalProducts;
+    if (formData.locatedIn) properties.locatedIn = formData.locatedIn;
+    if (formData.complementsActivity) properties.complementsActivity = formData.complementsActivity;
+    if (formData.offeredBy) properties.offeredBy = formData.offeredBy;
 
     try {
       let response;
@@ -75,234 +98,262 @@ function ServiceForm() {
           body: JSON.stringify({ properties })
         });
       } else {
+        const serviceId = `Service_${formData.serviceName.replace(/\s+/g, '_')}_${Date.now()}`;
         response = await fetch('http://localhost:5000/services', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            id: formData.id,
-            type: formData.type,
+            id: serviceId,
+            type: 'Service',
             properties
           })
         });
       }
 
       if (response.ok) {
-        alert(isEdit ? 'Service modifié avec succès' : 'Service créé avec succès');
         navigate('/services');
       } else {
-        const error = await response.json();
-        alert('Erreur: ' + (error.error || 'Une erreur est survenue'));
+        const errorData = await response.json();
+        setError(errorData.error || 'Erreur lors de la sauvegarde');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Erreur lors de la sauvegarde');
+      setError('Erreur de connexion au serveur');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value, type, checked } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: type === 'checkbox' ? checked : value
-    }));
-  };
-
   return (
-    <div style={{maxWidth:600, margin:'2rem auto', padding:'1.5rem', background:'white', borderRadius:8, boxShadow:'0 2px 8px #ddd'}}>
-      <h2>{isEdit ? 'Modifier le Service' : 'Nouveau Service'}</h2>
-      
-      <form onSubmit={handleSubmit}>
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            ID du Service *
-          </label>
-          <input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            required
-            disabled={isEdit}
-            placeholder="ex: EcoTourismCenter_Sousse"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
+    <div className="form-container">
+      <div className="form-header">
+        <h2>{isEdit ? 'Modifier le Service' : 'Nouveau Service'}</h2>
+        <p className="form-subtitle">Services écologiques</p>
+      </div>
 
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Type de Service *
-          </label>
-          <select
-            name="type"
-            value={formData.type}
-            onChange={handleChange}
-            required
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          >
-            <option value="Service">Service</option>
-            <option value="InformationCenter">Information Center</option>
-            <option value="LocalShop">Local Shop</option>
-          </select>
+      {error && (
+        <div className="alert alert-error">
+          {error}
         </div>
+      )}
 
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Nom du Service *
-          </label>
-          <input
-            type="text"
-            name="serviceName"
-            value={formData.serviceName}
-            onChange={handleChange}
-            required
-            placeholder="ex: Centre d'Information Écotourisme"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Type de Service
-          </label>
-          <input
-            type="text"
-            name="serviceType"
-            value={formData.serviceType}
-            onChange={handleChange}
-            placeholder="ex: Information, Shopping, etc."
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Horaires d'Ouverture
-          </label>
-          <input
-            type="text"
-            name="operatingHours"
-            value={formData.operatingHours}
-            onChange={handleChange}
-            placeholder="ex: 08:00-18:00"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Contact
-          </label>
-          <input
-            type="text"
-            name="contactInfo"
-            value={formData.contactInfo}
-            onChange={handleChange}
-            placeholder="ex: contact@example.com"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Fourchette de Prix
-          </label>
-          <input
-            type="text"
-            name="priceRange"
-            value={formData.priceRange}
-            onChange={handleChange}
-            placeholder="ex: €-€€"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Score de Durabilité (0-100)
-          </label>
-          <input
-            type="number"
-            name="sustainabilityScore"
-            value={formData.sustainabilityScore}
-            onChange={handleChange}
-            min="0"
-            max="100"
-            placeholder="ex: 95"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Localisation
-          </label>
-          <input
-            type="text"
-            name="locatedIn"
-            value={formData.locatedIn}
-            onChange={handleChange}
-            placeholder="ex: AlpinePark"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
-            <input
-              type="checkbox"
-              name="locallyOwned"
-              checked={formData.locallyOwned}
-              onChange={handleChange}
-            />
-            <span>Propriété locale</span>
-          </label>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'flex', alignItems:'center', gap:'0.5rem'}}>
-            <input
-              type="checkbox"
-              name="useLocalProducts"
-              checked={formData.useLocalProducts}
-              onChange={handleChange}
-            />
-            <span>Utilise des produits locaux</span>
-          </label>
-        </div>
-
-        <div style={{display:'flex', gap:'1rem', marginTop:'1.5rem'}}>
+      <form onSubmit={handleSubmit} className="modern-form">
+        <div className="advanced-mode-toggle">
           <button
-            type="submit"
-            disabled={loading}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#1976d2',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight:'bold'
-            }}
+            type="button"
+            onClick={() => setAdvancedMode(!advancedMode)}
+            className="btn-toggle"
           >
-            {loading ? 'Sauvegarde...' : (isEdit ? 'Modifier' : 'Créer')}
+            {advancedMode ? '📝 Mode Simple' : '⚙️ Mode Avancé'}
           </button>
+        </div>
+
+        <div className="form-grid">
+          <div className="form-group full-width">
+            <label>
+              Nom du service <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="serviceName"
+              value={formData.serviceName}
+              onChange={handleChange}
+              placeholder="Ex: Randonnée écologique guidée"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Type de service <span className="required">*</span>
+            </label>
+            <select
+              name="serviceType"
+              value={formData.serviceType}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez un type</option>
+              <option value="Transportation">🚗 Transportation - Transport</option>
+              <option value="Guided Tour">🗺️ Guided Tour - Visite guidée</option>
+              <option value="Equipment Rental">🎒 Equipment Rental - Location d'équipement</option>
+              <option value="Catering">🍽️ Catering - Restauration</option>
+              <option value="Wellness">💆 Wellness - Bien-être</option>
+              <option value="Educational">📚 Educational - Éducatif</option>
+              <option value="Adventure">⛰️ Adventure - Aventure</option>
+              <option value="Cultural">🎭 Cultural - Culturel</option>
+            </select>
+            <small>💡 Catégorie principale du service proposé</small>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Gamme de prix <span className="required">*</span>
+            </label>
+            <select
+              name="priceRange"
+              value={formData.priceRange}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez la gamme de prix</option>
+              <option value="$">$ - Budget (moins de 50 TND)</option>
+              <option value="$$">$$ - Modéré (50-150 TND)</option>
+              <option value="$$$">$$$ - Élevé (150-300 TND)</option>
+              <option value="$$$$">$$$$ - Luxe (plus de 300 TND)</option>
+            </select>
+            <small>💡 Indique le niveau de prix moyen du service</small>
+          </div>
+
+          <div className="form-group full-width">
+            <label>
+              Fournisseur <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="providedBy"
+              value={formData.providedBy}
+              onChange={handleChange}
+              placeholder="Ex: EcoTourOperator_001"
+              required
+            />
+            <small>L'organisation ou personne qui fournit ce service</small>
+          </div>
+
+          {/* Champs avancés - Affichés seulement en mode avancé */}
+          {advancedMode && (
+            <>
+              <div className="form-group">
+                <label>⏰ Heures d'ouverture</label>
+                <input
+                  type="text"
+                  name="operatingHours"
+                  value={formData.operatingHours}
+                  onChange={handleChange}
+                  placeholder="Ex: 09:00-18:00 ou Lun-Ven: 08:00-20:00"
+                />
+                <small>💡 Horaires d'ouverture du service</small>
+              </div>
+
+              <div className="form-group">
+                <label>📞 Informations de contact</label>
+                <input
+                  type="text"
+                  name="contactInfo"
+                  value={formData.contactInfo}
+                  onChange={handleChange}
+                  placeholder="Ex: info@service.tn, +216 71 123 456"
+                />
+                <small>💡 Email et/ou numéro de téléphone</small>
+              </div>
+
+              <div className="form-group">
+                <label>🌿 Score de durabilité (0-100)</label>
+                <input
+                  type="number"
+                  name="sustainabilityScore"
+                  value={formData.sustainabilityScore}
+                  onChange={handleChange}
+                  min="0"
+                  max="100"
+                  placeholder="Ex: 85"
+                />
+                <small>💡 Évaluation des pratiques écologiques (0=faible, 100=excellent)</small>
+              </div>
+
+              <div className="form-group">
+                <label>📍 Localisation</label>
+                <input
+                  type="text"
+                  name="locatedIn"
+                  value={formData.locatedIn}
+                  onChange={handleChange}
+                  placeholder="Ex: Destination_Sousse_001"
+                />
+                <small>💡 ID de la destination où se trouve le service</small>
+              </div>
+
+              <div className="form-group">
+                <label>🎯 Complète l'activité</label>
+                <input
+                  type="text"
+                  name="complementsActivity"
+                  value={formData.complementsActivity}
+                  onChange={handleChange}
+                  placeholder="Ex: Activity_Hiking_001"
+                />
+                <small>💡 ID de l'activité associée à ce service</small>
+              </div>
+
+              <div className="form-group">
+                <label>🏢 Offert par (organisation)</label>
+                <input
+                  type="text"
+                  name="offeredBy"
+                  value={formData.offeredBy}
+                  onChange={handleChange}
+                  placeholder="Ex: Organisation_EcoTourism_001"
+                />
+                <small>💡 ID de l'organisation qui offre ce service</small>
+              </div>
+
+              <div className="form-group full-width">
+                <label style={{ marginBottom: '12px', display: 'block', fontWeight: '600' }}>
+                  🌱 Caractéristiques de durabilité
+                </label>
+                <div style={{ display: 'flex', gap: '24px', marginTop: '12px' }}>
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      name="locallyOwned"
+                      checked={formData.locallyOwned}
+                      onChange={handleChange}
+                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                    />
+                    <span>✅ Propriété locale</span>
+                  </label>
+
+                  <label style={{ display: 'flex', alignItems: 'center', gap: '8px', cursor: 'pointer' }}>
+                    <input
+                      type="checkbox"
+                      name="useLocalProducts"
+                      checked={formData.useLocalProducts}
+                      onChange={handleChange}
+                      style={{ width: '18px', height: '18px', cursor: 'pointer' }}
+                    />
+                    <span>✅ Utilise produits locaux</span>
+                  </label>
+                </div>
+                <small style={{ display: 'block', marginTop: '8px' }}>
+                  💡 Cochez si le service est détenu localement et/ou utilise des produits locaux
+                </small>
+              </div>
+            </>
+          )}
+        </div>
+
+        <div className="form-actions">
           <button
             type="button"
             onClick={() => navigate('/services')}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#666',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor:'pointer'
-            }}
+            className="btn btn-secondary"
+            disabled={loading}
           >
             Annuler
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span className="spinner"></span>
+                Sauvegarde...
+              </>
+            ) : (
+              isEdit ? 'Modifier' : 'Créer le service'
+            )}
           </button>
         </div>
       </form>

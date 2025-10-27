@@ -498,6 +498,14 @@ xsd:date rdf:type rdfs:Datatype .
             rdfs:range xsd:date .
 
 
+###  http://www.fairtravel.com/fairtravel#verified
+:verified rdf:type owl:DatatypeProperty ,
+                   owl:FunctionalProperty ;
+          rdfs:domain :Review ;
+          rdfs:range xsd:boolean ;
+          rdfs:comment "Indicates whether the review has been verified by the system" .
+
+
 #################################################################
 #    Classes
 #################################################################

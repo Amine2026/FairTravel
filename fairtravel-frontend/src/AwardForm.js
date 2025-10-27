@@ -1,5 +1,6 @@
 import React, { useState, useEffect } from 'react';
 import { useNavigate, useParams } from 'react-router-dom';
+import './FormStyles.css';
 
 function AwardForm() {
   const navigate = useNavigate();
@@ -9,16 +10,32 @@ function AwardForm() {
   const [formData, setFormData] = useState({
     id: '',
     awardName: '',
-    awardType: '',
-    awardedBy: '',
-    dateAwarded: new Date().toISOString().split('T')[0],
-    description: '',
-    level: '',
-    validUntil: '',
-    receivedBy: ''
+    awardCategory: '',
+    awardDate: new Date().toISOString().split('T')[0],
+    awardDescription: '',
+    awardLevel: '',
+    issuingOrganization: '',
+    awardedTo: ''
   });
 
   const [loading, setLoading] = useState(false);
+  const [error, setError] = useState('');
+
+  const awardCategories = [
+    'Eco-Certification',
+    'Sustainability Excellence',
+    'Green Tourism',
+    'Environmental Leadership',
+    'Carbon Neutral'
+  ];
+
+  const awardLevels = [
+    'Bronze',
+    'Silver',
+    'Gold',
+    'Platinum',
+    'Diamond'
+  ];
 
   useEffect(() => {
     if (isEdit) {
@@ -30,34 +47,43 @@ function AwardForm() {
           setFormData({
             id: extractedId,
             awardName: data['http://www.fairtravel.com/fairtravel#awardName'] || '',
-            awardType: data['http://www.fairtravel.com/fairtravel#awardType'] || '',
-            awardedBy: data['http://www.fairtravel.com/fairtravel#awardedBy'] || '',
-            dateAwarded: data['http://www.fairtravel.com/fairtravel#dateAwarded'] || new Date().toISOString().split('T')[0],
-            description: data['http://www.fairtravel.com/fairtravel#description'] || '',
-            level: data['http://www.fairtravel.com/fairtravel#level'] || '',
-            validUntil: data['http://www.fairtravel.com/fairtravel#validUntil'] || '',
-            receivedBy: data['http://www.fairtravel.com/fairtravel#receivedBy']?.split('#')[1] || ''
+            awardCategory: data['http://www.fairtravel.com/fairtravel#awardCategory'] || '',
+            awardDate: data['http://www.fairtravel.com/fairtravel#awardDate'] || new Date().toISOString().split('T')[0],
+            awardDescription: data['http://www.fairtravel.com/fairtravel#awardDescription'] || '',
+            awardLevel: data['http://www.fairtravel.com/fairtravel#awardLevel'] || '',
+            issuingOrganization: data['http://www.fairtravel.com/fairtravel#issuingOrganization'] || '',
+            awardedTo: data['http://www.fairtravel.com/fairtravel#awardedTo']?.split('#')[1] || ''
           });
         })
-        .catch(error => console.error('Error:', error));
+        .catch(error => {
+          console.error('Error:', error);
+          setError('Erreur lors du chargement du prix');
+        });
     }
   }, [id, isEdit]);
+
+  const handleChange = (e) => {
+    const { name, value } = e.target;
+    setFormData(prev => ({
+      ...prev,
+      [name]: value
+    }));
+  };
 
   const handleSubmit = async (e) => {
     e.preventDefault();
     setLoading(true);
+    setError('');
 
     const properties = {
       awardName: formData.awardName,
-      awardType: formData.awardType,
-      awardedBy: formData.awardedBy,
-      dateAwarded: formData.dateAwarded,
-      description: formData.description,
-      level: formData.level
+      awardCategory: formData.awardCategory,
+      awardDate: formData.awardDate,
+      awardDescription: formData.awardDescription,
+      awardLevel: formData.awardLevel,
+      issuingOrganization: formData.issuingOrganization,
+      awardedTo: formData.awardedTo
     };
-
-    if (formData.validUntil) properties.validUntil = formData.validUntil;
-    if (formData.receivedBy) properties.receivedBy = formData.receivedBy;
 
     try {
       let response;
@@ -68,216 +94,174 @@ function AwardForm() {
           body: JSON.stringify({ properties })
         });
       } else {
+        const awardId = `Award_${formData.awardCategory.replace(/\s+/g, '_')}_${Date.now()}`;
         response = await fetch('http://localhost:5000/awards', {
           method: 'POST',
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({
-            id: formData.id,
+            id: awardId,
+            type: 'Award',
             properties
           })
         });
       }
 
       if (response.ok) {
-        alert(isEdit ? 'Prix modifié avec succès' : 'Prix créé avec succès');
         navigate('/awards');
       } else {
-        const error = await response.json();
-        alert('Erreur: ' + (error.error || 'Une erreur est survenue'));
+        const errorData = await response.json();
+        setError(errorData.error || 'Erreur lors de la sauvegarde');
       }
     } catch (error) {
       console.error('Error:', error);
-      alert('Erreur lors de la sauvegarde');
+      setError('Erreur de connexion au serveur');
     } finally {
       setLoading(false);
     }
   };
 
-  const handleChange = (e) => {
-    const { name, value } = e.target;
-    setFormData(prev => ({
-      ...prev,
-      [name]: value
-    }));
-  };
-
   return (
-    <div style={{maxWidth:600, margin:'2rem auto', padding:'1.5rem', background:'white', borderRadius:8, boxShadow:'0 2px 8px #ddd'}}>
-      <h2>{isEdit ? 'Modifier le Prix' : 'Nouveau Prix'}</h2>
-      
-      <form onSubmit={handleSubmit}>
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            ID du Prix *
-          </label>
-          <input
-            type="text"
-            name="id"
-            value={formData.id}
-            onChange={handleChange}
-            required
-            disabled={isEdit}
-            placeholder="ex: GreenCertification_2025"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
+    <div className="form-container">
+      <div className="form-header">
+        <h2>{isEdit ? 'Modifier le Prix' : 'Nouveau Prix'}</h2>
+        <p className="form-subtitle">Certification de durabilité</p>
+      </div>
+
+      {error && (
+        <div className="alert alert-error">
+          {error}
+        </div>
+      )}
+
+      <form onSubmit={handleSubmit} className="modern-form">
+        <div className="form-grid">
+          <div className="form-group full-width">
+            <label>
+              Nom du prix <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="awardName"
+              value={formData.awardName}
+              onChange={handleChange}
+              placeholder="Ex: Carbon Neutral Certification"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Catégorie <span className="required">*</span>
+            </label>
+            <select
+              name="awardCategory"
+              value={formData.awardCategory}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez une catégorie</option>
+              {awardCategories.map(cat => (
+                <option key={cat} value={cat}>{cat}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Niveau <span className="required">*</span>
+            </label>
+            <select
+              name="awardLevel"
+              value={formData.awardLevel}
+              onChange={handleChange}
+              required
+            >
+              <option value="">Sélectionnez un niveau</option>
+              {awardLevels.map(level => (
+                <option key={level} value={level}>{level}</option>
+              ))}
+            </select>
+          </div>
+
+          <div className="form-group">
+            <label>
+              Organisation émettrice <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="issuingOrganization"
+              value={formData.issuingOrganization}
+              onChange={handleChange}
+              placeholder="Ex: Green Globe Certification"
+              required
+            />
+          </div>
+
+          <div className="form-group">
+            <label>
+              Date d'attribution <span className="required">*</span>
+            </label>
+            <input
+              type="date"
+              name="awardDate"
+              value={formData.awardDate}
+              onChange={handleChange}
+              required
+            />
+          </div>
+
+          <div className="form-group full-width">
+            <label>
+              Entité récompensée <span className="required">*</span>
+            </label>
+            <input
+              type="text"
+              name="awardedTo"
+              value={formData.awardedTo}
+              onChange={handleChange}
+              placeholder="Ex: EcoHotel_Verde_001"
+              required
+            />
+            <small>L'hôtel, activité ou service qui reçoit ce prix</small>
+          </div>
+
+          <div className="form-group full-width">
+            <label>
+              Description <span className="required">*</span>
+            </label>
+            <textarea
+              name="awardDescription"
+              value={formData.awardDescription}
+              onChange={handleChange}
+              rows={4}
+              placeholder="Décrivez les critères et réalisations..."
+              required
+            />
+          </div>
         </div>
 
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Nom du Prix *
-          </label>
-          <input
-            type="text"
-            name="awardName"
-            value={formData.awardName}
-            onChange={handleChange}
-            required
-            placeholder="ex: Certification Écologique Or"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Type de Prix *
-          </label>
-          <select
-            name="awardType"
-            value={formData.awardType}
-            onChange={handleChange}
-            required
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          >
-            <option value="">-- Sélectionner --</option>
-            <option value="Certification">Certification</option>
-            <option value="Prize">Prize</option>
-            <option value="Recognition">Recognition</option>
-            <option value="Eco-Label">Eco-Label</option>
-            <option value="Quality Award">Quality Award</option>
-          </select>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Décerné par *
-          </label>
-          <input
-            type="text"
-            name="awardedBy"
-            value={formData.awardedBy}
-            onChange={handleChange}
-            required
-            placeholder="ex: Commission Européenne du Tourisme"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Date d'Attribution *
-          </label>
-          <input
-            type="date"
-            name="dateAwarded"
-            value={formData.dateAwarded}
-            onChange={handleChange}
-            required
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Niveau
-          </label>
-          <select
-            name="level"
-            value={formData.level}
-            onChange={handleChange}
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          >
-            <option value="">-- Aucun --</option>
-            <option value="Gold">Or</option>
-            <option value="Silver">Argent</option>
-            <option value="Bronze">Bronze</option>
-            <option value="Platinum">Platine</option>
-          </select>
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Description *
-          </label>
-          <textarea
-            name="description"
-            value={formData.description}
-            onChange={handleChange}
-            required
-            rows={3}
-            placeholder="Description du prix et critères d'attribution..."
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc', fontFamily:'inherit'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Valide jusqu'au
-          </label>
-          <input
-            type="date"
-            name="validUntil"
-            value={formData.validUntil}
-            onChange={handleChange}
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-        </div>
-
-        <div style={{marginBottom:'1rem'}}>
-          <label style={{display:'block', marginBottom:'0.25rem', fontWeight:'bold'}}>
-            Reçu par (Entity ID)
-          </label>
-          <input
-            type="text"
-            name="receivedBy"
-            value={formData.receivedBy}
-            onChange={handleChange}
-            placeholder="ex: EcoHotel_Verde_001 ou MountainHiking"
-            style={{width:'100%', padding:'0.5rem', borderRadius:4, border:'1px solid #ccc'}}
-          />
-          <small style={{color:'#666'}}>ID de l'activité, hébergement ou service qui a reçu ce prix</small>
-        </div>
-
-        <div style={{display:'flex', gap:'1rem', marginTop:'1.5rem'}}>
-          <button
-            type="submit"
-            disabled={loading}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#1976d2',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor: loading ? 'not-allowed' : 'pointer',
-              fontWeight:'bold'
-            }}
-          >
-            {loading ? 'Sauvegarde...' : (isEdit ? 'Modifier' : 'Créer')}
-          </button>
+        <div className="form-actions">
           <button
             type="button"
             onClick={() => navigate('/awards')}
-            style={{
-              flex:1,
-              padding:'0.75rem',
-              background:'#666',
-              color:'white',
-              border:'none',
-              borderRadius:4,
-              cursor:'pointer'
-            }}
+            className="btn btn-secondary"
+            disabled={loading}
           >
             Annuler
+          </button>
+          <button
+            type="submit"
+            className="btn btn-primary"
+            disabled={loading}
+          >
+            {loading ? (
+              <>
+                <span className="spinner"></span>
+                Sauvegarde...
+              </>
+            ) : (
+              isEdit ? 'Modifier' : 'Créer le prix'
+            )}
           </button>
         </div>
       </form>

@@ -96,10 +96,10 @@ function AwardsList() {
           {filteredAwards.map((award, idx) => {
             const details = detailsMap[award] || {};
             const awardName = details['http://www.fairtravel.com/fairtravel#awardName'] || extractId(award);
-            const awardType = details['http://www.fairtravel.com/fairtravel#awardType'] || 'N/A';
-            const awardedBy = details['http://www.fairtravel.com/fairtravel#awardedBy'] || 'N/A';
-            const dateAwarded = details['http://www.fairtravel.com/fairtravel#dateAwarded'] || '';
-            const level = details['http://www.fairtravel.com/fairtravel#level'] || '';
+            const awardCategory = details['http://www.fairtravel.com/fairtravel#awardCategory'] || 'N/A';
+            const issuingOrganization = details['http://www.fairtravel.com/fairtravel#issuingOrganization'] || 'N/A';
+            const awardDate = details['http://www.fairtravel.com/fairtravel#awardDate'] || '';
+            const awardLevel = details['http://www.fairtravel.com/fairtravel#awardLevel'] || '';
 
             return (
               <li 
@@ -123,13 +123,13 @@ function AwardsList() {
                     {awardName}
                   </Link>
                   <div style={{fontSize:'0.9rem', color:'#666', marginTop: '0.25rem'}}>
-                    Type: {awardType} | Décerné par: {awardedBy}
+                    Catégorie: {awardCategory} | Organisation: {issuingOrganization}
                   </div>
-                  {(level || dateAwarded) && (
+                  {(awardLevel || awardDate) && (
                     <div style={{fontSize:'0.85rem', color:'#888', marginTop: '0.25rem'}}>
-                      {level && `Niveau: ${level}`}
-                      {level && dateAwarded && ' | '}
-                      {dateAwarded && `Date: ${dateAwarded}`}
+                      {awardLevel && `Niveau: ${awardLevel}`}
+                      {awardLevel && awardDate && ' | '}
+                      {awardDate && `Date: ${awardDate}`}
                     </div>
                   )}
                 </div>

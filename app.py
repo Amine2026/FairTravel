@@ -4,6 +4,17 @@ from urllib.parse import unquote
 from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
 from groq import Groq
+from dotenv import load_dotenv
+
+# Load environment variables from .env file (includes GROQ_API_KEY)
+load_dotenv()
+
+# Debug: Check if GROQ_API_KEY is loaded
+groq_key_loaded = os.getenv('GROQ_API_KEY')
+if groq_key_loaded:
+    print(f"✓ GROQ_API_KEY loaded from .env (length: {len(groq_key_loaded)})")
+else:
+    print("✗ GROQ_API_KEY not found in environment")
 
 app = Flask(__name__)
 CORS(app)
@@ -613,6 +624,13 @@ def create_service():
         if not service_id:
             return jsonify({'error': 'Service ID is required'}), 400
         
+        # Validation du type de service
+        valid_service_types = ['Service', 'InformationCenter', 'LocalShop']
+        if service_type not in valid_service_types:
+            return jsonify({
+                'error': f'Invalid service type. Must be one of: {", ".join(valid_service_types)}'
+            }), 400
+        
         # Build the INSERT query
         triples = [f":{service_id} a :{service_type} ."]
         
@@ -637,6 +655,16 @@ def create_service():
         # Add object properties
         if 'locatedIn' in properties:
             triples.append(f':{service_id} :locatedIn :{properties["locatedIn"]} .')
+        if 'complementsActivity' in properties:
+            triples.append(f':{service_id} :complementsActivity :{properties["complementsActivity"]} .')
+        if 'offeredBy' in properties:
+            triples.append(f':{service_id} :offeredBy :{properties["offeredBy"]} .')
+        if 'usedByTourist' in properties:
+            triples.append(f':{service_id} :usedByTourist :{properties["usedByTourist"]} .')
+        if 'hasReview' in properties:
+            triples.append(f':{service_id} :hasReview :{properties["hasReview"]} .')
+        if 'hasAward' in properties:
+            triples.append(f':{service_id} :hasAward :{properties["hasAward"]} .')
         
         insert_query = f"""
             PREFIX : <http://www.fairtravel.com/fairtravel#>
@@ -677,7 +705,7 @@ def update_service(service_id):
                 insert_triples.append(f':{service_id} :{prop} {str(value).lower()}')
             elif isinstance(value, int):
                 insert_triples.append(f':{service_id} :{prop} {value}')
-            elif prop in ['locatedIn', 'offeredBy']:
+            elif prop in ['locatedIn', 'offeredBy', 'complementsActivity', 'usedByTourist', 'hasReview', 'hasAward']:
                 insert_triples.append(f':{service_id} :{prop} :{value}')
             else:
                 insert_triples.append(f':{service_id} :{prop} "{value}"')
@@ -781,10 +809,21 @@ def create_review():
             triples.append(f':{review_id} :mentionsSustainability {str(properties["mentionsSustainability"]).lower()} .')
         if 'verified' in properties:
             triples.append(f':{review_id} :verified {str(properties["verified"]).lower()} .')
+        # Propriétés manquantes ajoutées
+        if 'reviewTitle' in properties:
+            triples.append(f':{review_id} :reviewTitle "{properties["reviewTitle"]}" .')
+        if 'reviewerType' in properties:
+            triples.append(f':{review_id} :reviewerType "{properties["reviewerType"]}" .')
+        if 'overallRating' in properties:
+            triples.append(f':{review_id} :overallRating {properties["overallRating"]} .')
+        if 'sentiment' in properties:
+            triples.append(f':{review_id} :sentiment "{properties["sentiment"]}" .')
+        if 'ecoFriendlyPractices' in properties:
+            triples.append(f':{review_id} :ecoFriendlyPractices "{properties["ecoFriendlyPractices"]}" .')
         
         # Add object properties
-        if 'writtenBy' in properties:
-            triples.append(f':{review_id} :writtenBy :{properties["writtenBy"]} .')
+        if 'reviewedBy' in properties:
+            triples.append(f':{review_id} :reviewedBy :{properties["reviewedBy"]} .')
         if 'reviewsActivity' in properties:
             triples.append(f':{review_id} :reviewsActivity :{properties["reviewsActivity"]} .')
         if 'reviewsAccommodation' in properties:
@@ -831,7 +870,7 @@ def update_review(review_id):
                 insert_triples.append(f':{review_id} :{prop} {str(value).lower()}')
             elif isinstance(value, int):
                 insert_triples.append(f':{review_id} :{prop} {value}')
-            elif prop in ['writtenBy', 'reviewsActivity', 'reviewsAccommodation', 'reviewsService', 'reviewsTransport']:
+            elif prop in ['reviewedBy', 'reviewsActivity', 'reviewsAccommodation', 'reviewsService', 'reviewsTransport']:
                 insert_triples.append(f':{review_id} :{prop} :{value}')
             else:
                 insert_triples.append(f':{review_id} :{prop} "{value}"')
@@ -907,25 +946,25 @@ def create_award():
         # Build the INSERT query
         triples = [f":{award_id} a :Award ."]
         
-        # Add data properties
+        # Add data properties (alignées avec l'ontologie)
         if 'awardName' in properties:
             triples.append(f':{award_id} :awardName "{properties["awardName"]}" .')
-        if 'awardType' in properties:
-            triples.append(f':{award_id} :awardType "{properties["awardType"]}" .')
-        if 'awardedBy' in properties:
-            triples.append(f':{award_id} :awardedBy "{properties["awardedBy"]}" .')
-        if 'dateAwarded' in properties:
-            triples.append(f':{award_id} :dateAwarded "{properties["dateAwarded"]}" .')
-        if 'description' in properties:
-            triples.append(f':{award_id} :description "{properties["description"]}" .')
-        if 'level' in properties:
-            triples.append(f':{award_id} :level "{properties["level"]}" .')
+        if 'awardCategory' in properties:
+            triples.append(f':{award_id} :awardCategory "{properties["awardCategory"]}" .')
+        if 'awardDate' in properties:
+            triples.append(f':{award_id} :awardDate "{properties["awardDate"]}" .')
+        if 'awardDescription' in properties:
+            triples.append(f':{award_id} :awardDescription "{properties["awardDescription"]}" .')
+        if 'awardLevel' in properties:
+            triples.append(f':{award_id} :awardLevel "{properties["awardLevel"]}" .')
+        if 'certificateNumber' in properties:
+            triples.append(f':{award_id} :certificateNumber "{properties["certificateNumber"]}" .')
+        if 'issuingOrganization' in properties:
+            triples.append(f':{award_id} :issuingOrganization "{properties["issuingOrganization"]}" .')
         if 'validUntil' in properties:
             triples.append(f':{award_id} :validUntil "{properties["validUntil"]}" .')
         
-        # Add object properties
-        if 'receivedBy' in properties:
-            triples.append(f':{award_id} :receivedBy :{properties["receivedBy"]} .')
+        # Note: receivedBy retiré car hasAward est la relation inverse utilisée
         
         insert_query = f"""
             PREFIX : <http://www.fairtravel.com/fairtravel#>
@@ -962,10 +1001,8 @@ def update_award(award_id):
             delete_triples.append(f':{award_id} :{prop} ?old_{prop}')
             where_clauses.append(f'OPTIONAL {{ :{award_id} :{prop} ?old_{prop} }}')
             
-            if prop in ['receivedBy']:
-                insert_triples.append(f':{award_id} :{prop} :{value}')
-            else:
-                insert_triples.append(f':{award_id} :{prop} "{value}"')
+            # Toutes les propriétés d'Award sont des data properties (pas d'object properties)
+            insert_triples.append(f':{award_id} :{prop} "{value}"')
         
         update_query = f"""
             PREFIX : <http://www.fairtravel.com/fairtravel#>
@@ -1019,7 +1056,14 @@ def ai_query():
     GROQ_API_KEY = os.getenv('GROQ_API_KEY', 'YOUR_GROQ_API_KEY_HERE')
     
     # Initialize Groq client
-    client = Groq(api_key=GROQ_API_KEY)
+    try:
+        client = Groq(api_key=GROQ_API_KEY)
+    except TypeError as e:
+        # Handle incompatible Groq library version
+        return jsonify({
+            'error': 'Groq client initialization failed. Please update the groq library: pip install --upgrade groq',
+            'details': str(e)
+        }), 500
 
     # Prompt for Groq to generate a SPARQL query from the user's question
     prompt = f"""Generate a SPARQL query for the FairTravel ontology.
@@ -1032,6 +1076,21 @@ Key rules:
 - Activity has subclasses. Use: ?type rdfs:subClassOf* :Activity . ?activity a ?type .
 - Use :locatedIn to link Activity to Location
 - Location names are URIs (e.g., "AlpinePark" becomes :AlpinePark)
+
+Important properties (use EXACTLY these names):
+- Review properties: :reviewedBy (not writtenBy), :reviewTitle, :reviewerType, :overallRating (not hasRating), :sentiment (not hasSentiment), :ecoFriendlyPractices, :reviewContent, :reviewRating, :reviewDate, :reviewsEntity
+- Award properties: :awardCategory (not awardType), :awardDate (not dateAwarded), :awardDescription (not description), :awardLevel (not level), :issuingOrganization (not awardedBy), :certificateNumber
+- Service properties: :serviceName, :serviceType, :complementsActivity, :offeredBy, :hasReview, :hasAward
+
+Examples:
+Q: "List reviews with authors"
+A: SELECT ?review ?author WHERE {{ ?review a :Review . ?review :reviewedBy ?author . }}
+
+Q: "Show reviews with sentiment"
+A: SELECT ?review ?sentiment WHERE {{ ?review a :Review . ?review :sentiment ?sentiment . }}
+
+Q: "Find awards by category"
+A: SELECT ?award ?category WHERE {{ ?award a :Award . ?award :awardCategory ?category . }}
 
 Output only the SPARQL query, no explanations or code blocks.
 
@@ -1067,6 +1126,17 @@ Question: {question}"""
                 if in_code_block or not '```' in sparql_query:
                     cleaned_lines.append(line)
             sparql_query = '\n'.join(cleaned_lines).strip()
+        
+        # Ensure prefixes are included in the query
+        required_prefixes = """PREFIX : <http://www.fairtravel.com/fairtravel#>
+PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>"""
+        
+        if 'PREFIX' not in sparql_query.upper():
+            # Add prefixes if not present
+            sparql_query = required_prefixes + '\n' + sparql_query
+        elif 'PREFIX :' not in sparql_query:
+            # PREFIX keyword exists but our prefix is missing
+            sparql_query = required_prefixes + '\n' + sparql_query
         
         # Query Fuseki with the generated SPARQL
         sparql = SPARQLWrapper(FUSEKI_URL)
