@@ -178,17 +178,21 @@ def add_individual(class_name, properties):
                 except (ValueError, TypeError):
                     continue
             else:
-                # String type - escape quotes by using triple quotes or replace
-                escaped_value = str(value).replace('"', '\\"')
+                # Debug: print received value
+                print(f"Received value for {prop}:", repr(value))
+                # Strip extra quotes if present
+                clean_value = str(value).strip('"')
+                escaped_value = clean_value.replace('\n', ' ').replace('"', "'")
                 triples.append(f'<{individual_uri}> :{prop} "{escaped_value}"^^xsd:string')
 
     # Build the SPARQL query
+    triples_str = ' .\n            '.join(triples)
     sparql_query = f"""
         PREFIX : <http://www.fairtravel.com/fairtravel#>
         PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
         PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
         INSERT DATA {{
-            { ' ;\n            '.join(triples) } .
+            {triples_str} .
         }}
     """
     
@@ -211,7 +215,6 @@ def update_individual(uri, properties):
             PREFIX : <http://www.fairtravel.com/fairtravel#>
             DELETE WHERE {{
                 <{uri}> ?p ?o .
-                FILTER (?p != rdf:type)
             }}
         """
         
@@ -222,6 +225,8 @@ def update_individual(uri, properties):
         
         # Then insert new properties
         triples = []
+        # Always re-add type triple for Tourist
+        triples.append(f'<{uri}> rdf:type :Tourist')
         property_types = {
             'touristName': 'string', 'guideName': 'string', 'restaurantName': 'string',
             'touristAge': 'integer', 'averagePrice': 'float',
@@ -256,15 +261,19 @@ def update_individual(uri, properties):
                     except (ValueError, TypeError):
                         continue
                 else:
-                    escaped_value = str(value).replace('\n', ' ').replace('"', "'")
+                    print(f"Received value for {prop}:", repr(value))
+                    clean_value = str(value).strip('"')
+                    escaped_value = clean_value.replace('\n', ' ').replace('"', "'")
                     triples.append(f'<{uri}> :{prop} "{escaped_value}"^^xsd:string')
         
         if triples:
+            triples_str = ' .\n            '.join(triples)
             insert_query = f"""
                 PREFIX : <http://www.fairtravel.com/fairtravel#>
                 PREFIX xsd: <http://www.w3.org/2001/XMLSchema#>
+                PREFIX rdf: <http://www.w3.org/1999/02/22-rdf-syntax-ns#>
                 INSERT DATA {{
-                    { ' ;\n            '.join(triples) } .
+                    {triples_str} .
                 }}
             """
             sparql.setQuery(insert_query)

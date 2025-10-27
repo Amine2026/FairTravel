@@ -2,7 +2,7 @@ import React, { useState, useEffect } from 'react';
 import { Link } from 'react-router-dom';
 
 function TouristList() {
-  const [tourists, setTourists] = useState([]);
+  const [tourists, setTourists] = useState([]); // [{ uri, name }]
   const [loading, setLoading] = useState(true);
   const [error, setError] = useState(null);
 
@@ -14,8 +14,20 @@ function TouristList() {
     try {
       const response = await fetch('http://localhost:5000/tourists');
       if (!response.ok) throw new Error('Failed to fetch tourists');
-      const data = await response.json();
-      setTourists(data);
+      const uris = await response.json();
+      // Fetch details for each tourist to get the name
+      const detailsPromises = uris.map(async (uri) => {
+        try {
+          const res = await fetch(`http://localhost:5000/tourist-details?uri=${encodeURIComponent(uri)}`);
+          if (!res.ok) throw new Error();
+          const details = await res.json();
+          return { uri, name: details['http://www.fairtravel.com/fairtravel#touristName'] || uri.split('#')[1] };
+        } catch {
+          return { uri, name: uri.split('#')[1] };
+        }
+      });
+      const touristsWithNames = await Promise.all(detailsPromises);
+      setTourists(touristsWithNames);
       setLoading(false);
     } catch (err) {
       setError(err.message);
@@ -43,9 +55,9 @@ function TouristList() {
       <h2>Tourists</h2>
       <Link to="/add-tourist" className="btn btn-primary mb-3">Add Tourist</Link>
       <div className="list-group">
-        {tourists.map((uri) => (
+        {tourists.map(({ uri, name }) => (
           <div key={uri} className="list-group-item d-flex justify-content-between align-items-center">
-            <Link to={`/tourist/${encodeURIComponent(uri)}`}>{uri.split('#')[1]}</Link>
+            <Link to={`/tourist/${encodeURIComponent(uri)}`}>{name}</Link>
             <div>
               <Link to={`/edit-tourist/${encodeURIComponent(uri)}`} className="btn btn-sm btn-primary me-2">Edit</Link>
               <button onClick={() => handleDelete(uri)} className="btn btn-sm btn-danger">Delete</button>
