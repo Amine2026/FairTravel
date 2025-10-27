@@ -155,18 +155,6 @@ def list_entities(class_name):
     results = sparql.query().convert()
     return [r['entity']['value'] for r in results['results']['bindings'] if r['entity']['type'] == 'uri']
 
-@app.route('/accommodations')
-def get_accommodations():
-    return jsonify(list_entities('Accommodation'))
-
-@app.route('/bookings')
-def get_bookings():
-    return jsonify(list_entities('Booking'))
-
-@app.route('/sustainability-practices')
-def get_sustainability_practices():
-    return jsonify(list_entities('SustainabilityPractice'))
-
 def get_details(uri):
     if not uri:
         return jsonify({'error': 'Missing uri parameter'}), 400
@@ -179,17 +167,405 @@ def get_details(uri):
     details = { r['property']['value']: r['value']['value'] for r in results['results']['bindings'] }
     return details
 
+
+@app.route('/accommodations')
+def get_accommodations():
+    return jsonify(list_entities('Accommodation'))
+
 @app.route('/accommodation-details')
 def accommodation_details():
     return jsonify(get_details(request.args.get('uri')))
+
+# ------------------------
+# CREATE - Add new accommodation
+# ------------------------
+@app.route('/accommodations', methods=['POST'])
+def create_accommodation():
+    try:
+        data = request.get_json()
+        accommodation_id = data.get('id')
+        accommodation_type = data.get('type', 'Accommodation')
+        properties = data.get('properties', {})
+
+        if not accommodation_id:
+            return jsonify({'error': 'Accommodation ID is required'}), 400
+
+        # Build triples
+        triples = [f":{accommodation_id} a :{accommodation_type} ."]
+
+        # Data properties
+        if 'accommodationName' in properties:
+            triples.append(f':{accommodation_id} :accommodationName "{properties["accommodationName"]}" .')
+        if 'pricePerNight' in properties:
+            triples.append(f':{accommodation_id} :pricePerNight {properties["pricePerNight"]} .')
+        if 'capacity' in properties:
+            triples.append(f':{accommodation_id} :capacity {properties["capacity"]} .')
+        if 'starRating' in properties:
+            triples.append(f':{accommodation_id} :starRating {properties["starRating"]} .')
+        if 'description' in properties:
+            triples.append(f':{accommodation_id} :description "{properties["description"]}" .')
+        if 'availabilityStatus' in properties:
+            triples.append(f':{accommodation_id} :availabilityStatus {str(properties["availabilityStatus"]).lower()} .')
+
+        # Object properties
+        if 'hasLocation' in properties:
+            triples.append(f':{accommodation_id} :hasLocation :{properties["hasLocation"]} .')
+        if 'hasSustainabilityPractice' in properties:
+            triples.append(f':{accommodation_id} :hasSustainabilityPractice :{properties["hasSustainabilityPractice"]} .')
+
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Accommodation created successfully', 'id': accommodation_id}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# UPDATE - Modify accommodation
+# ------------------------
+@app.route('/accommodations/<accommodation_id>', methods=['PUT'])
+def update_accommodation(accommodation_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+
+        for prop, value in properties.items():
+            delete_triples.append(f':{accommodation_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{accommodation_id} :{prop} ?old_{prop} }}')
+
+            if isinstance(value, bool):
+                insert_triples.append(f':{accommodation_id} :{prop} {str(value).lower()}')
+            elif isinstance(value, int) or isinstance(value, float):
+                insert_triples.append(f':{accommodation_id} :{prop} {value}')
+            elif prop in ['hasLocation', 'hasSustainabilityPractice']:
+                insert_triples.append(f':{accommodation_id} :{prop} :{value}')
+            else:
+                insert_triples.append(f':{accommodation_id} :{prop} "{value}"')
+
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Accommodation updated successfully', 'id': accommodation_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# DELETE - Remove accommodation
+# ------------------------
+@app.route('/accommodations/<accommodation_id>', methods=['DELETE'])
+def delete_accommodation(accommodation_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{accommodation_id} ?p ?o .
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Accommodation deleted successfully', 'id': accommodation_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+@app.route('/bookings')
+def get_bookings():
+    return jsonify(list_entities('Booking'))
 
 @app.route('/booking-details')
 def booking_details():
     return jsonify(get_details(request.args.get('uri')))
 
+# ------------------------
+# CREATE - Add new booking
+# ------------------------
+@app.route('/bookings', methods=['POST'])
+def create_booking():
+    try:
+        data = request.get_json()
+        booking_id = data.get('id')
+        booking_type = data.get('type', 'Booking')
+        properties = data.get('properties', {})
+
+        if not booking_id:
+            return jsonify({'error': 'Booking ID is required'}), 400
+
+        # Build triples
+        triples = [f":{booking_id} a :{booking_type} ."]
+
+        # Data properties
+        if 'bookingID' in properties:
+            triples.append(f':{booking_id} :bookingID "{properties["bookingID"]}" .')
+        if 'bookingDate' in properties:
+            triples.append(f':{booking_id} :bookingDate "{properties["bookingDate"]}" .')
+        if 'checkInDate' in properties:
+            triples.append(f':{booking_id} :checkInDate "{properties["checkInDate"]}" .')
+        if 'checkOutDate' in properties:
+            triples.append(f':{booking_id} :checkOutDate "{properties["checkOutDate"]}" .')
+        if 'totalPrice' in properties:
+            triples.append(f':{booking_id} :totalPrice {properties["totalPrice"]} .')
+        if 'paymentStatus' in properties:
+            triples.append(f':{booking_id} :paymentStatus "{properties["paymentStatus"]}" .')
+
+        # Object property
+        if 'forAccommodation' in properties:
+            triples.append(f':{booking_id} :forAccommodation :{properties["forAccommodation"]} .')
+
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Booking created successfully', 'id': booking_id}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# UPDATE - Modify booking
+# ------------------------
+@app.route('/bookings/<booking_id>', methods=['PUT'])
+def update_booking(booking_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+
+        for prop, value in properties.items():
+            delete_triples.append(f':{booking_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{booking_id} :{prop} ?old_{prop} }}')
+
+            # Detect type for SPARQL formatting
+            if isinstance(value, bool):
+                insert_triples.append(f':{booking_id} :{prop} {str(value).lower()}')
+            elif isinstance(value, int) or isinstance(value, float):
+                insert_triples.append(f':{booking_id} :{prop} {value}')
+            elif prop == 'forAccommodation':
+                insert_triples.append(f':{booking_id} :{prop} :{value}')
+            else:
+                insert_triples.append(f':{booking_id} :{prop} "{value}"')
+
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Booking updated successfully', 'id': booking_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# DELETE - Remove booking
+# ------------------------
+@app.route('/bookings/<booking_id>', methods=['DELETE'])
+def delete_booking(booking_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{booking_id} ?p ?o .
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Booking deleted successfully', 'id': booking_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+    
+
+@app.route('/sustainability-practices')
+def get_sustainability_practices():
+    return jsonify(list_entities('SustainabilityPractice'))
+
 @app.route('/sustainability-details')
 def sustainability_practice_details():
     return jsonify(get_details(request.args.get('uri')))
+
+# ------------------------
+# CREATE - Add new sustainability practice
+# ------------------------
+@app.route('/sustainability-practices', methods=['POST'])
+def create_sustainability_practice():
+    try:
+        data = request.get_json()
+        practice_id = data.get('id')
+        practice_type = data.get('type', 'SustainabilityPractice')
+        properties = data.get('properties', {})
+
+        if not practice_id:
+            return jsonify({'error': 'Practice ID is required'}), 400
+
+        triples = [f":{practice_id} a :{practice_type} ."]
+
+        # Data properties
+        if 'practiceName' in properties:
+            triples.append(f':{practice_id} :practiceName "{properties["practiceName"]}" .')
+        if 'practiceType' in properties:
+            triples.append(f':{practice_id} :practiceType "{properties["practiceType"]}" .')
+        if 'impactLevel' in properties:
+            triples.append(f':{practice_id} :impactLevel "{properties["impactLevel"]}" .')
+        if 'description' in properties:
+            triples.append(f':{practice_id} :description "{properties["description"]}" .')
+
+        insert_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            INSERT DATA {{
+                {' '.join(triples)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(insert_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Sustainability Practice created successfully', 'id': practice_id}), 201
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# UPDATE - Modify sustainability practice
+# ------------------------
+@app.route('/sustainability-practices/<practice_id>', methods=['PUT'])
+def update_sustainability_practice(practice_id):
+    try:
+        data = request.get_json()
+        properties = data.get('properties', {})
+
+        if not properties:
+            return jsonify({'error': 'No properties to update'}), 400
+
+        delete_triples = []
+        insert_triples = []
+        where_clauses = []
+
+        for prop, value in properties.items():
+            delete_triples.append(f':{practice_id} :{prop} ?old_{prop}')
+            where_clauses.append(f'OPTIONAL {{ :{practice_id} :{prop} ?old_{prop} }}')
+            insert_triples.append(f':{practice_id} :{prop} "{value}"')
+
+        update_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE {{
+                {' . '.join(delete_triples)} .
+            }}
+            INSERT {{
+                {' . '.join(insert_triples)} .
+            }}
+            WHERE {{
+                {' '.join(where_clauses)}
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(update_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Sustainability Practice updated successfully', 'id': practice_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
+
+
+# ------------------------
+# DELETE - Remove sustainability practice
+# ------------------------
+@app.route('/sustainability-practices/<practice_id>', methods=['DELETE'])
+def delete_sustainability_practice(practice_id):
+    try:
+        delete_query = f"""
+            PREFIX : <http://www.fairtravel.com/fairtravel#>
+            DELETE WHERE {{
+                :{practice_id} ?p ?o .
+            }}
+        """
+
+        sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+        sparql.setQuery(delete_query)
+        sparql.setMethod('POST')
+        sparql.query()
+
+        return jsonify({'message': 'Sustainability Practice deleted successfully', 'id': practice_id}), 200
+
+    except Exception as e:
+        return jsonify({'error': str(e)}), 500
 
 #========================================================================
 # CRUD Operations for Service, Review and Award
