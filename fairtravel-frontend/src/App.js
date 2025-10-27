@@ -14,6 +14,16 @@ import BookingDetails from './BookingDetails';
 import SustainabilityPracticesList from './SustainabilityPracticesList';
 import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
 import AiQueryBox from './AiQueryBox';
+import TouristList from './TouristList';
+import TouristForm from './TouristForm';
+import TouristDetails from './TouristDetails';
+import GuideList from './GuideList';
+import GuideForm from './GuideForm';
+import GuideDetails from './GuideDetails';
+import RestaurantList from './RestaurantList';
+import RestaurantForm from './RestaurantForm';
+import RestaurantDetails from './RestaurantDetails';
+
 
 function App() {
   return (
@@ -69,6 +79,27 @@ function App() {
           >
             Sustainability
           </Link>
+
+          <Link
+            to="/tourists"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Tourists
+          </Link>
+
+          <Link
+            to="/guides"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Guides
+          </Link>
+
+          <Link
+            to="/restaurants"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Restaurants
+          </Link>
         </nav>
 
         <Routes>
@@ -85,6 +116,21 @@ function App() {
             <Route path="/bookings/:id" element={<BookingDetails />} />
             <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
             <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
+            <Route path="/tourists" element={<TouristList />} />
+            <Route path="/add-tourist" element={<TouristForm />} />
+            <Route path="/edit-tourist/:uri" element={<TouristForm />} />
+            <Route path="/tourist/:uri" element={<TouristDetails />} />
+
+            <Route path="/guides" element={<GuideList />} />
+            <Route path="/add-guide" element={<GuideForm />} />
+            <Route path="/edit-guide/:uri" element={<GuideForm />} />
+            <Route path="/guide/:uri" element={<GuideDetails />} />
+
+            <Route path="/restaurants" element={<RestaurantList />} />
+            <Route path="/add-restaurant" element={<RestaurantForm />} />
+            <Route path="/edit-restaurant/:uri" element={<RestaurantForm />} />
+            <Route path="/restaurant/:uri" element={<RestaurantDetails />} />
+            
         </Routes>
         <AiQueryBox />
       </div>
