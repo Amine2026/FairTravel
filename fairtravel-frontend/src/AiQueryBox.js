@@ -108,13 +108,33 @@ function AiQueryBox() {
             {Array.isArray(result.results) && result.results.length > 0 ? (
               <ul style={{paddingLeft:0, listStyle:'none'}}>
                 {result.results.map((row, idx) => {
-                  // If activity URI exists, render as clickable link
+                  // Handle Reviews
+                  if (row.review && row.review.type === 'uri') {
+                    const uri = row.review.value;
+                    const id = encodeURIComponent(uri);
+                    const label = uri.split('#')[1] || uri;
+                    const title = row.title ? row.title.value : '';
+                    const author = row.author ? row.author.value : '';
+                    return (
+                      <li key={idx} style={{marginBottom:'0.8rem', padding:'0.6rem', background:'#fff', borderRadius:6, border:'1px solid #e0e0e0'}}>
+                        <div style={{fontWeight:600, color:'#1976d2', fontSize:'1.05rem'}}>
+                          📝 {title || label}
+                        </div>
+                        {author && <div style={{color:'#666', fontSize:'0.9rem', marginTop:'0.3rem'}}>👤 {author}</div>}
+                        <a
+                          href={`/reviews/${id}`}
+                          style={{color:'#1976d2', textDecoration:'none', fontSize:'0.85rem', marginTop:'0.3rem', display:'inline-block'}}
+                        >→ View details</a>
+                      </li>
+                    );
+                  }
+                  // Handle Activities
                   if (row.activity && row.activity.type === 'uri') {
                     const uri = row.activity.value;
                     const id = encodeURIComponent(uri);
                     const label = uri.split('#')[1] || uri;
                     return (
-                      <li key={idx}>
+                      <li key={idx} style={{marginBottom:'0.5rem'}}>
                         <a
                           href={`/activities/${id}`}
                           style={{color:'#1976d2',textDecoration:'underline',cursor:'pointer',fontWeight:600}}
@@ -123,12 +143,52 @@ function AiQueryBox() {
                       </li>
                     );
                   }
-                  // Fallback: show JSON
-                  return <li key={idx}><pre>{JSON.stringify(row, null, 2)}</pre></li>;
+                  // Handle Awards
+                  if (row.award && row.award.type === 'uri') {
+                    const uri = row.award.value;
+                    const id = encodeURIComponent(uri);
+                    const label = uri.split('#')[1] || uri;
+                    const name = row.name ? row.name.value : '';
+                    const category = row.category ? row.category.value : '';
+                    return (
+                      <li key={idx} style={{marginBottom:'0.8rem', padding:'0.6rem', background:'#fff', borderRadius:6, border:'1px solid #e0e0e0'}}>
+                        <div style={{fontWeight:600, color:'#ffa726', fontSize:'1.05rem'}}>
+                          🏆 {name || label}
+                        </div>
+                        {category && <div style={{color:'#666', fontSize:'0.9rem', marginTop:'0.3rem'}}>📂 {category}</div>}
+                        <a
+                          href={`/awards/${id}`}
+                          style={{color:'#ffa726', textDecoration:'none', fontSize:'0.85rem', marginTop:'0.3rem', display:'inline-block'}}
+                        >→ View details</a>
+                      </li>
+                    );
+                  }
+                  // Handle Services
+                  if (row.service && row.service.type === 'uri') {
+                    const uri = row.service.value;
+                    const id = encodeURIComponent(uri);
+                    const label = uri.split('#')[1] || uri;
+                    const serviceName = row.name ? row.name.value : '';
+                    const serviceType = row.type ? row.type.value : '';
+                    return (
+                      <li key={idx} style={{marginBottom:'0.8rem', padding:'0.6rem', background:'#fff', borderRadius:6, border:'1px solid #e0e0e0'}}>
+                        <div style={{fontWeight:600, color:'#66bb6a', fontSize:'1.05rem'}}>
+                          🛠️ {serviceName || label}
+                        </div>
+                        {serviceType && <div style={{color:'#666', fontSize:'0.9rem', marginTop:'0.3rem'}}>🔧 {serviceType}</div>}
+                        <a
+                          href={`/services/${id}`}
+                          style={{color:'#66bb6a', textDecoration:'none', fontSize:'0.85rem', marginTop:'0.3rem', display:'inline-block'}}
+                        >→ View details</a>
+                      </li>
+                    );
+                  }
+                  // Fallback: show JSON for any other data
+                  return <li key={idx}><pre style={{fontSize:'0.85rem', background:'#fff', padding:'0.5rem', borderRadius:4}}>{JSON.stringify(row, null, 2)}</pre></li>;
                 })}
               </ul>
             ) : (
-              <pre>{JSON.stringify(result.results, null, 2)}</pre>
+              <div style={{color:'#999', fontStyle:'italic', padding:'1rem'}}>No results found</div>
             )}
           </div>
         </div>

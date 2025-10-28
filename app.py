@@ -2391,25 +2391,31 @@ PREFIX : <http://www.fairtravel.com/fairtravel#>
 PREFIX rdfs: <http://www.w3.org/2000/01/rdf-schema#>
 
 Key rules:
-- Activity has subclasses. Use: ?type rdfs:subClassOf* :Activity . ?activity a ?type .
+- Review has subclasses (AccommodationReview, ActivityReview). ALWAYS use: ?type rdfs:subClassOf* :Review . ?review a ?type .
+- Activity has subclasses. ALWAYS use: ?type rdfs:subClassOf* :Activity . ?activity a ?type .
+- Award has subclasses. ALWAYS use: ?type rdfs:subClassOf* :Award . ?award a ?type .
+- Service has subclasses. ALWAYS use: ?type rdfs:subClassOf* :Service . ?service a ?type .
 - Use :locatedIn to link Activity to Location
 - Location names are URIs (e.g., "AlpinePark" becomes :AlpinePark)
 
 Important properties (use EXACTLY these names):
-- Review properties: :reviewedBy (not writtenBy), :reviewTitle, :reviewerType, :overallRating (not hasRating), :sentiment (not hasSentiment), :ecoFriendlyPractices, :reviewContent, :reviewRating, :reviewDate, :reviewsEntity
-- Award properties: :awardCategory (not awardType), :awardDate (not dateAwarded), :awardDescription (not description), :awardLevel (not level), :issuingOrganization (not awardedBy), :certificateNumber
+- Review properties: :reviewedBy (not writtenBy), :reviewTitle, :reviewerType, :overallRating (not hasRating), :sentiment (not hasSentiment), :ecoFriendlyPractices, :reviewText (not reviewContent), :reviewRating, :reviewDate, :reviewsEntity
+- Award properties: :awardName, :awardCategory (not awardType), :awardDate (not dateAwarded), :awardDescription (not description), :awardLevel (not level), :issuingOrganization (not awardedBy), :certificateNumber
 - Service properties: :serviceName, :serviceType, :complementsActivity, :offeredBy, :hasReview, :hasAward
 
 
 Examples:
-Q: "List reviews with authors"
-A: SELECT ?review ?author WHERE {{ ?review a :Review . ?review :reviewedBy ?author . }}
+Q: "List all reviews"
+A: SELECT ?review WHERE {{ ?type rdfs:subClassOf* :Review . ?review a ?type . }}
 
-Q: "Show reviews with sentiment"
-A: SELECT ?review ?sentiment WHERE {{ ?review a :Review . ?review :sentiment ?sentiment . }}
+Q: "Show reviews with authors and titles"
+A: SELECT ?review ?author ?title WHERE {{ ?type rdfs:subClassOf* :Review . ?review a ?type . OPTIONAL {{ ?review :reviewedBy ?author }} . OPTIONAL {{ ?review :reviewTitle ?title }} }}
+
+Q: "Find reviews with sentiment"
+A: SELECT ?review ?sentiment WHERE {{ ?type rdfs:subClassOf* :Review . ?review a ?type . ?review :sentiment ?sentiment . }}
 
 Q: "Find awards by category"
-A: SELECT ?award ?category WHERE {{ ?award a :Award . ?award :awardCategory ?category . }}
+A: SELECT ?award ?category WHERE {{ ?type rdfs:subClassOf* :Award . ?award a ?type . ?award :awardCategory ?category . }}
 
 Q: "Show me all outdoor activities in AlpinePark"
 A: SELECT ?activity WHERE {{ ?type rdfs:subClassOf* :OutdoorActivity . ?activity a ?type . ?activity :locatedIn :AlpinePark . }}
