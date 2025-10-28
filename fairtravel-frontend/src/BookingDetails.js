@@ -31,12 +31,13 @@ function BookingDetails({ uri }) {
     'http://www.fairtravel.com/fairtravel#totalPrice': 'Total Price',
     'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': 'Element Type',
     'http://www.fairtravel.com/fairtravel#paymentStatus': 'Payment Status',
+    'http://www.fairtravel.com/fairtravel#bookedBy': 'Booked By',
     'http://www.fairtravel.com/fairtravel#forAccommodation': 'Accommodation',
   };
 
   const valueToLabel = (v) => {
     if (!v) return 'Unknown';
-    if (typeof v === 'string' && v.includes('http://www.fairtravel.com/fairtravel#')) {
+    if (typeof v === 'string' && v.includes('#')) {
       return v.split('#')[1]; // extract the local name
     }
     return v;

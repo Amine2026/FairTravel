@@ -15,7 +15,7 @@ function AccommodationForm() {
     starRating: "",
     description: "",
     availabilityStatus: true,
-    hasLocation: "",
+    locatedIn: "",
     hasSustainabilityPractice: ""
   });
 
@@ -61,8 +61,8 @@ function AccommodationForm() {
           description: data["http://www.fairtravel.com/fairtravel#description"] || "",
           availabilityStatus:
             data["http://www.fairtravel.com/fairtravel#availabilityStatus"] === "true",
-          hasLocation:
-            (data["http://www.fairtravel.com/fairtravel#hasLocation"] || "").split("#").pop() || "",
+          locatedIn:
+            (data["http://www.fairtravel.com/fairtravel#locatedIn"] || "").split("#").pop() || "",
           hasSustainabilityPractice:
             (data["http://www.fairtravel.com/fairtravel#hasSustainabilityPractice"] || "")
               .split("#")

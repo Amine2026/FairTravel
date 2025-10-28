@@ -33,7 +33,7 @@ export default function SustainabilityPracticeDetails({ uri }) {
 
   const valueToLabel = (v) => {
     if (!v) return 'Unknown';
-    if (typeof v === 'string' && v.includes('http://www.fairtravel.com/fairtravel#')) {
+    if (typeof v === 'string' && v.includes('#')) {
       return v.split('#')[1]; // extract the local name
     }
     return v;
