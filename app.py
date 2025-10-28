@@ -1131,6 +1131,7 @@ Important properties (use EXACTLY these names):
 - Award properties: :awardCategory (not awardType), :awardDate (not dateAwarded), :awardDescription (not description), :awardLevel (not level), :issuingOrganization (not awardedBy), :certificateNumber
 - Service properties: :serviceName, :serviceType, :complementsActivity, :offeredBy, :hasReview, :hasAward
 
+
 Examples:
 Q: "List reviews with authors"
 A: SELECT ?review ?author WHERE {{ ?review a :Review . ?review :reviewedBy ?author . }}
@@ -1140,6 +1141,9 @@ A: SELECT ?review ?sentiment WHERE {{ ?review a :Review . ?review :sentiment ?se
 
 Q: "Find awards by category"
 A: SELECT ?award ?category WHERE {{ ?award a :Award . ?award :awardCategory ?category . }}
+
+Q: "Show me all outdoor activities in AlpinePark"
+A: SELECT ?activity WHERE {{ ?type rdfs:subClassOf* :OutdoorActivity . ?activity a ?type . ?activity :locatedIn :AlpinePark . }}
 
 Output only the SPARQL query, no explanations or code blocks.
 

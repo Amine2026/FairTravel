@@ -95,7 +95,7 @@ function AiQueryBox() {
             whiteSpace:'pre-wrap'
           }}>{result.sparql_query}</pre>
           <div><strong>Results:</strong></div>
-          <pre style={{
+          <div style={{
             background:'#f6f8fa',
             padding:'0.5rem',
             borderRadius:4,
@@ -104,7 +104,33 @@ function AiQueryBox() {
             overflow:'auto',
             wordBreak:'break-all',
             whiteSpace:'pre-wrap'
-          }}>{JSON.stringify(result.results, null, 2)}</pre>
+          }}>
+            {Array.isArray(result.results) && result.results.length > 0 ? (
+              <ul style={{paddingLeft:0, listStyle:'none'}}>
+                {result.results.map((row, idx) => {
+                  // If activity URI exists, render as clickable link
+                  if (row.activity && row.activity.type === 'uri') {
+                    const uri = row.activity.value;
+                    const id = encodeURIComponent(uri);
+                    const label = uri.split('#')[1] || uri;
+                    return (
+                      <li key={idx}>
+                        <a
+                          href={`/activities/${id}`}
+                          style={{color:'#1976d2',textDecoration:'underline',cursor:'pointer',fontWeight:600}}
+                        >{label}</a>
+                        <span style={{color:'#888',marginLeft:8,fontSize:'0.95em'}}>{uri}</span>
+                      </li>
+                    );
+                  }
+                  // Fallback: show JSON
+                  return <li key={idx}><pre>{JSON.stringify(row, null, 2)}</pre></li>;
+                })}
+              </ul>
+            ) : (
+              <pre>{JSON.stringify(result.results, null, 2)}</pre>
+            )}
+          </div>
         </div>
       )}
     </div>

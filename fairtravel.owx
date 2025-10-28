@@ -481,6 +481,9 @@
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </Declaration>
     <Declaration>
@@ -506,6 +509,9 @@
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#reviewsActivity"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#AccommodationReview"/>
@@ -662,6 +668,10 @@
     <ClassAssertion>
         <Class IRI="#AccommodationReview"/>
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ActivityReview"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#ActivityReview"/>
@@ -861,6 +871,11 @@
         <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReview"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#MountainHiking"/>
         <NamedIndividual IRI="#AlpinePark"/>
@@ -869,6 +884,11 @@
         <ObjectProperty IRI="#reviewedBy"/>
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
         <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#reviewedBy"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <NamedIndividual IRI="#AliceTourist"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
@@ -1458,7 +1478,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#rating"/>
         <NamedIndividual IRI="#MedinaRec"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">4</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#recommendationText"/>
@@ -1559,6 +1579,46 @@
         <DataProperty IRI="#sustainabilityRating"/>
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#overallRating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewDate"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-10-15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewText"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Challenging but rewarding hike with stunning views.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewTitle"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Amazing adventure!</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewerName"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Alice</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sentiment"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>positive</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityRating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#mentionsSustainability"/>
@@ -1678,7 +1738,7 @@
     <DataPropertyAssertion>
         <DataProperty IRI="#rating"/>
         <NamedIndividual IRI="#VolleyballRec"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5</Literal>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#recommendationText"/>
@@ -2557,6 +2617,11 @@
         <DataProperty IRI="#zipCode"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#reviewsActivity"/>
+        <IRI>#Review_MountainHiking_001</IRI>
+        <IRI>#MountainHiking</IRI>
+    </AnnotationAssertion>
 </Ontology>
 
 
