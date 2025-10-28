@@ -28,7 +28,7 @@ function AccommodationForm() {
   if (token) {
     try {
       const payload = JSON.parse(atob(token.split('.')[1]));
-      role = payload.role || (payload.identity && payload.identity.role);
+      role = payload.sub && payload.sub.role ? payload.sub.role : null;
     } catch {}
   }
 

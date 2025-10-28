@@ -2,6 +2,24 @@ import React, { useState } from 'react';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
 import AiQueryBox from './AiQueryBox';
+import AccommodationsList from './AccommodationsList';
+import AccommodationForm from './AccommodationForm';
+import ActivitiesList from './ActivitiesList';
+import ActivityDetails from './ActivityDetails';
+import AwardsList from './AwardsList';
+import AwardForm from './AwardForm';
+import BookingsList from './BookingsList';
+import BookingForm from './BookingForm';
+import EventsList from './EventsList';
+import EventDetails from './EventDetails';
+import RecommendationsList from './RecommendationsList';
+import RecommendationDetails from './RecommendationDetails';
+import ReviewsList from './ReviewsList';
+import ReviewForm from './ReviewForm';
+import ServicesList from './ServicesList';
+import ServiceForm from './ServiceForm';
+import SustainabilityPracticesList from './SustainabilityPracticesList';
+import SustainabilityPracticeForm from './SustainabilityPracticeForm';
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
@@ -74,12 +92,30 @@ function App() {
         minHeight:500,
         textAlign:'center',
         marginTop:'5vh',
-        transition:'box-shadow 0.2s'
+        transition:'box-shadow 0.2s',
+        width:'100%',
+        maxWidth:600
       }}>
         <h1 style={{marginBottom:'2rem', fontSize:'2.5rem', fontWeight:700, color:'#1976d2'}}>Welcome to FairTravel!</h1>
         <p style={{marginBottom:'2rem', color:'#555'}}>You are logged in.</p>
         <div style={{marginBottom:'1rem', color:'#888', fontSize:'0.95rem'}}>Detected role: <b>{role ? role : 'none'}</b></div>
-  {role === 'user' && <AiQueryBox />}
+        {role === 'user' && <AiQueryBox />}
+        {role === 'admin' && (
+          <div style={{margin:'2rem 0 1rem 0', textAlign:'left'}}>
+            <h2 style={{fontSize:'1.4rem', fontWeight:700, color:'#1976d2', marginBottom:'1.2rem'}}>Admin Dashboard</h2>
+            <div style={{display:'flex', flexWrap:'wrap', gap:'1.2rem'}}>
+              <div style={{flex:'1 1 220px'}}><AccommodationsList /><AccommodationForm /></div>
+              <div style={{flex:'1 1 220px'}}><ActivitiesList /><ActivityDetails /></div>
+              <div style={{flex:'1 1 220px'}}><AwardsList /><AwardForm /></div>
+              <div style={{flex:'1 1 220px'}}><BookingsList /><BookingForm /></div>
+              <div style={{flex:'1 1 220px'}}><EventsList /><EventDetails /></div>
+              <div style={{flex:'1 1 220px'}}><RecommendationsList /><RecommendationDetails /></div>
+              <div style={{flex:'1 1 220px'}}><ReviewsList /><ReviewForm /></div>
+              <div style={{flex:'1 1 220px'}}><ServicesList /><ServiceForm /></div>
+              <div style={{flex:'1 1 220px'}}><SustainabilityPracticesList /><SustainabilityPracticeForm /></div>
+            </div>
+          </div>
+        )}
         <button
           onClick={handleLogout}
           style={{

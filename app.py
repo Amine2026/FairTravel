@@ -48,6 +48,10 @@ def register():
 @app.route('/login', methods=['POST'])
 def login():
     data = request.json
+    # Hardcoded admin account for local testing
+    if data['username'] == 'admin' and data['password'] == 'admin123':
+        access_token = create_access_token(identity={'username': 'admin', 'role': 'admin'})
+        return jsonify(access_token=access_token)
     user = User.query.filter_by(username=data['username'], password=data['password']).first()
     if not user:
         return jsonify({"msg": "Bad credentials"}), 401
