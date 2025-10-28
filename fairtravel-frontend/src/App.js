@@ -26,6 +26,17 @@ import AwardForm from './AwardForm';
 import AccommodationForm from './AccommodationForm';
 import SustainabilityPracticeForm from './SustainabilityPracticeForm';
 import BookingForm from './BookingForm';
+// Location, Transport, CarbonFootprint components
+import LocationsList from './LocationsList';
+import LocationDetails from './LocationDetails';
+import LocationForm from './LocationForm';
+import TransportsList from './TransportsList';
+import TransportDetails from './TransportDetails';
+import TransportForm from './TransportForm';
+import CarbonFootprintsList from './CarbonFootprintsList';
+import CarbonFootprintDetails from './CarbonFootprintDetails';
+import CarbonFootprintForm from './CarbonFootprintForm';
+
 
 function App() {
   return (
@@ -104,7 +115,38 @@ function App() {
           </Link>
         </nav>
 
+        <nav style={{ marginBottom: '2rem', display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
+          <Link to="/locations" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
+            Locations
+          </Link>
+          <Link to="/transports" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
+            Transports
+          </Link>
+          <Link to="/carbon-footprints" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
+            Carbon Footprints
+          </Link>
+        </nav>
+
         <Routes>
+          {/* Location Routes */}
+          <Route path="/locations" element={<LocationsList />} />
+            <Route path="/locations/new" element={<LocationForm />} />
+            <Route path="/locations/:id" element={<LocationDetails />} />
+            <Route path="/locations/:item_id/edit" element={<LocationForm />} />
+
+          {/* Transport Routes */}
+          <Route path="/transports" element={<TransportsList />} />
+          <Route path="/transports/new" element={<TransportForm />} />
+          <Route path="/transports/:id" element={<TransportDetails />} />
+          <Route path="/transports/:id/edit" element={<TransportForm />} />
+
+          {/* Carbon Footprint Routes */}
+          <Route path="/carbon-footprints" element={<CarbonFootprintsList />} />
+          <Route path="/carbon-footprints/new" element={<CarbonFootprintForm />} />
+          <Route path="/carbon-footprints/:id" element={<CarbonFootprintDetails />} />
+          <Route path="/carbon-footprints/:id/edit" element={<CarbonFootprintForm />} />
+
+
           <Route path="/activities" element={<ActivitiesList />} />
           <Route path="/activities/:id" element={<ActivityDetails />} />
             <Route path="/recommendations" element={<RecommendationsList />} />

@@ -5,6 +5,8 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 # Load environment variables from .env file (includes GROQ_API_KEY)
 load_dotenv()
@@ -18,6 +20,53 @@ else:
 
 app = Flask(__name__)
 CORS(app)
+
+# Configure SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['JWT_SECRET_KEY'] = 'your-secret-key'  # Change this to a strong secret key
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
+
+# User model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    role = db.Column(db.String(10), nullable=False)  # 'user' or 'admin'
+
+# User registration endpoint
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    # Always set role to 'user' for public registration
+    user = User(username=data['username'], password=data['password'], role='user')
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"msg": "User registered"}), 201
+
+# User login endpoint
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    # Hardcoded admin account for local testing
+    if data['username'] == 'admin' and data['password'] == 'admin123':
+        access_token = create_access_token(identity={'username': 'admin', 'role': 'admin'})
+        return jsonify(access_token=access_token)
+    user = User.query.filter_by(username=data['username'], password=data['password']).first()
+    if not user:
+        return jsonify({"msg": "Bad credentials"}), 401
+    access_token = create_access_token(identity={'username': user.username, 'role': user.role})
+    return jsonify(access_token=access_token)
+
+# Admin-only endpoint
+@app.route('/admin-only', methods=['GET'])
+@jwt_required()
+def admin_only():
+    identity = get_jwt_identity()
+    if identity['role'] != 'admin':
+        return jsonify({"msg": "Admins only!"}), 403
+    return jsonify({"msg": "Welcome, admin!"})
+
 
 # Change this to your Fuseki SPARQL endpoint
 FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
@@ -1082,6 +1131,7 @@ Important properties (use EXACTLY these names):
 - Award properties: :awardCategory (not awardType), :awardDate (not dateAwarded), :awardDescription (not description), :awardLevel (not level), :issuingOrganization (not awardedBy), :certificateNumber
 - Service properties: :serviceName, :serviceType, :complementsActivity, :offeredBy, :hasReview, :hasAward
 
+
 Examples:
 Q: "List reviews with authors"
 A: SELECT ?review ?author WHERE {{ ?review a :Review . ?review :reviewedBy ?author . }}
@@ -1091,6 +1141,9 @@ A: SELECT ?review ?sentiment WHERE {{ ?review a :Review . ?review :sentiment ?se
 
 Q: "Find awards by category"
 A: SELECT ?award ?category WHERE {{ ?award a :Award . ?award :awardCategory ?category . }}
+
+Q: "Show me all outdoor activities in AlpinePark"
+A: SELECT ?activity WHERE {{ ?type rdfs:subClassOf* :OutdoorActivity . ?activity a ?type . ?activity :locatedIn :AlpinePark . }}
 
 Output only the SPARQL query, no explanations or code blocks.
 
@@ -1404,5 +1457,446 @@ def delete_event(event_uri):
     except Exception as e:
         return jsonify({'error': str(e)}), 500
 
+
+
+# ========================================================================
+# LOCATION CRUD
+# ========================================================================
+
+@app.route('/locations', methods=['GET', 'POST'])
+def locations():
+    if request.method == 'GET':
+        # List all locations
+        return jsonify(list_entities('Location'))
+    
+    elif request.method == 'POST':
+        # Create new location
+        try:
+            data = request.get_json()
+            location_id = data.get('id')
+            properties = data.get('properties', {})
+
+            if not location_id:
+                return jsonify({'error': 'Location ID is required'}), 400
+
+            # Build triples
+            triples = [f":{location_id} a :Location ."]
+
+            # Data properties
+            if 'locationName' in properties:
+                triples.append(f':{location_id} :locationName "{properties["locationName"]}" .')
+            if 'address' in properties:
+                triples.append(f':{location_id} :address "{properties["address"]}" .')
+            if 'city' in properties:
+                triples.append(f':{location_id} :city "{properties["city"]}" .')
+            if 'country' in properties:
+                triples.append(f':{location_id} :country "{properties["country"]}" .')
+            if 'region' in properties:
+                triples.append(f':{location_id} :region "{properties["region"]}" .')
+            if 'latitude' in properties:
+                triples.append(f':{location_id} :latitude {properties["latitude"]} .')
+            if 'longitude' in properties:
+                triples.append(f':{location_id} :longitude {properties["longitude"]} .')
+            if 'altitude' in properties:
+                triples.append(f':{location_id} :altitude {properties["altitude"]} .')
+            if 'zipCode' in properties:
+                triples.append(f':{location_id} :zipCode "{properties["zipCode"]}" .')
+            if 'description' in properties:
+                triples.append(f':{location_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(insert_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'Location created successfully', 'id': location_id}), 201
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/locations/<location_id>', methods=['GET', 'PUT', 'DELETE'])
+def location_detail(location_id):
+    location_uri = f"http://www.fairtravel.com/fairtravel#{location_id}"
+    
+    if request.method == 'GET':
+        # Get location details
+        details = get_details(location_uri)
+        if details:
+            return jsonify(details)
+        return jsonify({'error': 'Location not found'}), 404
+    
+    elif request.method == 'PUT':
+        # Update location
+        try:
+            data = request.get_json()
+            properties = data.get('properties', {})
+
+            # Delete existing triples
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{location_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            # Insert updated triples
+            triples = [f":{location_id} a :Location ."]
+
+            if 'locationName' in properties:
+                triples.append(f':{location_id} :locationName "{properties["locationName"]}" .')
+            if 'address' in properties:
+                triples.append(f':{location_id} :address "{properties["address"]}" .')
+            if 'city' in properties:
+                triples.append(f':{location_id} :city "{properties["city"]}" .')
+            if 'country' in properties:
+                triples.append(f':{location_id} :country "{properties["country"]}" .')
+            if 'region' in properties:
+                triples.append(f':{location_id} :region "{properties["region"]}" .')
+            if 'latitude' in properties:
+                triples.append(f':{location_id} :latitude {properties["latitude"]} .')
+            if 'longitude' in properties:
+                triples.append(f':{location_id} :longitude {properties["longitude"]} .')
+            if 'altitude' in properties:
+                triples.append(f':{location_id} :altitude {properties["altitude"]} .')
+            if 'zipCode' in properties:
+                triples.append(f':{location_id} :zipCode "{properties["zipCode"]}" .')
+            if 'description' in properties:
+                triples.append(f':{location_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql.setQuery(insert_query)
+            sparql.query()
+
+            return jsonify({'message': 'Location updated successfully', 'id': location_id})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    elif request.method == 'DELETE':
+        # Delete location
+        try:
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{location_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'Location deleted successfully'})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/location-details')
+def location_details():
+    return jsonify(get_details(request.args.get('uri')))
+
+# ========================================================================
+# TRANSPORT CRUD
+# ========================================================================
+
+@app.route('/transports', methods=['GET', 'POST'])
+def transports():
+    if request.method == 'GET':
+        # List all transports
+        return jsonify(list_entities('Transport'))
+    
+    elif request.method == 'POST':
+        # Create new transport
+        try:
+            data = request.get_json()
+            transport_id = data.get('id')
+            properties = data.get('properties', {})
+
+            if not transport_id:
+                return jsonify({'error': 'Transport ID is required'}), 400
+
+            # Build triples
+            triples = [f":{transport_id} a :Transport ."]
+
+            # Data properties
+            if 'transportType' in properties:
+                triples.append(f':{transport_id} :transportType "{properties["transportType"]}" .')
+            if 'transportName' in properties:
+                triples.append(f':{transport_id} :transportName "{properties["transportName"]}" .')
+            if 'co2PerKm' in properties:
+                triples.append(f':{transport_id} :co2PerKm {properties["co2PerKm"]} .')
+            if 'capacity' in properties:
+                triples.append(f':{transport_id} :capacity {properties["capacity"]} .')
+            if 'isEcoFriendly' in properties:
+                triples.append(f':{transport_id} :isEcoFriendly {str(properties["isEcoFriendly"]).lower()} .')
+            if 'fuelType' in properties:
+                triples.append(f':{transport_id} :fuelType "{properties["fuelType"]}" .')
+            if 'averageSpeed' in properties:
+                triples.append(f':{transport_id} :averageSpeed {properties["averageSpeed"]} .')
+            if 'description' in properties:
+                triples.append(f':{transport_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(insert_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'Transport created successfully', 'id': transport_id}), 201
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/transports/<transport_id>', methods=['GET', 'PUT', 'DELETE'])
+def transport_detail(transport_id):
+    transport_uri = f"http://www.fairtravel.com/fairtravel#{transport_id}"
+    
+    if request.method == 'GET':
+        # Get transport details
+        details = get_details(transport_uri)
+        if details:
+            return jsonify(details)
+        return jsonify({'error': 'Transport not found'}), 404
+    
+    elif request.method == 'PUT':
+        # Update transport
+        try:
+            data = request.get_json()
+            properties = data.get('properties', {})
+
+            # Delete existing triples
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{transport_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            # Insert updated triples
+            triples = [f":{transport_id} a :Transport ."]
+
+            if 'transportType' in properties:
+                triples.append(f':{transport_id} :transportType "{properties["transportType"]}" .')
+            if 'transportName' in properties:
+                triples.append(f':{transport_id} :transportName "{properties["transportName"]}" .')
+            if 'co2PerKm' in properties:
+                triples.append(f':{transport_id} :co2PerKm {properties["co2PerKm"]} .')
+            if 'capacity' in properties:
+                triples.append(f':{transport_id} :capacity {properties["capacity"]} .')
+            if 'isEcoFriendly' in properties:
+                triples.append(f':{transport_id} :isEcoFriendly {str(properties["isEcoFriendly"]).lower()} .')
+            if 'fuelType' in properties:
+                triples.append(f':{transport_id} :fuelType "{properties["fuelType"]}" .')
+            if 'averageSpeed' in properties:
+                triples.append(f':{transport_id} :averageSpeed {properties["averageSpeed"]} .')
+            if 'description' in properties:
+                triples.append(f':{transport_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql.setQuery(insert_query)
+            sparql.query()
+
+            return jsonify({'message': 'Transport updated successfully', 'id': transport_id})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    elif request.method == 'DELETE':
+        # Delete transport
+        try:
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{transport_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'Transport deleted successfully'})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/transport-details')
+def transport_details():
+    return jsonify(get_details(request.args.get('uri')))
+
+# ========================================================================
+# CARBON FOOTPRINT CRUD
+# ========================================================================
+
+@app.route('/carbonfootprints', methods=['GET', 'POST'])
+def carbonfootprints():
+    if request.method == 'GET':
+        # List all carbon footprints
+        return jsonify(list_entities('CarbonFootprint'))
+    
+    elif request.method == 'POST':
+        # Create new carbon footprint
+        try:
+            data = request.get_json()
+            footprint_id = data.get('id')
+            properties = data.get('properties', {})
+
+            if not footprint_id:
+                return jsonify({'error': 'CarbonFootprint ID is required'}), 400
+
+            # Build triples
+            triples = [f":{footprint_id} a :CarbonFootprint ."]
+
+            # Data properties
+            if 'carbonEmissions' in properties:
+                triples.append(f':{footprint_id} :carbonEmissions {properties["carbonEmissions"]} .')
+            if 'calculationMethod' in properties:
+                triples.append(f':{footprint_id} :calculationMethod "{properties["calculationMethod"]}" .')
+            if 'emissionSource' in properties:
+                triples.append(f':{footprint_id} :emissionSource "{properties["emissionSource"]}" .')
+            if 'offsetAmount' in properties:
+                triples.append(f':{footprint_id} :offsetAmount {properties["offsetAmount"]} .')
+            if 'measurementUnit' in properties:
+                triples.append(f':{footprint_id} :measurementUnit "{properties["measurementUnit"]}" .')
+            if 'calculationDate' in properties:
+                triples.append(f':{footprint_id} :calculationDate "{properties["calculationDate"]}" .')
+            if 'description' in properties:
+                triples.append(f':{footprint_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(insert_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'CarbonFootprint created successfully', 'id': footprint_id}), 201
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/carbonfootprints/<footprint_id>', methods=['GET', 'PUT', 'DELETE'])
+def carbonfootprint_detail(footprint_id):
+    footprint_uri = f"http://www.fairtravel.com/fairtravel#{footprint_id}"
+    
+    if request.method == 'GET':
+        # Get carbon footprint details
+        details = get_details(footprint_uri)
+        if details:
+            return jsonify(details)
+        return jsonify({'error': 'CarbonFootprint not found'}), 404
+    
+    elif request.method == 'PUT':
+        # Update carbon footprint
+        try:
+            data = request.get_json()
+            properties = data.get('properties', {})
+
+            # Delete existing triples
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{footprint_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            # Insert updated triples
+            triples = [f":{footprint_id} a :CarbonFootprint ."]
+
+            if 'carbonEmissions' in properties:
+                triples.append(f':{footprint_id} :carbonEmissions {properties["carbonEmissions"]} .')
+            if 'calculationMethod' in properties:
+                triples.append(f':{footprint_id} :calculationMethod "{properties["calculationMethod"]}" .')
+            if 'emissionSource' in properties:
+                triples.append(f':{footprint_id} :emissionSource "{properties["emissionSource"]}" .')
+            if 'offsetAmount' in properties:
+                triples.append(f':{footprint_id} :offsetAmount {properties["offsetAmount"]} .')
+            if 'measurementUnit' in properties:
+                triples.append(f':{footprint_id} :measurementUnit "{properties["measurementUnit"]}" .')
+            if 'calculationDate' in properties:
+                triples.append(f':{footprint_id} :calculationDate "{properties["calculationDate"]}" .')
+            if 'description' in properties:
+                triples.append(f':{footprint_id} :description "{properties["description"]}" .')
+
+            insert_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                INSERT DATA {{
+                    {' '.join(triples)}
+                }}
+            """
+
+            sparql.setQuery(insert_query)
+            sparql.query()
+
+            return jsonify({'message': 'CarbonFootprint updated successfully', 'id': footprint_id})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+    
+    elif request.method == 'DELETE':
+        # Delete carbon footprint
+        try:
+            delete_query = f"""
+                PREFIX : <http://www.fairtravel.com/fairtravel#>
+                DELETE WHERE {{ :{footprint_id} ?p ?o . }}
+            """
+            
+            sparql = SPARQLWrapper(FUSEKI_UPDATE_URL)
+            sparql.setQuery(delete_query)
+            sparql.setMethod('POST')
+            sparql.query()
+
+            return jsonify({'message': 'CarbonFootprint deleted successfully'})
+
+        except Exception as e:
+            return jsonify({'error': str(e)}), 500
+
+@app.route('/carbonfootprint-details')
+def carbonfootprint_details():
+    return jsonify(get_details(request.args.get('uri')))
+
+
+
+
+
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
