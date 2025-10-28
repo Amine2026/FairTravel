@@ -22,8 +22,8 @@ import ServicesList from './ServicesList';
 import ServiceForm from './ServiceForm';
 import SustainabilityPracticesList from './SustainabilityPracticesList';
 import SustainabilityPracticeForm from './SustainabilityPracticeForm';
-import AccommodationDetails from './AccommodationDetails';
 import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
+import AccommodationDetails from './AccommodationDetails';
 import BookingDetails from './BookingDetails';
 
 function App() {
@@ -67,8 +67,16 @@ function App() {
           <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5vh' }}>
             <div style={{ background: 'white', padding: '2.5rem 2rem', borderRadius: 18, boxShadow: '0 8px 32px #0002', minWidth: 370, maxWidth: 600, textAlign: 'center' }}>
               <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem', fontWeight: 700, color: '#1976d2' }}>Welcome to FairTravel!</h1>
-              <p style={{ marginBottom: '2rem', color: '#555' }}>You are logged in.</p>
-              <div style={{ marginBottom: '1rem', color: '#888', fontSize: '0.95rem' }}>Detected role: <b>{role ? role : 'none'}</b></div>
+              {role ? (
+                <>
+                  <p style={{ marginBottom: '2rem', color: '#555' }}>You are logged in.</p>
+                  <div style={{ marginBottom: '1rem', color: '#888', fontSize: '0.95rem' }}>Detected role: <b>{role}</b></div>
+                </>
+              ) : (
+                <>
+                  <p style={{ marginBottom: '2rem', color: '#555' }}>Please <a href="/login" style={{color:'#1976d2',fontWeight:600}}>login</a> or <a href="/register" style={{color:'#1976d2',fontWeight:600}}>register</a> to continue.</p>
+                </>
+              )}
             </div>
           </div>
         } />
@@ -92,10 +100,10 @@ function App() {
           </div>
         ) : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
         <Route path="/accommodations/*" element={role === 'admin' ? <AccommodationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/accommodations" element={role === 'admin' ? <AccommodationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/accommodations/new" element={role === 'admin' ? <AccommodationForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/accommodations/:id" element={role === 'admin' ? <AccommodationDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/accommodations/:id/edit" element={role === 'admin' ? <AccommodationForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations" element={role === 'admin' ? <AccommodationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/new" element={role === 'admin' ? <AccommodationForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/:id" element={role === 'admin' ? <AccommodationDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/:id/edit" element={role === 'admin' ? <AccommodationForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
     <Route path="/activities" element={role === 'admin' ? <ActivitiesList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
     <Route path="/activities/new" element={role === 'admin' ? <ActivityDetails isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
@@ -107,10 +115,10 @@ function App() {
     <Route path="/awards/:id" element={role === 'admin' ? <AwardForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
     <Route path="/awards/:id/edit" element={role === 'admin' ? <AwardForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-    <Route path="/bookings" element={role === 'admin' ? <BookingsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/bookings/new" element={role === 'admin' ? <BookingForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/bookings/:id" element={role === 'admin' ? <BookingDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/bookings/:id/edit" element={role === 'admin' ? <BookingForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings" element={role === 'admin' ? <BookingsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/new" element={role === 'admin' ? <BookingForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/:id" element={role === 'admin' ? <BookingDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/:id/edit" element={role === 'admin' ? <BookingForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
     <Route path="/events" element={role === 'admin' ? <EventsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
     <Route path="/events/new" element={role === 'admin' ? <EventDetails isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
@@ -132,10 +140,10 @@ function App() {
     <Route path="/services/:id" element={role === 'admin' ? <ServiceForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
     <Route path="/services/:id/edit" element={role === 'admin' ? <ServiceForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-    <Route path="/sustainability-practices" element={role === 'admin' ? <SustainabilityPracticesList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/sustainability-practices/new" element={role === 'admin' ? <SustainabilityPracticeForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/sustainability-practices/:id" element={role === 'admin' ? <SustainabilityPracticeDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
-    <Route path="/sustainability-practices/:id/edit" element={role === 'admin' ? <SustainabilityPracticeForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices" element={role === 'admin' ? <SustainabilityPracticesList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/new" element={role === 'admin' ? <SustainabilityPracticeForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/:id" element={role === 'admin' ? <SustainabilityPracticeDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/:id/edit" element={role === 'admin' ? <SustainabilityPracticeForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
       </Routes>
     </div>
   );
