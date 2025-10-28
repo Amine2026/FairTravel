@@ -50,6 +50,12 @@ xsd:date rdf:type rdfs:Datatype .
              rdfs:range :Location .
 
 
+###  http://www.fairtravel.com/fairtravel#featuredInEvent
+:featuredInEvent rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Activity ;
+                 rdfs:range :Event .
+
+
 ###  http://www.fairtravel.com/fairtravel#forAccommodation
 :forAccommodation rdf:type owl:ObjectProperty ;
                   rdfs:domain :Booking ;
@@ -819,6 +825,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#Beach_Volleyball
 :Beach_Volleyball rdf:type owl:NamedIndividual ,
                            :SportActivity ;
+                  :featuredInEvent :SportsTournament2025 ;
                   :locatedIn :AlpinePark ;
                   :activityName "Beach Volleyball" ;
                   :activityType "Sport" ;
@@ -921,6 +928,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#EcoFestival2025
 :EcoFestival2025 rdf:type owl:NamedIndividual ,
                           :Event ;
+                 :complementsActivity :GuidedNatureWalk ;
                  :locatedIn :AlpinePark ;
                  :eventDate "2025-11-15T10:00:00"^^xsd:dateTime ;
                  :eventType "Festival" ;
@@ -1050,6 +1058,7 @@ xsd:date rdf:type rdfs:Datatype .
 :MedinaRec rdf:type owl:NamedIndividual ,
                     :Recommendation ;
            :forActivity :Medina_Heritage_Tour ;
+           :hasReview :Review_Walking_Tour_001 ;
            :dateRecommended "2025-09-15"^^xsd:date ;
            :rating 4 ;
            :recommendationText "Great for history lovers!" ;
@@ -1059,6 +1068,7 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#Medina_Heritage_Tour
 :Medina_Heritage_Tour rdf:type owl:NamedIndividual ,
                                :CulturalActivity ;
+                      :guidedBy :AliGuide ;
                       :locatedIn :TunisCity ;
                       :activityName "Medina Heritage Tour" ;
                       :activityType "Cultural" ;
@@ -1138,7 +1148,8 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.fairtravel.com/fairtravel#TunisCity
 :TunisCity rdf:type owl:NamedIndividual ,
-                    :Location .
+                    :Location ;
+           :guidedBy :AliGuide .
 
 
 ###  http://www.fairtravel.com/fairtravel#VolleyballRec
@@ -1163,6 +1174,7 @@ xsd:date rdf:type rdfs:Datatype .
 :Workshop2025 rdf:type owl:NamedIndividual ,
                        :Event ;
               :locatedIn :TunisCity ;
+              :offeredBy :ArtisanMarket_Medina ;
               :eventDate "2025-12-05T14:00:00"^^xsd:dateTime ;
               :eventType "Workshop" ;
               :organizer "Local Artisans" ;

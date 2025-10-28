@@ -100,6 +100,9 @@
         <ObjectProperty IRI="#departsFrom"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#featuredInEvent"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#forAccommodation"/>
     </Declaration>
     <Declaration>
@@ -435,12 +438,6 @@
     <Declaration>
         <NamedIndividual IRI="#EcoHotel_Verde"/>
     </Declaration>
-        <Declaration>
-            <NamedIndividual IRI="#Workshop2025"/>
-        </Declaration>
-        <Declaration>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-        </Declaration>
     <Declaration>
         <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
     </Declaration>
@@ -478,9 +475,6 @@
         <NamedIndividual IRI="#Medina_Heritage_Tour"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#VolleyballRec"/>
-    </Declaration>
-    <Declaration>
         <NamedIndividual IRI="#MountainHiking"/>
     </Declaration>
     <Declaration>
@@ -496,10 +490,19 @@
         <NamedIndividual IRI="#SousseBeach"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#TunisCity"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#VolleyballRec"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#WasteReductionProgram"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Workshop2025"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
@@ -604,14 +607,6 @@
         <Class IRI="#Accommodation"/>
         <NamedIndividual IRI="#EcoHotel_Verde"/>
     </ClassAssertion>
-        <ClassAssertion>
-            <Class IRI="#Event"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-        </ClassAssertion>
-        <ClassAssertion>
-            <Class IRI="#Event"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-        </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Award"/>
         <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
@@ -661,10 +656,6 @@
         <NamedIndividual IRI="#Medina_Heritage_Tour"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Recommendation"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-    </ClassAssertion>
-    <ClassAssertion>
         <Class IRI="#OutdoorActivity"/>
         <NamedIndividual IRI="#MountainHiking"/>
     </ClassAssertion>
@@ -685,12 +676,24 @@
         <NamedIndividual IRI="#SousseBeach"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Location"/>
         <NamedIndividual IRI="#TunisCity"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Recommendation"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#SustainabilityPractice"/>
         <NamedIndividual IRI="#WasteReductionProgram"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#Workshop2025"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#worksAt"/>
@@ -706,6 +709,11 @@
         <ObjectProperty IRI="#usedByTourist"/>
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
         <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
@@ -753,20 +761,15 @@
         <NamedIndividual IRI="#TunisCity"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#complementsActivity"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#EcoFestival2025"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#locatedIn"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-            <NamedIndividual IRI="#TunisCity"/>
-        </ObjectPropertyAssertion>
-        <ObjectPropertyAssertion>
-            <ObjectProperty IRI="#locatedIn"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-            <NamedIndividual IRI="#AlpinePark"/>
-        </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCarbonFootprint"/>
         <NamedIndividual IRI="#EcoHotel_Verde"/>
@@ -838,14 +841,19 @@
         <NamedIndividual IRI="#Medina_Heritage_Tour"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReview"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#Medina_Heritage_Tour"/>
         <NamedIndividual IRI="#TunisCity"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#forActivity"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-        <NamedIndividual IRI="#Beach_Volleyball"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasCarbonFootprint"/>
@@ -861,6 +869,31 @@
         <ObjectProperty IRI="#reviewedBy"/>
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
         <NamedIndividual IRI="#JohnDoe"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#TunisCity"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#forActivity"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <NamedIndividual IRI="#TunisCity"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#offeredBy"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </ObjectPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#guideName"/>
@@ -1167,46 +1200,6 @@
         <NamedIndividual IRI="#EcoFestival2025"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
     </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#eventDate"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-12-05T14:00:00</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#eventType"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-            <Literal>Workshop</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#organizer"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-            <Literal>Local Artisans</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#price"/>
-            <NamedIndividual IRI="#Workshop2025"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">25.0</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#eventDate"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-07-20T09:00:00</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#eventType"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-            <Literal>Sports Tournament</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#organizer"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-            <Literal>Beach Sports Club</Literal>
-        </DataPropertyAssertion>
-        <DataPropertyAssertion>
-            <DataProperty IRI="#price"/>
-            <NamedIndividual IRI="#SportsTournament2025"/>
-            <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.0</Literal>
-        </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#awardCategory"/>
         <NamedIndividual IRI="#EcoLabel_Restaurant_2025"/>
@@ -1483,26 +1476,6 @@
         <Literal>Medina Heritage Tour</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#dateRecommended"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-08-20</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#rating"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#recommendationText"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-        <Literal>Fun for groups!</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#source"/>
-        <NamedIndividual IRI="#VolleyballRec"/>
-        <Literal>SportLife</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#activityType"/>
         <NamedIndividual IRI="#Medina_Heritage_Tour"/>
         <Literal>Cultural</Literal>
@@ -1678,6 +1651,46 @@
         <Literal>Sousse Governorate</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-07-20T09:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal>Sports Tournament</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal>Beach Sports Club</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateRecommended"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-08-20</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#decimal">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#recommendationText"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal>Fun for groups!</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#source"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal>SportLife</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#impactLevel"/>
         <NamedIndividual IRI="#WasteReductionProgram"/>
         <Literal>Medium</Literal>
@@ -1691,6 +1704,26 @@
         <DataProperty IRI="#practiceType"/>
         <NamedIndividual IRI="#WasteReductionProgram"/>
         <Literal>Waste Management</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-12-05T14:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal>Workshop</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal>Local Artisans</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">25.0</Literal>
     </DataPropertyAssertion>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#arrivesAt"/>
@@ -1711,6 +1744,10 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#departsFrom"/>
         <Class IRI="#Transport"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <Class IRI="#Activity"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#forAccommodation"/>
@@ -1803,6 +1840,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#departsFrom"/>
         <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <Class IRI="#Event"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#forAccommodation"/>
