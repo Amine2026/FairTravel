@@ -1086,6 +1086,22 @@ xsd:date rdf:type rdfs:Datatype .
                 :difficultyLevel "Hard" ;
                 :duration "4 hours" .
 
+# Review for MountainHiking
+:Review_MountainHiking_001 rdf:type owl:NamedIndividual ,
+                                  :ActivityReview ;
+                         :reviewedBy :AliceTourist ;
+                         :reviewTitle "Amazing adventure!" ;
+                         :reviewerName "Alice" ;
+                         :rating 5 ;
+                         :overallRating 5 ;
+                         :reviewDate "2025-10-15"^^xsd:date ;
+                         :reviewText "Challenging but rewarding hike with stunning views." ;
+                         :sentiment "positive" ;
+                         :sustainabilityRating 5 ;
+                         :reviewsActivity :MountainHiking .
+
+:MountainHiking :hasReview :Review_MountainHiking_001 .
+
 
 ###  http://www.fairtravel.com/fairtravel#Review_EcoHotel_Verde_001
 :Review_EcoHotel_Verde_001 rdf:type owl:NamedIndividual ,
