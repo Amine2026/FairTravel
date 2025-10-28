@@ -28,13 +28,21 @@ function TouristDetails() {
   if (error) return <div>Error: {error}</div>;
   if (!details) return <div>No details found</div>;
 
+  // Fonction pour formater les noms des propriétés
+  const formatPropertyName = (key) => {
+    return key
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, str => str.toUpperCase())
+      .trim();
+  };
+
   return (
     <div className="container">
       <h2>Tourist Details</h2>
       <ul className="list-group mb-3">
         {Object.entries(details).map(([key, value]) => (
           <li key={key} className="list-group-item">
-            <strong>{key.split('#')[1] || key}:</strong> {value}
+            <strong>{formatPropertyName(key)}:</strong> {value}
           </li>
         ))}
       </ul>

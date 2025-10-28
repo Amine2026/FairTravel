@@ -14,26 +14,17 @@ function TouristList() {
     try {
       const response = await fetch('http://localhost:5000/tourists');
       if (!response.ok) throw new Error('Failed to fetch tourists');
-      const uris = await response.json();
-      // Fetch details for each tourist to get the name
-      const detailsPromises = uris.map(async (uri) => {
-        try {
-          const res = await fetch(`http://localhost:5000/tourist-details?uri=${encodeURIComponent(uri)}`);
-          if (!res.ok) throw new Error();
-          const details = await res.json();
-          return { uri, name: details['http://www.fairtravel.com/fairtravel#touristName'] || uri.split('#')[1] };
-        } catch {
-          return { uri, name: uri.split('#')[1] };
-        }
-      });
-      const touristsWithNames = await Promise.all(detailsPromises);
-      setTourists(touristsWithNames);
+      const data = await response.json();
+      
+  
+      setTourists(data);
       setLoading(false);
     } catch (err) {
       setError(err.message);
       setLoading(false);
     }
   };
+
 
   const handleDelete = async (uri) => {
     if (window.confirm('Delete this tourist?')) {

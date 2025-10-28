@@ -38,11 +38,16 @@ function TouristForm() {
           const touristRes = await fetch(`http://localhost:5000/tourist-details?uri=${encodeURIComponent(uri)}`);
           if (!touristRes.ok) throw new Error('Failed to fetch tourist');
           const data = await touristRes.json();
+          
+          // Extraire seulement le nom pour les relations (au lieu de l'URI complète)
+          const guidedBy = data.guidedBy || '';
+          const visitsRestaurant = data.visitsRestaurant || '';
+          
           setFormData({
-            touristName: data['http://www.fairtravel.com/fairtravel#touristName'] || '',
-            touristAge: parseInt(data['http://www.fairtravel.com/fairtravel#touristAge']) || '',
-            guidedBy: data['http://www.fairtravel.com/fairtravel#guidedBy'] || '',
-            visitsRestaurant: data['http://www.fairtravel.com/fairtravel#visitsRestaurant'] || ''
+            touristName: data.touristName || '',
+            touristAge: data.touristAge || '',
+            guidedBy: guidedBy.split('#')[1] || guidedBy, // Extraire seulement l'ID
+            visitsRestaurant: visitsRestaurant.split('#')[1] || visitsRestaurant // Extraire seulement l'ID
           });
         }
       } catch (err) {
@@ -60,58 +65,65 @@ function TouristForm() {
   };
 
   const handleSubmit = async (e) => {
-  e.preventDefault();
-  const validationError = validate();
-  if (validationError) { 
-    setError(validationError); 
-    return; 
-  }
-  
-  setLoading(true);
-  setError(null);
-  
-  try {
-    const endpoint = uri ? 'http://localhost:5000/update-tourist' : 'http://localhost:5000/add-tourist';
-    const method = uri ? 'PUT' : 'POST';
-    
-    // Prepare data - ensure proper formatting
-    const submissionData = {
-      touristName: formData.touristName.trim(),
-      touristAge: parseInt(formData.touristAge),
-      ...(formData.guidedBy && { guidedBy: formData.guidedBy }),
-      ...(formData.visitsRestaurant && { visitsRestaurant: formData.visitsRestaurant })
-    };
-    
-    // Add URI for updates
-    if (uri) {
-      submissionData.uri = uri;
+    e.preventDefault();
+    const validationError = validate();
+    if (validationError) { 
+      setError(validationError); 
+      return; 
     }
+    
+    setLoading(true);
+    setError(null);
+    
+    try {
+      const endpoint = uri ? 'http://localhost:5000/update-tourist' : 'http://localhost:5000/add-tourist';
+      const method = uri ? 'PUT' : 'POST';
+      
+      // Préparer les données avec formatage correct
+      const submissionData = {
+        touristName: formData.touristName.trim(),
+        touristAge: parseInt(formData.touristAge)
+      };
+      
+      // Ajouter les relations seulement si elles sont sélectionnées
+      if (formData.guidedBy) {
+        submissionData.guidedBy = formData.guidedBy;
+      }
+      if (formData.visitsRestaurant) {
+        submissionData.visitsRestaurant = formData.visitsRestaurant;
+      }
+      
+      // Ajouter URI pour les mises à jour
+      if (uri) {
+        submissionData.uri = uri;
+      }
 
-    console.log('Submitting data:', submissionData); // Debug log
-    
-    const response = await fetch(endpoint, {
-      method,
-      headers: { 
-        'Content-Type': 'application/json',
-        'Accept': 'application/json'
-      },
-      body: JSON.stringify(submissionData)
-    });
-    
-    const responseData = await response.json();
-    
-    if (!response.ok) {
-      throw new Error(responseData.error || `HTTP error! status: ${response.status}`);
+      console.log('Submitting data:', submissionData);
+      
+      const response = await fetch(endpoint, {
+        method,
+        headers: { 
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+        body: JSON.stringify(submissionData)
+      });
+      
+      const responseData = await response.json();
+      
+      if (!response.ok) {
+        throw new Error(responseData.error || `HTTP error! status: ${response.status}`);
+      }
+      
+      navigate('/tourists');
+    } catch (err) {
+      console.error('Submission error:', err);
+      setError(err.message || 'Failed to save tourist');
+    } finally {
+      setLoading(false);
     }
-    
-    navigate('/tourists');
-  } catch (err) {
-    console.error('Submission error:', err);
-    setError(err.message || 'Failed to save tourist');
-  } finally {
-    setLoading(false);
-  }
-};
+  };
+
   const handleChange = (e) => {
     const { name, value } = e.target;
     setFormData(prev => ({
@@ -158,8 +170,8 @@ function TouristForm() {
           >
             <option value="">Select a guide...</option>
             {guides.map(guide => (
-              <option key={guide} value={guide.split('#')[1]}>
-                {guide.split('#')[1]}
+              <option key={guide.uri} value={guide.uri.split('#')[1]}>
+                {guide.name}
               </option>
             ))}
           </select>
@@ -174,8 +186,8 @@ function TouristForm() {
           >
             <option value="">Select a restaurant...</option>
             {restaurants.map(restaurant => (
-              <option key={restaurant} value={restaurant.split('#')[1]}>
-                {restaurant.split('#')[1]}
+              <option key={restaurant.uri} value={restaurant.uri.split('#')[1]}>
+                {restaurant.name}
               </option>
             ))}
           </select>

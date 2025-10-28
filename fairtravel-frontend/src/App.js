@@ -23,6 +23,9 @@ import GuideDetails from './GuideDetails';
 import RestaurantList from './RestaurantList';
 import RestaurantForm from './RestaurantForm';
 import RestaurantDetails from './RestaurantDetails';
+import AdvancedSearch from './AdvancedSearch';
+import SemanticChatbot from './SemanticChatbot';
+import AdvancedStats from './AdvancedStats';
 
 
 function App() {
@@ -100,6 +103,28 @@ function App() {
           >
             Restaurants
           </Link>
+
+          <Link
+            to="/advanced-search"
+            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Advanced Search Tourist
+          </Link>
+
+          <Link
+          to="/semantic-chatbot"
+          style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+          >
+            Chatbot Tourist
+          </Link>
+
+          <Link
+          to="/advanced-stats"
+          style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+        >
+          📊 Statistics Tourists
+        </Link>
+
         </nav>
 
         <Routes>
@@ -120,6 +145,9 @@ function App() {
             <Route path="/add-tourist" element={<TouristForm />} />
             <Route path="/edit-tourist/:uri" element={<TouristForm />} />
             <Route path="/tourist/:uri" element={<TouristDetails />} />
+            <Route path="/advanced-search" element={<AdvancedSearch />} />
+            <Route path="/advanced-stats" element={<AdvancedStats />} />   
+            <Route path="/semantic-chatbot" element={<SemanticChatbot />} />
 
             <Route path="/guides" element={<GuideList />} />
             <Route path="/add-guide" element={<GuideForm />} />

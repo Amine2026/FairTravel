@@ -24,6 +24,14 @@ function RestaurantDetails() {
     fetchDetails();
   }, [uri]);
 
+  // Fonction pour formater les noms des propriétés
+  const formatPropertyName = (key) => {
+    return key
+      .replace(/([A-Z])/g, ' $1')
+      .replace(/^./, str => str.toUpperCase())
+      .trim();
+  };
+
   if (loading) return <div>Loading...</div>;
   if (error) return <div>Error: {error}</div>;
   if (!details) return <div>No details found</div>;
@@ -34,12 +42,15 @@ function RestaurantDetails() {
       <ul className="list-group mb-3">
         {Object.entries(details).map(([key, value]) => (
           <li key={key} className="list-group-item">
-            <strong>{key.split('#')[1] || key}:</strong> {value}
+            <strong>{formatPropertyName(key)}:</strong> {value}
           </li>
         ))}
       </ul>
-      <button className="btn btn-secondary" onClick={() => navigate('/restaurants')}>Back</button>
+      <button className="btn btn-secondary" onClick={() => navigate('/restaurants')}>
+        Back
+      </button>
     </div>
   );
 }
+
 export default RestaurantDetails;

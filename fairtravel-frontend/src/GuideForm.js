@@ -29,10 +29,14 @@ function GuideForm() {
           const guideRes = await fetch(`http://localhost:5000/guide-details?uri=${encodeURIComponent(uri)}`);
           if (!guideRes.ok) throw new Error('Failed to fetch guide');
           const data = await guideRes.json();
+          
+          // Extraire seulement l'ID pour worksAt
+          const worksAt = data.worksAt || '';
+          
           setFormData({
-            guideName: data['http://www.fairtravel.com/fairtravel#guideName'] || '',
-            languageSpoken: data['http://www.fairtravel.com/fairtravel#languageSpoken'] || '',
-            worksAt: data['http://www.fairtravel.com/fairtravel#worksAt'] || ''
+            guideName: data.guideName || '',
+            languageSpoken: data.languageSpoken || '',
+            worksAt: worksAt.split('#')[1] || worksAt // Extraire seulement l'ID
           });
         }
       } catch (err) {
@@ -51,25 +55,34 @@ function GuideForm() {
   const handleSubmit = async (e) => {
     e.preventDefault();
     const validationError = validate();
-    if (validationError) { setError(validationError); return; }
+    if (validationError) { 
+      setError(validationError); 
+      return; 
+    }
+    
     setLoading(true);
     setError(null);
+    
     try {
-      const endpoint = uri ? 'update-guide' : 'add-guide';
+      const endpoint = uri ? 'http://localhost:5000/update-guide' : 'http://localhost:5000/add-guide';
       const method = uri ? 'PUT' : 'POST';
       
-      // Prepare the data with proper types
+      // Préparer les données
       const submissionData = {
-        ...formData,
-        // Only include relationships if they are selected
-        ...(formData.worksAt ? { worksAt: formData.worksAt } : {})
+        guideName: formData.guideName.trim(),
+        languageSpoken: formData.languageSpoken.trim()
       };
+      
+      // Ajouter worksAt seulement si sélectionné
+      if (formData.worksAt) {
+        submissionData.worksAt = formData.worksAt;
+      }
       
       if (uri) {
         submissionData.uri = uri;
       }
 
-      const response = await fetch(`http://localhost:5000/${endpoint}`, {
+      const response = await fetch(endpoint, {
         method,
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify(submissionData)
@@ -89,7 +102,11 @@ function GuideForm() {
   };
 
   const handleChange = (e) => {
-    setFormData({ ...formData, [e.target.name]: e.target.value });
+    const { name, value } = e.target;
+    setFormData(prev => ({ 
+      ...prev, 
+      [name]: value 
+    }));
   };
 
   return (
@@ -98,12 +115,26 @@ function GuideForm() {
       {error && <div className="alert alert-danger">{error}</div>}
       <form onSubmit={handleSubmit}>
         <div className="mb-3">
-          <label>Name</label>
-          <input type="text" name="guideName" className="form-control" value={formData.guideName} onChange={handleChange} required />
+          <label className="form-label">Name *</label>
+          <input 
+            type="text" 
+            name="guideName" 
+            className="form-control" 
+            value={formData.guideName} 
+            onChange={handleChange} 
+            required 
+          />
         </div>
         <div className="mb-3">
-          <label>Language Spoken</label>
-          <input type="text" name="languageSpoken" className="form-control" value={formData.languageSpoken} onChange={handleChange} required />
+          <label className="form-label">Language Spoken *</label>
+          <input 
+            type="text" 
+            name="languageSpoken" 
+            className="form-control" 
+            value={formData.languageSpoken} 
+            onChange={handleChange} 
+            required 
+          />
         </div>
         <div className="mb-3">
           <label className="form-label">Works At</label>
@@ -115,15 +146,23 @@ function GuideForm() {
           >
             <option value="">Select a restaurant...</option>
             {restaurants.map(restaurant => (
-              <option key={restaurant} value={restaurant.split('#')[1]}>
-                {restaurant.split('#')[1]}
+              <option key={restaurant.uri} value={restaurant.uri.split('#')[1]}>
+                {restaurant.name}
               </option>
             ))}
           </select>
         </div>
-        <button type="submit" className="btn btn-primary" disabled={loading}>{loading ? 'Saving...' : 'Save'}</button>
+        <div className="mb-3">
+          <button type="submit" className="btn btn-primary me-2" disabled={loading}>
+            {loading ? 'Saving...' : 'Save'}
+          </button>
+          <button type="button" className="btn btn-secondary" onClick={() => navigate('/guides')}>
+            Cancel
+          </button>
+        </div>
       </form>
     </div>
   );
 }
+
 export default GuideForm;
