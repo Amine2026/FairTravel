@@ -115,12 +115,15 @@ function App() {
             <Route path="/accommodations" element={<AccommodationsList />} />
             <Route path="/accommodations/:id" element={<AccommodationDetails />} />
             <Route path="/accommodations/new" element={<AccommodationForm />} />
+            <Route path="/accommodations/:id/edit" element={<AccommodationForm />} />
             <Route path="/bookings" element={<BookingsList />} />
             <Route path="/bookings/:id" element={<BookingDetails />} />
             <Route path="/bookings/new" element={<BookingForm />} />
+            <Route path="/bookings/:id/edit" element={<BookingForm />} />
             <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
             <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
             <Route path="/sustainability-practices/new" element={<SustainabilityPracticeForm />} />
+            <Route path="/sustainability-practices/:id/edit" element={<SustainabilityPracticeForm />} />
             
             {/* Services Routes */}
             <Route path="/services" element={<ServicesList />} />
