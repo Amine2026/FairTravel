@@ -1,5 +1,5 @@
 import React, { useState } from 'react';
-import { Routes, Route, useNavigate } from 'react-router-dom';
+import { Routes, Route, useNavigate ,Link} from 'react-router-dom';
 import Navbar from './Navbar';
 import LoginForm from './LoginForm';
 import RegisterForm from './RegisterForm';
@@ -36,6 +36,19 @@ import SustainabilityPracticeForm from './SustainabilityPracticeForm';
 import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
 import AccommodationDetails from './AccommodationDetails';
 import BookingDetails from './BookingDetails';
+import TouristList from './TouristList';
+import TouristForm from './TouristForm';
+import TouristDetails from './TouristDetails';
+import GuideList from './GuideList';
+import GuideForm from './GuideForm';
+import GuideDetails from './GuideDetails';
+import RestaurantList from './RestaurantList';
+import RestaurantForm from './RestaurantForm';
+import RestaurantDetails from './RestaurantDetails';
+import AdvancedSearch from './AdvancedSearch';
+import SemanticChatbot from './SemanticChatbot';
+import AdvancedStats from './AdvancedStats';
+
 
 function App() {
   const [token, setToken] = useState(localStorage.getItem('token') || null);
@@ -70,8 +83,8 @@ function App() {
     } catch {}
   }
 
-  return (
-    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e3f0ff 0%, #f5f7fa 100%)' }}>
+   return (
+     <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e3f0ff 0%, #f5f7fa 100%)' }}>
       <Navbar role={role} onLogout={handleLogout} />
       <Routes>
         <Route path="/" element={
@@ -82,6 +95,32 @@ function App() {
                 <>
                   <p style={{ marginBottom: '2rem', color: '#555' }}>You are logged in.</p>
                   <div style={{ marginBottom: '1rem', color: '#888', fontSize: '0.95rem' }}>Detected role: <b>{role}</b></div>
+                  
+                  {/* Navigation Links for Tourists */}
+                  <div style={{ display: 'flex', flexDirection: 'column', gap: '1rem', marginTop: '2rem', alignItems: 'center' }}>
+                    
+
+                    <Link
+                      to="/advanced-search"
+                      style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+                    >
+                      Advanced Search Tourist
+                    </Link>
+
+                    <Link
+                      to="/semantic-chatbot"
+                      style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+                    >
+                      Chatbot Tourist
+                    </Link>
+
+                    <Link
+                      to="/advanced-stats"
+                      style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
+                    >
+                      📊 Statistics Tourists
+                    </Link>
+                  </div>
                 </>
               ) : (
                 <>
@@ -110,6 +149,9 @@ function App() {
               <li><a href="/locations" style={{color:'#1976d2',fontWeight:600}}>Manage Locations</a></li>
               <li><a href="/transports" style={{color:'#1976d2',fontWeight:600}}>Manage Transports</a></li>
               <li><a href="/carbon-footprints" style={{color:'#1976d2',fontWeight:600}}>Manage Carbon Footprints</a></li>
+              <li><a href="/tourists" style={{color:'#1976d2',fontWeight:600}}>Manage Tourists</a></li>
+              <li><a href="/guides" style={{color:'#1976d2',fontWeight:600}}>Manage Guides</a></li>
+              <li><a href="/restaurants" style={{color:'#1976d2',fontWeight:600}}>Manage Restaurants</a></li>
             </ul>
           </div>
         ) : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
@@ -184,6 +226,29 @@ function App() {
         <Route path="/carbon-footprints/new" element={role === 'admin' ? <CarbonFootprintForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
         <Route path="/carbon-footprints/:id" element={role === 'admin' ? <CarbonFootprintDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
         <Route path="/carbon-footprints/:id/edit" element={role === 'admin' ? <CarbonFootprintForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+
+        {/* Tourist Routes */}
+        <Route path="/tourists" element={<TouristList />} />
+        <Route path="/add-tourist" element={<TouristForm />} />
+        <Route path="/edit-tourist/:uri" element={<TouristForm />} />
+        <Route path="/tourist/:uri" element={<TouristDetails />} />
+
+        {/* Guide Routes */}
+        <Route path="/guides" element={<GuideList />} />
+        <Route path="/add-guide" element={<GuideForm />} />
+        <Route path="/edit-guide/:uri" element={<GuideForm />} />
+        <Route path="/guide/:uri" element={<GuideDetails />} />
+
+        {/* Restaurant Routes */}
+        <Route path="/restaurants" element={<RestaurantList />} />
+        <Route path="/add-restaurant" element={<RestaurantForm />} />
+        <Route path="/edit-restaurant/:uri" element={<RestaurantForm />} />
+        <Route path="/restaurant/:uri" element={<RestaurantDetails />} />
+
+        {/* Advanced Features */}
+        <Route path="/advanced-search" element={<AdvancedSearch />} />
+        <Route path="/advanced-stats" element={<AdvancedStats />} />   
+        <Route path="/semantic-chatbot" element={<SemanticChatbot />} />
       </Routes>
     </div>
   );

@@ -9,3 +9,4 @@ __pycache__/
 *.pyc
 # Env files
 .env
+"node_modules/" 
