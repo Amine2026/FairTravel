@@ -27,7 +27,7 @@ function AccommodationDetails({ uri }) {
     'http://www.fairtravel.com/fairtravel#accommodationName': 'Accommodation Name',
     'http://www.fairtravel.com/fairtravel#availabilityStatus': 'Availability Status',
     'http://www.fairtravel.com/fairtravel#description': 'Description',
-    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': 'Type',
+    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': 'Element Type',
     'http://www.fairtravel.com/fairtravel#pricePerNight': 'Price per Night',
     'http://www.fairtravel.com/fairtravel#capacity': 'Capacity',
     'http://www.fairtravel.com/fairtravel#starRating': 'Star Rating',

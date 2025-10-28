@@ -29,8 +29,17 @@ function BookingDetails({ uri }) {
     'http://www.fairtravel.com/fairtravel#checkInDate': 'Check-In Date',
     'http://www.fairtravel.com/fairtravel#checkOutDate': 'Check-Out Date',
     'http://www.fairtravel.com/fairtravel#totalPrice': 'Total Price',
+    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': 'Element Type',
     'http://www.fairtravel.com/fairtravel#paymentStatus': 'Payment Status',
     'http://www.fairtravel.com/fairtravel#forAccommodation': 'Accommodation',
+  };
+
+  const valueToLabel = (v) => {
+    if (!v) return 'Unknown';
+    if (typeof v === 'string' && v.includes('http://www.fairtravel.com/fairtravel#')) {
+      return v.split('#')[1]; // extract the local name
+    }
+    return v;
   };
 
   return (
@@ -48,7 +57,7 @@ function BookingDetails({ uri }) {
       <ul style={{ listStyle: 'none', paddingLeft: 0 }}>
         {Object.entries(details).map(([p, v]) => (
           <li key={p} style={{ marginBottom: '0.5rem' }}>
-            <strong>{labels[p] || p}:</strong> {v}
+            <strong>{labels[p] || p}:</strong> {valueToLabel(v)}
           </li>
         ))}
       </ul>
