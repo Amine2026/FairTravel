@@ -82,7 +82,7 @@ function App() {
         } />
         <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
         <Route path="/register" element={<RegisterForm onRegister={handleRegister} />} />
-        <Route path="/ai-chat" element={role === 'user' ? <AiQueryBox /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/ai-chat" element={(role === 'user' || role === 'admin') ? <AiQueryBox /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
         <Route path="/admin" element={role === 'admin' ? (
           <div style={{margin:'2rem auto',maxWidth:900}}>
             <h2 style={{fontSize:'1.4rem', fontWeight:700, color:'#1976d2', marginBottom:'1.2rem'}}>Admin Dashboard</h2>
