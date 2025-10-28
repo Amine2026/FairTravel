@@ -20,6 +20,12 @@ xsd:date rdf:type rdfs:Datatype .
 #    Object Properties
 #################################################################
 
+###  http://www.fairtravel.com/fairtravel#arrivesAt
+:arrivesAt rdf:type owl:ObjectProperty ;
+           rdfs:domain :Transport ;
+           rdfs:range :Location .
+
+
 ###  http://www.fairtravel.com/fairtravel#bookedBy
 :bookedBy rdf:type owl:ObjectProperty ;
           rdfs:domain :Booking ;
@@ -30,6 +36,24 @@ xsd:date rdf:type rdfs:Datatype .
 :complementsActivity rdf:type owl:ObjectProperty ;
                      rdfs:domain :Service ;
                      rdfs:range :Activity .
+
+
+###  http://www.fairtravel.com/fairtravel#connectsLocation
+:connectsLocation rdf:type owl:ObjectProperty ;
+                  rdfs:domain :Transport ;
+                  rdfs:range :Location .
+
+
+###  http://www.fairtravel.com/fairtravel#departsFrom
+:departsFrom rdf:type owl:ObjectProperty ;
+             rdfs:domain :Transport ;
+             rdfs:range :Location .
+
+
+###  http://www.fairtravel.com/fairtravel#featuredInEvent
+:featuredInEvent rdf:type owl:ObjectProperty ;
+                 rdfs:domain :Activity ;
+                 rdfs:range :Event .
 
 
 ###  http://www.fairtravel.com/fairtravel#forAccommodation
@@ -61,6 +85,17 @@ xsd:date rdf:type rdfs:Datatype .
                                     )
                       ] ;
           rdfs:range :Award .
+
+
+###  http://www.fairtravel.com/fairtravel#hasCarbonFootprint
+:hasCarbonFootprint rdf:type owl:ObjectProperty ;
+                    rdfs:domain [ rdf:type owl:Class ;
+                                  owl:unionOf ( :Accommodation
+                                                :Activity
+                                                :Transport
+                                              )
+                                ] ;
+                    rdfs:range :CarbonFootprint .
 
 
 ###  http://www.fairtravel.com/fairtravel#hasReview
@@ -98,6 +133,12 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:range :Accommodation .
 
 
+###  http://www.fairtravel.com/fairtravel#offsetsCarbon
+:offsetsCarbon rdf:type owl:ObjectProperty ;
+               rdfs:domain :CarbonFootprint ;
+               rdfs:range :SustainabilityPractice .
+
+
 ###  http://www.fairtravel.com/fairtravel#reviewedBy
 :reviewedBy rdf:type owl:ObjectProperty ;
             rdfs:domain :Review ;
@@ -108,6 +149,17 @@ xsd:date rdf:type rdfs:Datatype .
 :usedByTourist rdf:type owl:ObjectProperty ;
                rdfs:domain :Service ;
                rdfs:range :Tourist .
+
+
+###  http://www.fairtravel.com/fairtravel#usesTransport
+:usesTransport rdf:type owl:ObjectProperty ;
+               rdfs:domain [ rdf:type owl:Class ;
+                             owl:unionOf ( :Activity
+                                           :Booking
+                                           :Tourist
+                                         )
+                           ] ;
+               rdfs:range :Transport .
 
 
 ###  http://www.fairtravel.com/fairtravel#visitsRestaurant
@@ -141,6 +193,18 @@ xsd:date rdf:type rdfs:Datatype .
               rdfs:range xsd:string .
 
 
+###  http://www.fairtravel.com/fairtravel#address
+:address rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Location ;
+         rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#altitude
+:altitude rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Location ;
+          rdfs:range xsd:float .
+
+
 ###  http://www.fairtravel.com/fairtravel#availabilityStatus
 :availabilityStatus rdf:type owl:DatatypeProperty ;
                     rdfs:domain :Accommodation ;
@@ -149,6 +213,12 @@ xsd:date rdf:type rdfs:Datatype .
 
 ###  http://www.fairtravel.com/fairtravel#averagePrice
 :averagePrice rdf:type owl:DatatypeProperty .
+
+
+###  http://www.fairtravel.com/fairtravel#averageSpeed
+:averageSpeed rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Transport ;
+              rdfs:range xsd:float .
 
 
 ###  http://www.fairtravel.com/fairtravel#awardCategory
@@ -198,10 +268,28 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:range xsd:string .
 
 
+###  http://www.fairtravel.com/fairtravel#calculationDate
+:calculationDate rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :CarbonFootprint ;
+                 rdfs:range xsd:dateTime .
+
+
+###  http://www.fairtravel.com/fairtravel#calculationMethod
+:calculationMethod rdf:type owl:DatatypeProperty ;
+                   rdfs:domain :CarbonFootprint ;
+                   rdfs:range xsd:string .
+
+
 ###  http://www.fairtravel.com/fairtravel#capacity
 :capacity rdf:type owl:DatatypeProperty ;
           rdfs:domain :Accommodation ;
           rdfs:range xsd:integer .
+
+
+###  http://www.fairtravel.com/fairtravel#carbonEmissions
+:carbonEmissions rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :CarbonFootprint ;
+                 rdfs:range xsd:float .
 
 
 ###  http://www.fairtravel.com/fairtravel#certificateNumber
@@ -223,10 +311,28 @@ xsd:date rdf:type rdfs:Datatype .
               rdfs:range xsd:date .
 
 
+###  http://www.fairtravel.com/fairtravel#city
+:city rdf:type owl:DatatypeProperty ;
+      rdfs:domain :Location ;
+      rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#co2PerKm
+:co2PerKm rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Transport ;
+          rdfs:range xsd:float .
+
+
 ###  http://www.fairtravel.com/fairtravel#contactInfo
 :contactInfo rdf:type owl:DatatypeProperty ;
              rdfs:domain :Service ;
              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#country
+:country rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Location ;
+         rdfs:range xsd:string .
 
 
 ###  http://www.fairtravel.com/fairtravel#cuisineType
@@ -264,6 +370,12 @@ xsd:date rdf:type rdfs:Datatype .
                       rdfs:range xsd:string .
 
 
+###  http://www.fairtravel.com/fairtravel#emissionSource
+:emissionSource rdf:type owl:DatatypeProperty ;
+                rdfs:domain :CarbonFootprint ;
+                rdfs:range xsd:string .
+
+
 ###  http://www.fairtravel.com/fairtravel#eventDate
 :eventDate rdf:type owl:DatatypeProperty ,
                     owl:FunctionalProperty ;
@@ -277,6 +389,12 @@ xsd:date rdf:type rdfs:Datatype .
            rdfs:range xsd:string .
 
 
+###  http://www.fairtravel.com/fairtravel#fuelType
+:fuelType rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Transport ;
+          rdfs:range xsd:string .
+
+
 ###  http://www.fairtravel.com/fairtravel#guideName
 :guideName rdf:type owl:DatatypeProperty .
 
@@ -285,6 +403,12 @@ xsd:date rdf:type rdfs:Datatype .
 :impactLevel rdf:type owl:DatatypeProperty ;
              rdfs:domain :SustainabilityPractice ;
              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#isEcoFriendly
+:isEcoFriendly rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Transport ;
+               rdfs:range xsd:boolean .
 
 
 ###  http://www.fairtravel.com/fairtravel#issuingOrganization
@@ -298,6 +422,12 @@ xsd:date rdf:type rdfs:Datatype .
 :languageSpoken rdf:type owl:DatatypeProperty .
 
 
+###  http://www.fairtravel.com/fairtravel#latitude
+:latitude rdf:type owl:DatatypeProperty ;
+          rdfs:domain :Location ;
+          rdfs:range xsd:float .
+
+
 ###  http://www.fairtravel.com/fairtravel#locallyOwned
 :locallyOwned rdf:type owl:DatatypeProperty ,
                        owl:FunctionalProperty ;
@@ -305,11 +435,35 @@ xsd:date rdf:type rdfs:Datatype .
               rdfs:range xsd:boolean .
 
 
+###  http://www.fairtravel.com/fairtravel#locationName
+:locationName rdf:type owl:DatatypeProperty ;
+              rdfs:domain :Location ;
+              rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#longitude
+:longitude rdf:type owl:DatatypeProperty ;
+           rdfs:domain :Location ;
+           rdfs:range xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#measurementUnit
+:measurementUnit rdf:type owl:DatatypeProperty ;
+                 rdfs:domain :CarbonFootprint ;
+                 rdfs:range xsd:string .
+
+
 ###  http://www.fairtravel.com/fairtravel#mentionsSustainability
 :mentionsSustainability rdf:type owl:DatatypeProperty ,
                                  owl:FunctionalProperty ;
                         rdfs:domain :Review ;
                         rdfs:range xsd:boolean .
+
+
+###  http://www.fairtravel.com/fairtravel#offsetAmount
+:offsetAmount rdf:type owl:DatatypeProperty ;
+              rdfs:domain :CarbonFootprint ;
+              rdfs:range xsd:float .
 
 
 ###  http://www.fairtravel.com/fairtravel#openingHours
@@ -388,6 +542,12 @@ xsd:date rdf:type rdfs:Datatype .
                              owl:FunctionalProperty ;
                     rdfs:domain :Recommendation ;
                     rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#region
+:region rdf:type owl:DatatypeProperty ;
+        rdfs:domain :Location ;
+        rdfs:range xsd:string .
 
 
 ###  http://www.fairtravel.com/fairtravel#restaurantName
@@ -484,6 +644,18 @@ xsd:date rdf:type rdfs:Datatype .
 :touristName rdf:type owl:DatatypeProperty .
 
 
+###  http://www.fairtravel.com/fairtravel#transportName
+:transportName rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Transport ;
+               rdfs:range xsd:string .
+
+
+###  http://www.fairtravel.com/fairtravel#transportType
+:transportType rdf:type owl:DatatypeProperty ;
+               rdfs:domain :Transport ;
+               rdfs:range xsd:string .
+
+
 ###  http://www.fairtravel.com/fairtravel#useLocalProducts
 :useLocalProducts rdf:type owl:DatatypeProperty ,
                            owl:FunctionalProperty ;
@@ -498,12 +670,10 @@ xsd:date rdf:type rdfs:Datatype .
             rdfs:range xsd:date .
 
 
-###  http://www.fairtravel.com/fairtravel#verified
-:verified rdf:type owl:DatatypeProperty ,
-                   owl:FunctionalProperty ;
-          rdfs:domain :Review ;
-          rdfs:range xsd:boolean ;
-          rdfs:comment "Indicates whether the review has been verified by the system" .
+###  http://www.fairtravel.com/fairtravel#zipCode
+:zipCode rdf:type owl:DatatypeProperty ;
+         rdfs:domain :Location ;
+         rdfs:range xsd:string .
 
 
 #################################################################
@@ -652,10 +822,34 @@ xsd:date rdf:type rdfs:Datatype .
                       :useLocalProducts "true"^^xsd:boolean .
 
 
+###  http://www.fairtravel.com/fairtravel#Beach_Volleyball
+:Beach_Volleyball rdf:type owl:NamedIndividual ,
+                           :SportActivity ;
+                  :featuredInEvent :SportsTournament2025 ;
+                  :locatedIn :AlpinePark ;
+                  :activityName "Beach Volleyball" ;
+                  :activityType "Sport" ;
+                  :difficultyLevel "Medium" ;
+                  :duration "1.5 hours" .
+
+
+###  http://www.fairtravel.com/fairtravel#BicycleRental
+:BicycleRental rdf:type owl:NamedIndividual ,
+                        :Transport ;
+               :hasCarbonFootprint :CarbonFootprint_BicycleRental ;
+               :averageSpeed "15.0"^^xsd:float ;
+               :co2PerKm "0.0"^^xsd:float ;
+               :fuelType "Human Powered" ;
+               :isEcoFriendly "true"^^xsd:boolean ;
+               :transportName "City Bicycle Rental" ;
+               :transportType "Bicycle" .
+
+
 ###  http://www.fairtravel.com/fairtravel#BioBistro
 :BioBistro rdf:type owl:NamedIndividual ,
                     :Restaurant ;
-           :locatedIn :TunisCity ;
+           :locatedIn :MedinaMarketplace ,
+                      :TunisCity ;
            :averagePrice "28.5"^^xsd:float ;
            :cuisineType "Vegetarian" ;
            :restaurantName "Bio Bistro Tunis" .
@@ -671,6 +865,39 @@ xsd:date rdf:type rdfs:Datatype .
              :totalPrice "360.0"^^xsd:float .
 
 
+###  http://www.fairtravel.com/fairtravel#CarbonFootprint_BicycleRental
+:CarbonFootprint_BicycleRental rdf:type owl:NamedIndividual ,
+                                        :CarbonFootprint ;
+                               :calculationDate "2025-01-20T00:00:00"^^xsd:dateTime ;
+                               :calculationMethod "Zero Emission Transport" ;
+                               :carbonEmissions "0.0"^^xsd:float ;
+                               :emissionSource "Human Powered Transport" ;
+                               :measurementUnit "kg CO2e per km" .
+
+
+###  http://www.fairtravel.com/fairtravel#CarbonFootprint_EcoHotel_Verde
+:CarbonFootprint_EcoHotel_Verde rdf:type owl:NamedIndividual ,
+                                         :CarbonFootprint ;
+                                :offsetsCarbon :SolarEnergyUse ;
+                                :calculationDate "2025-01-15T00:00:00"^^xsd:dateTime ;
+                                :calculationMethod "Greenhouse Gas Protocol" ;
+                                :carbonEmissions "150.5"^^xsd:float ;
+                                :emissionSource "Energy Consumption" ;
+                                :measurementUnit "kg CO2e per month" ;
+                                :offsetAmount "150.5"^^xsd:float .
+
+
+###  http://www.fairtravel.com/fairtravel#CarbonFootprint_MountainHiking
+:CarbonFootprint_MountainHiking rdf:type owl:NamedIndividual ,
+                                         :CarbonFootprint ;
+                                :calculationDate "2025-01-10T00:00:00"^^xsd:dateTime ;
+                                :calculationMethod "Activity-based Calculation" ;
+                                :carbonEmissions "5.2"^^xsd:float ;
+                                :emissionSource "Equipment + Transport" ;
+                                :measurementUnit "kg CO2e per activity" ;
+                                :offsetAmount "5.2"^^xsd:float .
+
+
 ###  http://www.fairtravel.com/fairtravel#CarbonNeutral_Certification
 :CarbonNeutral_Certification rdf:type owl:NamedIndividual ,
                                       :Award ;
@@ -684,9 +911,24 @@ xsd:date rdf:type rdfs:Datatype .
                              :validUntil "2026-06-01"^^xsd:date .
 
 
+###  http://www.fairtravel.com/fairtravel#EcoElectricBus
+:EcoElectricBus rdf:type owl:NamedIndividual ,
+                         :Transport ;
+                :arrivesAt :SousseBeach ;
+                :departsFrom :TunisCity ;
+                :averageSpeed "40.0"^^xsd:float ;
+                :capacity 50 ;
+                :co2PerKm "0.0"^^xsd:float ;
+                :fuelType "Electric" ;
+                :isEcoFriendly "true"^^xsd:boolean ;
+                :transportName "Eco Electric Bus" ;
+                :transportType "Bus" .
+
+
 ###  http://www.fairtravel.com/fairtravel#EcoFestival2025
 :EcoFestival2025 rdf:type owl:NamedIndividual ,
                           :Event ;
+                 :complementsActivity :GuidedNatureWalk ;
                  :locatedIn :AlpinePark ;
                  :eventDate "2025-11-15T10:00:00"^^xsd:dateTime ;
                  :eventType "Festival" ;
@@ -697,7 +939,9 @@ xsd:date rdf:type rdfs:Datatype .
 ###  http://www.fairtravel.com/fairtravel#EcoHotel_Verde
 :EcoHotel_Verde rdf:type owl:NamedIndividual ,
                          :Accommodation ;
-                :hasReview :Review_EcoHotel_Verde_001 .
+                :hasCarbonFootprint :CarbonFootprint_EcoHotel_Verde ;
+                :hasReview :Review_EcoHotel_Verde_001 ;
+                :locatedIn :SousseBeach .
 
 
 ###  http://www.fairtravel.com/fairtravel#EcoLabel_Restaurant_2025
@@ -762,6 +1006,7 @@ xsd:date rdf:type rdfs:Datatype .
 :HibaTourist rdf:type owl:NamedIndividual ,
                       :Tourist ;
              :guidedBy :AliGuide ;
+             :usesTransport :BicycleRental ;
              :visitsRestaurant :BioBistro ;
              :touristAge 24 ;
              :touristName "Hiba" .
@@ -777,19 +1022,85 @@ xsd:date rdf:type rdfs:Datatype .
            :source "TravelGuide2025" .
 
 
+###  http://www.fairtravel.com/fairtravel#HybridTaxi
+:HybridTaxi rdf:type owl:NamedIndividual ,
+                     :Transport ;
+            :connectsLocation :MedinaMarketplace ;
+            :averageSpeed "50.0"^^xsd:float ;
+            :capacity 4 ;
+            :co2PerKm "0.08"^^xsd:float ;
+            :fuelType "Hybrid (Electric + Gasoline)" ;
+            :isEcoFriendly "true"^^xsd:boolean ;
+            :transportName "Hybrid Taxi Service" ;
+            :transportType "Taxi" .
+
+
 ###  http://www.fairtravel.com/fairtravel#JohnDoe
 :JohnDoe rdf:type owl:NamedIndividual ,
-                  :Tourist .
+                  :Tourist ;
+         :usesTransport :EcoElectricBus .
+
+
+###  http://www.fairtravel.com/fairtravel#MedinaMarketplace
+:MedinaMarketplace rdf:type owl:NamedIndividual ,
+                            :Location ;
+                   :address "Old Medina Quarter" ;
+                   :city "Tunis" ;
+                   :country "Tunisia" ;
+                   :latitude "36.8065"^^xsd:float ;
+                   :locationName "Medina Marketplace" ;
+                   :longitude "10.1815"^^xsd:float ;
+                   :region "Tunis Governorate" ;
+                   :zipCode "1000" .
+
+
+###  http://www.fairtravel.com/fairtravel#MedinaRec
+:MedinaRec rdf:type owl:NamedIndividual ,
+                    :Recommendation ;
+           :forActivity :Medina_Heritage_Tour ;
+           :hasReview :Review_Walking_Tour_001 ;
+           :dateRecommended "2025-09-15"^^xsd:date ;
+           :rating 4 ;
+           :recommendationText "Great for history lovers!" ;
+           :source "CultureMag2025" .
+
+
+###  http://www.fairtravel.com/fairtravel#Medina_Heritage_Tour
+:Medina_Heritage_Tour rdf:type owl:NamedIndividual ,
+                               :CulturalActivity ;
+                      :guidedBy :AliGuide ;
+                      :locatedIn :TunisCity ;
+                      :activityName "Medina Heritage Tour" ;
+                      :activityType "Cultural" ;
+                      :difficultyLevel "Easy" ;
+                      :duration "2 hours" .
 
 
 ###  http://www.fairtravel.com/fairtravel#MountainHiking
 :MountainHiking rdf:type owl:NamedIndividual ,
                          :OutdoorActivity ;
+                :hasCarbonFootprint :CarbonFootprint_MountainHiking ;
                 :locatedIn :AlpinePark ;
                 :activityName "Mountain Hiking" ;
                 :activityType "Outdoor" ;
                 :difficultyLevel "Hard" ;
                 :duration "4 hours" .
+
+# Review for MountainHiking
+:Review_MountainHiking_001 rdf:type owl:NamedIndividual ,
+                                  :ActivityReview ;
+                         :reviewedBy :AliceTourist ;
+                         :reviewTitle "Amazing adventure!" ;
+                         :reviewerName "Alice" ;
+                         :rating 5 ;
+                         :overallRating 5 ;
+                         :reviewDate "2025-10-15"^^xsd:date ;
+                         :reviewText "Challenging but rewarding hike with stunning views." ;
+                         :sentiment "positive" ;
+                         :sustainabilityRating 5 ;
+                         :reviewsActivity :MountainHiking .
+
+:MountainHiking :hasReview :Review_MountainHiking_001 .
 
 
 ###  http://www.fairtravel.com/fairtravel#Review_EcoHotel_Verde_001
@@ -829,9 +1140,42 @@ xsd:date rdf:type rdfs:Datatype .
                 :practiceType "Renewable Energy" .
 
 
+###  http://www.fairtravel.com/fairtravel#SousseBeach
+:SousseBeach rdf:type owl:NamedIndividual ,
+                      :Location ;
+             :address "Corniche Avenue" ;
+             :city "Sousse" ;
+             :country "Tunisia" ;
+             :latitude "35.8256"^^xsd:float ;
+             :locationName "Sousse Beach" ;
+             :longitude "10.6369"^^xsd:float ;
+             :region "Sousse Governorate" .
+
+
+###  http://www.fairtravel.com/fairtravel#SportsTournament2025
+:SportsTournament2025 rdf:type owl:NamedIndividual ,
+                               :Event ;
+                      :locatedIn :AlpinePark ;
+                      :eventDate "2025-07-20T09:00:00"^^xsd:dateTime ;
+                      :eventType "Sports Tournament" ;
+                      :organizer "Beach Sports Club" ;
+                      :price "10.0"^^xsd:float .
+
+
 ###  http://www.fairtravel.com/fairtravel#TunisCity
 :TunisCity rdf:type owl:NamedIndividual ,
-                    :Location .
+                    :Location ;
+           :guidedBy :AliGuide .
+
+
+###  http://www.fairtravel.com/fairtravel#VolleyballRec
+:VolleyballRec rdf:type owl:NamedIndividual ,
+                        :Recommendation ;
+               :forActivity :Beach_Volleyball ;
+               :dateRecommended "2025-08-20"^^xsd:date ;
+               :rating 5 ;
+               :recommendationText "Fun for groups!" ;
+               :source "SportLife" .
 
 
 ###  http://www.fairtravel.com/fairtravel#WasteReductionProgram
@@ -840,6 +1184,17 @@ xsd:date rdf:type rdfs:Datatype .
                        :impactLevel "Medium" ;
                        :practiceName "Waste Reduction Program" ;
                        :practiceType "Waste Management" .
+
+
+###  http://www.fairtravel.com/fairtravel#Workshop2025
+:Workshop2025 rdf:type owl:NamedIndividual ,
+                       :Event ;
+              :locatedIn :TunisCity ;
+              :offeredBy :ArtisanMarket_Medina ;
+              :eventDate "2025-12-05T14:00:00"^^xsd:dateTime ;
+              :eventType "Workshop" ;
+              :organizer "Local Artisans" ;
+              :price "25.0"^^xsd:float .
 
 
 ###  Generated by the OWL API (version 4.5.29.2024-05-13T12:11:03Z) https://github.com/owlcs/owlapi

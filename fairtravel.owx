@@ -85,10 +85,22 @@
         <Class IRI="#TransportReview"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#arrivesAt"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#bookedBy"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#complementsActivity"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#connectsLocation"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#departsFrom"/>
+    </Declaration>
+    <Declaration>
+        <ObjectProperty IRI="#featuredInEvent"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#forAccommodation"/>
@@ -103,6 +115,9 @@
         <ObjectProperty IRI="#hasAward"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#hasReview"/>
     </Declaration>
     <Declaration>
@@ -115,34 +130,22 @@
         <ObjectProperty IRI="#offeredBy"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#offsetsCarbon"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#reviewedBy"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#usedByTourist"/>
     </Declaration>
     <Declaration>
+        <ObjectProperty IRI="#usesTransport"/>
+    </Declaration>
+    <Declaration>
         <ObjectProperty IRI="#visitsRestaurant"/>
     </Declaration>
     <Declaration>
         <ObjectProperty IRI="#worksAt"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#usesTransport"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#connectsLocation"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#departsFrom"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#arrivesAt"/>
-    </Declaration>
-    <Declaration>
-        <ObjectProperty IRI="#offsetsCarbon"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#accommodationName"/>
@@ -154,10 +157,19 @@
         <DataProperty IRI="#activityType"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#address"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#altitude"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#availabilityStatus"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#averagePrice"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#averageSpeed"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#awardCategory"/>
@@ -181,7 +193,16 @@
         <DataProperty IRI="#bookingID"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#calculationDate"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#calculationMethod"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#capacity"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#carbonEmissions"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#certificateNumber"/>
@@ -193,7 +214,16 @@
         <DataProperty IRI="#checkOutDate"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#city"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#co2PerKm"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#contactInfo"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#country"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#cuisineType"/>
@@ -214,10 +244,16 @@
         <DataProperty IRI="#ecoFriendlyPractices"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#emissionSource"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#eventDate"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#eventType"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#fuelType"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#guideName"/>
@@ -226,16 +262,34 @@
         <DataProperty IRI="#impactLevel"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#isEcoFriendly"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#issuingOrganization"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#languageSpoken"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#latitude"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#locallyOwned"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#locationName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#longitude"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#measurementUnit"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#mentionsSustainability"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#offsetAmount"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#openingHours"/>
@@ -272,6 +326,9 @@
     </Declaration>
     <Declaration>
         <DataProperty IRI="#recommendationText"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#region"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#restaurantName"/>
@@ -322,76 +379,19 @@
         <DataProperty IRI="#touristName"/>
     </Declaration>
     <Declaration>
+        <DataProperty IRI="#transportName"/>
+    </Declaration>
+    <Declaration>
+        <DataProperty IRI="#transportType"/>
+    </Declaration>
+    <Declaration>
         <DataProperty IRI="#useLocalProducts"/>
     </Declaration>
     <Declaration>
         <DataProperty IRI="#validUntil"/>
     </Declaration>
     <Declaration>
-        <DataProperty IRI="#locationName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#address"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#city"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#country"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#region"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#latitude"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#longitude"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#altitude"/>
-    </Declaration>
-    <Declaration>
         <DataProperty IRI="#zipCode"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#transportType"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#transportName"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#co2PerKm"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#capacity"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#isEcoFriendly"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#fuelType"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#averageSpeed"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#carbonEmissions"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#calculationMethod"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#emissionSource"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#offsetAmount"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#measurementUnit"/>
-    </Declaration>
-    <Declaration>
-        <DataProperty IRI="#calculationDate"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#AliGuide"/>
@@ -406,13 +406,31 @@
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#BicycleRental"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#BioBistro"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#Booking1234"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#EcoElectricBus"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#EcoFestival2025"/>
@@ -442,7 +460,19 @@
         <NamedIndividual IRI="#HikingRec"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#HybridTaxi"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#JohnDoe"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#MedinaRec"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#MountainHiking"/>
@@ -451,43 +481,37 @@
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#SolarEnergyUse"/>
     </Declaration>
     <Declaration>
+        <NamedIndividual IRI="#SousseBeach"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+    </Declaration>
+    <Declaration>
         <NamedIndividual IRI="#TunisCity"/>
+    </Declaration>
+    <Declaration>
+        <NamedIndividual IRI="#VolleyballRec"/>
     </Declaration>
     <Declaration>
         <NamedIndividual IRI="#WasteReductionProgram"/>
     </Declaration>
     <Declaration>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#BicycleRental"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#HybridTaxi"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#SousseBeach"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-    </Declaration>
-    <Declaration>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <NamedIndividual IRI="#Workshop2025"/>
     </Declaration>
     <Declaration>
         <Datatype abbreviatedIRI="xsd:date"/>
+    </Declaration>
+    <Declaration>
+        <AnnotationProperty IRI="#reviewsActivity"/>
     </Declaration>
     <SubClassOf>
         <Class IRI="#AccommodationReview"/>
@@ -546,6 +570,14 @@
         <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#SportActivity"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Transport"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Restaurant"/>
         <NamedIndividual IRI="#BioBistro"/>
     </ClassAssertion>
@@ -554,8 +586,24 @@
         <NamedIndividual IRI="#Booking1234"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#CarbonFootprint"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CarbonFootprint"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CarbonFootprint"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Award"/>
         <NamedIndividual IRI="#CarbonNeutral_Certification"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Transport"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Event"/>
@@ -594,8 +642,24 @@
         <NamedIndividual IRI="#HikingRec"/>
     </ClassAssertion>
     <ClassAssertion>
+        <Class IRI="#Transport"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+    </ClassAssertion>
+    <ClassAssertion>
         <Class IRI="#Tourist"/>
         <NamedIndividual IRI="#JohnDoe"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Location"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Recommendation"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#CulturalActivity"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#OutdoorActivity"/>
@@ -607,6 +671,10 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#ActivityReview"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#ActivityReview"/>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
     </ClassAssertion>
     <ClassAssertion>
@@ -615,43 +683,27 @@
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#Location"/>
+        <NamedIndividual IRI="#SousseBeach"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Location"/>
         <NamedIndividual IRI="#TunisCity"/>
+    </ClassAssertion>
+    <ClassAssertion>
+        <Class IRI="#Recommendation"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
     </ClassAssertion>
     <ClassAssertion>
         <Class IRI="#SustainabilityPractice"/>
         <NamedIndividual IRI="#WasteReductionProgram"/>
     </ClassAssertion>
     <ClassAssertion>
-        <Class IRI="#Transport"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Transport"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Transport"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Location"/>
-        <NamedIndividual IRI="#SousseBeach"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#Location"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#CarbonFootprint"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#CarbonFootprint"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-    </ClassAssertion>
-    <ClassAssertion>
-        <Class IRI="#CarbonFootprint"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Class IRI="#Event"/>
+        <NamedIndividual IRI="#Workshop2025"/>
     </ClassAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#worksAt"/>
@@ -669,6 +721,26 @@
         <NamedIndividual IRI="#JohnDoe"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <NamedIndividual IRI="#AlpinePark"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#BioBistro"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#BioBistro"/>
         <NamedIndividual IRI="#TunisCity"/>
@@ -684,14 +756,44 @@
         <NamedIndividual IRI="#GreenValleyEcoLodge"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#offsetsCarbon"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <NamedIndividual IRI="#SolarEnergyUse"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <NamedIndividual IRI="#SousseBeach"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#departsFrom"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <NamedIndividual IRI="#TunisCity"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#complementsActivity"/>
+        <NamedIndividual IRI="#EcoFestival2025"/>
+        <NamedIndividual IRI="#GuidedNatureWalk"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
         <NamedIndividual IRI="#EcoFestival2025"/>
         <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#hasReview"/>
         <NamedIndividual IRI="#EcoHotel_Verde"/>
         <NamedIndividual IRI="#Review_EcoHotel_Verde_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#EcoHotel_Verde"/>
+        <NamedIndividual IRI="#SousseBeach"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#complementsActivity"/>
@@ -719,6 +821,11 @@
         <NamedIndividual IRI="#AliGuide"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesTransport"/>
+        <NamedIndividual IRI="#HibaTourist"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
         <ObjectProperty IRI="#visitsRestaurant"/>
         <NamedIndividual IRI="#HibaTourist"/>
         <NamedIndividual IRI="#BioBistro"/>
@@ -727,6 +834,46 @@
         <ObjectProperty IRI="#forActivity"/>
         <NamedIndividual IRI="#HikingRec"/>
         <NamedIndividual IRI="#MountainHiking"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#connectsLocation"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#usesTransport"/>
+        <NamedIndividual IRI="#JohnDoe"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#forActivity"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReview"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <NamedIndividual IRI="#Review_Walking_Tour_001"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <NamedIndividual IRI="#AliGuide"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <NamedIndividual IRI="#TunisCity"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+    </ObjectPropertyAssertion>
+    <ObjectPropertyAssertion>
+        <ObjectProperty IRI="#hasReview"/>
+        <NamedIndividual IRI="#MountainHiking"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
         <ObjectProperty IRI="#locatedIn"/>
@@ -739,59 +886,34 @@
         <NamedIndividual IRI="#JohnDoe"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-        <NamedIndividual IRI="#EcoHotel_Verde"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <ObjectProperty IRI="#reviewedBy"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <NamedIndividual IRI="#AliceTourist"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <NamedIndividual IRI="#AlpinePark"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-        <NamedIndividual IRI="#MountainHiking"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <ObjectProperty IRI="#guidedBy"/>
+        <NamedIndividual IRI="#TunisCity"/>
+        <NamedIndividual IRI="#AliGuide"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#usesTransport"/>
-        <NamedIndividual IRI="#JohnDoe"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
+        <ObjectProperty IRI="#forActivity"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#usesTransport"/>
-        <NamedIndividual IRI="#HibaTourist"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#departsFrom"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
+        <ObjectProperty IRI="#locatedIn"/>
+        <NamedIndividual IRI="#Workshop2025"/>
         <NamedIndividual IRI="#TunisCity"/>
     </ObjectPropertyAssertion>
     <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#arrivesAt"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <NamedIndividual IRI="#SousseBeach"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#connectsLocation"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#locatedIn"/>
-        <NamedIndividual IRI="#EcoHotel_Verde"/>
-        <NamedIndividual IRI="#SousseBeach"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#locatedIn"/>
-        <NamedIndividual IRI="#BioBistro"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-    </ObjectPropertyAssertion>
-    <ObjectPropertyAssertion>
-        <ObjectProperty IRI="#offsetsCarbon"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <NamedIndividual IRI="#SolarEnergyUse"/>
+        <ObjectProperty IRI="#offeredBy"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <NamedIndividual IRI="#ArtisanMarket_Medina"/>
     </ObjectPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#guideName"/>
@@ -839,6 +961,56 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#activityName"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <Literal>Beach Volleyball</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityType"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <Literal>Sport</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#difficultyLevel"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <Literal>Medium</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Beach_Volleyball"/>
+        <Literal>1.5 hours</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#averageSpeed"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2PerKm"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#fuelType"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal>Human Powered</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#isEcoFriendly"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportName"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal>City Bicycle Rental</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportType"/>
+        <NamedIndividual IRI="#BicycleRental"/>
+        <Literal>Bicycle</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#averagePrice"/>
         <NamedIndividual IRI="#BioBistro"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">28.5</Literal>
@@ -867,6 +1039,91 @@
         <DataProperty IRI="#totalPrice"/>
         <NamedIndividual IRI="#Booking1234"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">360.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationDate"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-20T00:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationMethod"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <Literal>Zero Emission Transport</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#carbonEmissions"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#emissionSource"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <Literal>Human Powered Transport</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#measurementUnit"/>
+        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
+        <Literal>kg CO2e per km</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationDate"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-15T00:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationMethod"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal>Greenhouse Gas Protocol</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#carbonEmissions"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">150.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#emissionSource"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal>Energy Consumption</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#measurementUnit"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal>kg CO2e per month</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#offsetAmount"/>
+        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">150.5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationDate"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-10T00:00:00</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#calculationMethod"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal>Activity-based Calculation</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#carbonEmissions"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">5.2</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#emissionSource"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal>Equipment + Transport</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#measurementUnit"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal>kg CO2e per activity</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#offsetAmount"/>
+        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">5.2</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#awardCategory"/>
@@ -907,6 +1164,41 @@
         <DataProperty IRI="#validUntil"/>
         <NamedIndividual IRI="#CarbonNeutral_Certification"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2026-06-01</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#averageSpeed"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">40.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#capacity"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">50</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2PerKm"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#fuelType"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal>Electric</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#isEcoFriendly"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportName"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal>Eco Electric Bus</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportType"/>
+        <NamedIndividual IRI="#EcoElectricBus"/>
+        <Literal>Bus</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#eventDate"/>
@@ -1104,6 +1396,121 @@
         <Literal>TravelGuide2025</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#averageSpeed"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">50.0</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#capacity"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#co2PerKm"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.08</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#fuelType"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal>Hybrid (Electric + Gasoline)</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#isEcoFriendly"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportName"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal>Hybrid Taxi Service</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#transportType"/>
+        <NamedIndividual IRI="#HybridTaxi"/>
+        <Literal>Taxi</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#address"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>Old Medina Quarter</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#city"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>Tunis</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#country"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>Tunisia</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#latitude"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">36.8065</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#locationName"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>Medina Marketplace</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#longitude"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.1815</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#region"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>Tunis Governorate</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#zipCode"/>
+        <NamedIndividual IRI="#MedinaMarketplace"/>
+        <Literal>1000</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#dateRecommended"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-09-15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#recommendationText"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <Literal>Great for history lovers!</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#source"/>
+        <NamedIndividual IRI="#MedinaRec"/>
+        <Literal>CultureMag2025</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityName"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <Literal>Medina Heritage Tour</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#activityType"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <Literal>Cultural</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#difficultyLevel"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <Literal>Easy</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#duration"/>
+        <NamedIndividual IRI="#Medina_Heritage_Tour"/>
+        <Literal>2 hours</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#activityName"/>
         <NamedIndividual IRI="#MountainHiking"/>
         <Literal>Mountain Hiking</Literal>
@@ -1174,6 +1581,46 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">8</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
+        <DataProperty IRI="#overallRating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewDate"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-10-15</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewText"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Challenging but rewarding hike with stunning views.</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewTitle"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Amazing adventure!</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#reviewerName"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>Alice</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sentiment"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal>positive</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#sustainabilityRating"/>
+        <NamedIndividual IRI="#Review_MountainHiking_001"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
         <DataProperty IRI="#mentionsSustainability"/>
         <NamedIndividual IRI="#Review_Walking_Tour_001"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">false</Literal>
@@ -1229,126 +1676,6 @@
         <Literal>Renewable Energy</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#impactLevel"/>
-        <NamedIndividual IRI="#WasteReductionProgram"/>
-        <Literal>Medium</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#practiceName"/>
-        <NamedIndividual IRI="#WasteReductionProgram"/>
-        <Literal>Waste Reduction Program</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#practiceType"/>
-        <NamedIndividual IRI="#WasteReductionProgram"/>
-        <Literal>Waste Management</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportType"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal>Bus</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportName"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal>Eco Electric Bus</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#co2PerKm"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#capacity"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">50</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#isEcoFriendly"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#fuelType"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal>Electric</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#averageSpeed"/>
-        <NamedIndividual IRI="#EcoElectricBus"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">40.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportType"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal>Bicycle</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportName"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal>City Bicycle Rental</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#co2PerKm"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#isEcoFriendly"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#fuelType"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal>Human Powered</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#averageSpeed"/>
-        <NamedIndividual IRI="#BicycleRental"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">15.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportType"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal>Taxi</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#transportName"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal>Hybrid Taxi Service</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#co2PerKm"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.08</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#capacity"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">4</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#isEcoFriendly"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#boolean">true</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#fuelType"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal>Hybrid (Electric + Gasoline)</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#averageSpeed"/>
-        <NamedIndividual IRI="#HybridTaxi"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">50.0</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#locationName"/>
-        <NamedIndividual IRI="#SousseBeach"/>
-        <Literal>Sousse Beach</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#address"/>
         <NamedIndividual IRI="#SousseBeach"/>
         <Literal>Corniche Avenue</Literal>
@@ -1364,14 +1691,14 @@
         <Literal>Tunisia</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#region"/>
-        <NamedIndividual IRI="#SousseBeach"/>
-        <Literal>Sousse Governorate</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#latitude"/>
         <NamedIndividual IRI="#SousseBeach"/>
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">35.8256</Literal>
+    </DataPropertyAssertion>
+    <DataPropertyAssertion>
+        <DataProperty IRI="#locationName"/>
+        <NamedIndividual IRI="#SousseBeach"/>
+        <Literal>Sousse Beach</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
         <DataProperty IRI="#longitude"/>
@@ -1379,130 +1706,89 @@
         <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.6369</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#locationName"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>Medina Marketplace</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#address"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>Old Medina Quarter</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#city"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>Tunis</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#country"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>Tunisia</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
         <DataProperty IRI="#region"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>Tunis Governorate</Literal>
+        <NamedIndividual IRI="#SousseBeach"/>
+        <Literal>Sousse Governorate</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#latitude"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">36.8065</Literal>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-07-20T09:00:00</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#longitude"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.1815</Literal>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal>Sports Tournament</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#zipCode"/>
-        <NamedIndividual IRI="#MedinaMarketplace"/>
-        <Literal>1000</Literal>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal>Beach Sports Club</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#carbonEmissions"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">150.5</Literal>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#SportsTournament2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">10.0</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#calculationMethod"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal>Greenhouse Gas Protocol</Literal>
+        <DataProperty IRI="#dateRecommended"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#date">2025-08-20</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#emissionSource"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal>Energy Consumption</Literal>
+        <DataProperty IRI="#rating"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#integer">5</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#offsetAmount"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">150.5</Literal>
+        <DataProperty IRI="#recommendationText"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal>Fun for groups!</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#measurementUnit"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal>kg CO2e per month</Literal>
+        <DataProperty IRI="#source"/>
+        <NamedIndividual IRI="#VolleyballRec"/>
+        <Literal>SportLife</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#calculationDate"/>
-        <NamedIndividual IRI="#CarbonFootprint_EcoHotel_Verde"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-15T00:00:00</Literal>
+        <DataProperty IRI="#impactLevel"/>
+        <NamedIndividual IRI="#WasteReductionProgram"/>
+        <Literal>Medium</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#carbonEmissions"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">0.0</Literal>
+        <DataProperty IRI="#practiceName"/>
+        <NamedIndividual IRI="#WasteReductionProgram"/>
+        <Literal>Waste Reduction Program</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#calculationMethod"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-        <Literal>Zero Emission Transport</Literal>
+        <DataProperty IRI="#practiceType"/>
+        <NamedIndividual IRI="#WasteReductionProgram"/>
+        <Literal>Waste Management</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#emissionSource"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-        <Literal>Human Powered Transport</Literal>
+        <DataProperty IRI="#eventDate"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-12-05T14:00:00</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#measurementUnit"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-        <Literal>kg CO2e per km</Literal>
+        <DataProperty IRI="#eventType"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal>Workshop</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#calculationDate"/>
-        <NamedIndividual IRI="#CarbonFootprint_BicycleRental"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-20T00:00:00</Literal>
+        <DataProperty IRI="#organizer"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal>Local Artisans</Literal>
     </DataPropertyAssertion>
     <DataPropertyAssertion>
-        <DataProperty IRI="#carbonEmissions"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">5.2</Literal>
+        <DataProperty IRI="#price"/>
+        <NamedIndividual IRI="#Workshop2025"/>
+        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">25.0</Literal>
     </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#calculationMethod"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal>Activity-based Calculation</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#emissionSource"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal>Equipment + Transport</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#offsetAmount"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#float">5.2</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#measurementUnit"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal>kg CO2e per activity</Literal>
-    </DataPropertyAssertion>
-    <DataPropertyAssertion>
-        <DataProperty IRI="#calculationDate"/>
-        <NamedIndividual IRI="#CarbonFootprint_MountainHiking"/>
-        <Literal datatypeIRI="http://www.w3.org/2001/XMLSchema#dateTime">2025-01-10T00:00:00</Literal>
-    </DataPropertyAssertion>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <Class IRI="#Transport"/>
+    </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#bookedBy"/>
         <Class IRI="#Booking"/>
@@ -1510,6 +1796,18 @@
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#complementsActivity"/>
         <Class IRI="#Service"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#connectsLocation"/>
+        <Class IRI="#Transport"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#departsFrom"/>
+        <Class IRI="#Transport"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <Class IRI="#Activity"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
         <ObjectProperty IRI="#forAccommodation"/>
@@ -1528,6 +1826,14 @@
             <Class IRI="#Accommodation"/>
             <Class IRI="#Activity"/>
             <Class IRI="#Service"/>
+        </ObjectUnionOf>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+        <ObjectUnionOf>
+            <Class IRI="#Accommodation"/>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Transport"/>
         </ObjectUnionOf>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
@@ -1556,6 +1862,10 @@
         <Class IRI="#Service"/>
     </ObjectPropertyDomain>
     <ObjectPropertyDomain>
+        <ObjectProperty IRI="#offsetsCarbon"/>
+        <Class IRI="#CarbonFootprint"/>
+    </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
         <ObjectProperty IRI="#reviewedBy"/>
         <Class IRI="#Review"/>
     </ObjectPropertyDomain>
@@ -1563,6 +1873,18 @@
         <ObjectProperty IRI="#usedByTourist"/>
         <Class IRI="#Service"/>
     </ObjectPropertyDomain>
+    <ObjectPropertyDomain>
+        <ObjectProperty IRI="#usesTransport"/>
+        <ObjectUnionOf>
+            <Class IRI="#Activity"/>
+            <Class IRI="#Booking"/>
+            <Class IRI="#Tourist"/>
+        </ObjectUnionOf>
+    </ObjectPropertyDomain>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#arrivesAt"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#bookedBy"/>
         <Class IRI="#Tourist"/>
@@ -1570,6 +1892,18 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#complementsActivity"/>
         <Class IRI="#Activity"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#connectsLocation"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#departsFrom"/>
+        <Class IRI="#Location"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#featuredInEvent"/>
+        <Class IRI="#Event"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#forAccommodation"/>
@@ -1582,6 +1916,10 @@
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasAward"/>
         <Class IRI="#Award"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
+        <ObjectProperty IRI="#hasCarbonFootprint"/>
+        <Class IRI="#CarbonFootprint"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#hasReview"/>
@@ -1600,6 +1938,10 @@
         <Class IRI="#Accommodation"/>
     </ObjectPropertyRange>
     <ObjectPropertyRange>
+        <ObjectProperty IRI="#offsetsCarbon"/>
+        <Class IRI="#SustainabilityPractice"/>
+    </ObjectPropertyRange>
+    <ObjectPropertyRange>
         <ObjectProperty IRI="#reviewedBy"/>
         <Class IRI="#Tourist"/>
     </ObjectPropertyRange>
@@ -1607,61 +1949,9 @@
         <ObjectProperty IRI="#usedByTourist"/>
         <Class IRI="#Tourist"/>
     </ObjectPropertyRange>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-        <ObjectUnionOf>
-            <Class IRI="#Transport"/>
-            <Class IRI="#Activity"/>
-            <Class IRI="#Accommodation"/>
-        </ObjectUnionOf>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#usesTransport"/>
-        <ObjectUnionOf>
-            <Class IRI="#Tourist"/>
-            <Class IRI="#Activity"/>
-            <Class IRI="#Booking"/>
-        </ObjectUnionOf>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#connectsLocation"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#departsFrom"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#arrivesAt"/>
-        <Class IRI="#Transport"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyDomain>
-        <ObjectProperty IRI="#offsetsCarbon"/>
-        <Class IRI="#CarbonFootprint"/>
-    </ObjectPropertyDomain>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#hasCarbonFootprint"/>
-        <Class IRI="#CarbonFootprint"/>
-    </ObjectPropertyRange>
     <ObjectPropertyRange>
         <ObjectProperty IRI="#usesTransport"/>
         <Class IRI="#Transport"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#connectsLocation"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#departsFrom"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#arrivesAt"/>
-        <Class IRI="#Location"/>
-    </ObjectPropertyRange>
-    <ObjectPropertyRange>
-        <ObjectProperty IRI="#offsetsCarbon"/>
-        <Class IRI="#SustainabilityPractice"/>
     </ObjectPropertyRange>
     <FunctionalDataProperty>
         <DataProperty IRI="#activityName"/>
@@ -1733,8 +2023,20 @@
         <Class IRI="#Activity"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#address"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#altitude"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#availabilityStatus"/>
         <Class IRI="#Accommodation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#averageSpeed"/>
+        <Class IRI="#Transport"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#awardCategory"/>
@@ -1765,8 +2067,20 @@
         <Class IRI="#Booking"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#calculationDate"/>
+        <Class IRI="#CarbonFootprint"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#calculationMethod"/>
+        <Class IRI="#CarbonFootprint"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#capacity"/>
         <Class IRI="#Accommodation"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#carbonEmissions"/>
+        <Class IRI="#CarbonFootprint"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#certificateNumber"/>
@@ -1781,8 +2095,20 @@
         <Class IRI="#Booking"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#city"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#co2PerKm"/>
+        <Class IRI="#Transport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#contactInfo"/>
         <Class IRI="#Service"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#country"/>
+        <Class IRI="#Location"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#dateRecommended"/>
@@ -1809,6 +2135,10 @@
         <Class IRI="#Review"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#emissionSource"/>
+        <Class IRI="#CarbonFootprint"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#eventDate"/>
         <Class IRI="#Event"/>
     </DataPropertyDomain>
@@ -1817,20 +2147,48 @@
         <Class IRI="#Event"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#fuelType"/>
+        <Class IRI="#Transport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#impactLevel"/>
         <Class IRI="#SustainabilityPractice"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#isEcoFriendly"/>
+        <Class IRI="#Transport"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#issuingOrganization"/>
         <Class IRI="#Award"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#latitude"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#locallyOwned"/>
         <Class IRI="#Service"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#locationName"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#longitude"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#measurementUnit"/>
+        <Class IRI="#CarbonFootprint"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#mentionsSustainability"/>
         <Class IRI="#Review"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#offsetAmount"/>
+        <Class IRI="#CarbonFootprint"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
         <DataProperty IRI="#openingHours"/>
@@ -1884,6 +2242,10 @@
         <Class IRI="#Recommendation"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#region"/>
+        <Class IRI="#Location"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#reviewDate"/>
         <Class IRI="#Review"/>
     </DataPropertyDomain>
@@ -1936,6 +2298,14 @@
         <Class IRI="#Booking"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
+        <DataProperty IRI="#transportName"/>
+        <Class IRI="#Transport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
+        <DataProperty IRI="#transportType"/>
+        <Class IRI="#Transport"/>
+    </DataPropertyDomain>
+    <DataPropertyDomain>
         <DataProperty IRI="#useLocalProducts"/>
         <Class IRI="#Service"/>
     </DataPropertyDomain>
@@ -1944,88 +2314,8 @@
         <Class IRI="#Award"/>
     </DataPropertyDomain>
     <DataPropertyDomain>
-        <DataProperty IRI="#locationName"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#address"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#city"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#country"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#region"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#latitude"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#longitude"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#altitude"/>
-        <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
         <DataProperty IRI="#zipCode"/>
         <Class IRI="#Location"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#transportType"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#transportName"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#co2PerKm"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#isEcoFriendly"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#fuelType"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#averageSpeed"/>
-        <Class IRI="#Transport"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#carbonEmissions"/>
-        <Class IRI="#CarbonFootprint"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#calculationMethod"/>
-        <Class IRI="#CarbonFootprint"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#emissionSource"/>
-        <Class IRI="#CarbonFootprint"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#offsetAmount"/>
-        <Class IRI="#CarbonFootprint"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#measurementUnit"/>
-        <Class IRI="#CarbonFootprint"/>
-    </DataPropertyDomain>
-    <DataPropertyDomain>
-        <DataProperty IRI="#calculationDate"/>
-        <Class IRI="#CarbonFootprint"/>
     </DataPropertyDomain>
     <DataPropertyRange>
         <DataProperty IRI="#accommodationName"/>
@@ -2040,8 +2330,20 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#address"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#altitude"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#availabilityStatus"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#averageSpeed"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#awardCategory"/>
@@ -2072,8 +2374,20 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#calculationDate"/>
+        <Datatype abbreviatedIRI="xsd:dateTime"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#calculationMethod"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#capacity"/>
         <Datatype abbreviatedIRI="xsd:integer"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#carbonEmissions"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#certificateNumber"/>
@@ -2088,7 +2402,19 @@
         <Datatype abbreviatedIRI="xsd:date"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#city"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#co2PerKm"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#contactInfo"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#country"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
@@ -2112,6 +2438,10 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#emissionSource"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#eventDate"/>
         <Datatype abbreviatedIRI="xsd:dateTime"/>
     </DataPropertyRange>
@@ -2120,20 +2450,48 @@
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#fuelType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#impactLevel"/>
         <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#isEcoFriendly"/>
+        <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#issuingOrganization"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#latitude"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#locallyOwned"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#locationName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#longitude"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#measurementUnit"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#mentionsSustainability"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#offsetAmount"/>
+        <Datatype abbreviatedIRI="xsd:float"/>
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#openingHours"/>
@@ -2181,6 +2539,10 @@
     </DataPropertyRange>
     <DataPropertyRange>
         <DataProperty IRI="#recommendationText"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#region"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
     <DataPropertyRange>
@@ -2236,6 +2598,14 @@
         <Datatype abbreviatedIRI="xsd:float"/>
     </DataPropertyRange>
     <DataPropertyRange>
+        <DataProperty IRI="#transportName"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
+        <DataProperty IRI="#transportType"/>
+        <Datatype abbreviatedIRI="xsd:string"/>
+    </DataPropertyRange>
+    <DataPropertyRange>
         <DataProperty IRI="#useLocalProducts"/>
         <Datatype abbreviatedIRI="xsd:boolean"/>
     </DataPropertyRange>
@@ -2244,89 +2614,14 @@
         <Datatype abbreviatedIRI="xsd:date"/>
     </DataPropertyRange>
     <DataPropertyRange>
-        <DataProperty IRI="#locationName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#address"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#city"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#country"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#region"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#latitude"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#longitude"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#altitude"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
         <DataProperty IRI="#zipCode"/>
         <Datatype abbreviatedIRI="xsd:string"/>
     </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#transportType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#transportName"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#co2PerKm"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#isEcoFriendly"/>
-        <Datatype abbreviatedIRI="xsd:boolean"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#fuelType"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#averageSpeed"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#carbonEmissions"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#calculationMethod"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#emissionSource"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#offsetAmount"/>
-        <Datatype abbreviatedIRI="xsd:float"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#measurementUnit"/>
-        <Datatype abbreviatedIRI="xsd:string"/>
-    </DataPropertyRange>
-    <DataPropertyRange>
-        <DataProperty IRI="#calculationDate"/>
-        <Datatype abbreviatedIRI="xsd:dateTime"/>
-    </DataPropertyRange>
+    <AnnotationAssertion>
+        <AnnotationProperty IRI="#reviewsActivity"/>
+        <IRI>#Review_MountainHiking_001</IRI>
+        <IRI>#MountainHiking</IRI>
+    </AnnotationAssertion>
 </Ontology>
 
 

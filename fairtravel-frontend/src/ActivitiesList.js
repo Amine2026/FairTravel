@@ -116,17 +116,39 @@ function ActivitiesList() {
     }
   };
 
+  // Get JWT and role
+  const token = localStorage.getItem('token');
+  let role = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      role = payload.sub && payload.sub.role ? payload.sub.role : null;
+    } catch {}
+  }
+
+  // Hide everything if not logged in
+  if (!token) {
+    return (
+      <div style={{maxWidth:500,margin:'2rem auto',padding:'2rem',textAlign:'center'}}>
+        <h2>Please log in to view activities.</h2>
+      </div>
+    );
+  }
+
   return (
     <div style={{maxWidth:600, margin:'2rem auto', padding:'1rem', background:'#f9f9f9', borderRadius:8, boxShadow:'0 2px 8px #ddd'}}>
       <h2 style={{marginBottom:'1rem'}}>Activities</h2>
-      <form onSubmit={handleCreate} style={{marginBottom:'2rem', background:'#eef', padding:'1rem', borderRadius:6}}>
-        <h3>Add Activity</h3>
-        <input name="name" value={form.name} onChange={handleFormChange} placeholder="Name" required style={{marginRight:8}} />
-        <input name="type" value={form.type} onChange={handleFormChange} placeholder="Type" required style={{marginRight:8}} />
-        <input name="location" value={form.location} onChange={handleFormChange} placeholder="Location" required style={{marginRight:8}} />
-        <button type="submit" disabled={creating}>Create</button>
-        {error && <div style={{color:'red'}}>{error}</div>}
-      </form>
+      {/* Only admins see Add Activity form */}
+      {role === 'admin' && (
+        <form onSubmit={handleCreate} style={{marginBottom:'2rem', background:'#eef', padding:'1rem', borderRadius:6}}>
+          <h3>Add Activity</h3>
+          <input name="name" value={form.name} onChange={handleFormChange} placeholder="Name" required style={{marginRight:8}} />
+          <input name="type" value={form.type} onChange={handleFormChange} placeholder="Type" required style={{marginRight:8}} />
+          <input name="location" value={form.location} onChange={handleFormChange} placeholder="Location" required style={{marginRight:8}} />
+          <button type="submit" disabled={creating}>Create</button>
+          {error && <div style={{color:'red'}}>{error}</div>}
+        </form>
+      )}
       <input
         type="text"
         placeholder="Search activities..."
@@ -157,9 +179,14 @@ function ActivitiesList() {
             >
               {activity}
             </Link>
-            <button onClick={() => handleDelete(activity)} style={{marginLeft:12, color:'red'}}>Delete</button>
-            <button onClick={() => startEdit(activity)} style={{marginLeft:8}}>Edit</button>
-            {editingUri === activity && (
+            {/* Only admins see Delete/Edit buttons */}
+            {role === 'admin' && (
+              <>
+                <button onClick={() => handleDelete(activity)} style={{marginLeft:12, color:'red'}}>Delete</button>
+                <button onClick={() => startEdit(activity)} style={{marginLeft:8}}>Edit</button>
+              </>
+            )}
+            {editingUri === activity && role === 'admin' && (
               <form onSubmit={handleUpdate} style={{marginTop:'1rem', background:'#ffe', padding:'1rem', borderRadius:6}}>
                 <input name="name" value={editForm.name} onChange={handleEditFormChange} placeholder="Name" required style={{marginRight:8}} />
                 <input name="type" value={editForm.type} onChange={handleEditFormChange} placeholder="Type" required style={{marginRight:8}} />

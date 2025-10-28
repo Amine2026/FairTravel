@@ -140,9 +140,8 @@ function BookingsList() {
           {filteredBookings.map((booking) => {
             const details = detailsMap[booking] || {};
             const bookingID = details['http://www.fairtravel.com/fairtravel#bookingID'] || extractId(booking);
-            const accommodation = details['http://www.fairtravel.com/fairtravel#forAccommodation'] || 'Unknown';
+            const accommodation = details['http://www.fairtravel.com/fairtravel#forAccommodation']?.split('#')[1] || 'Unknown';
             const totalPrice = details['http://www.fairtravel.com/fairtravel#totalPrice'] || 'N/A';
-
             return (
               <li
                 key={booking}

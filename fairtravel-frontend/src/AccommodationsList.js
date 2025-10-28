@@ -166,8 +166,9 @@ function AccommodationsList() {
           {filteredAccommodations.map((accommodation) => {
             const details = detailsMap[accommodation] || {};
             const name = details['http://www.fairtravel.com/fairtravel#accommodationName'] || extractId(accommodation);
-            const location = details['http://www.fairtravel.com/fairtravel#accommodationLocation'] || 'Unknown';
-            const type = details['http://www.fairtravel.com/fairtravel#accommodationType'] || 'N/A';
+            const location = details['http://www.fairtravel.com/fairtravel#locatedIn']?.split('#')[1] || 'Unknown';
+            const type = details['http://www.w3.org/1999/02/22-rdf-syntax-ns#type']?.split('#')[1] || 'N/A';
+
 
             return (
               <li

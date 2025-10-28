@@ -1,30 +1,16 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
-import ActivitiesList from './ActivitiesList';
-import RecommendationsList from './RecommendationsList';
-import EventsList from './EventsList';
-import ActivityDetails from './ActivityDetails';
-import RecommendationDetails from './RecommendationDetails';
-import EventDetails from './EventDetails';
-import AccommodationsList from './AccommodationsList';
-import AccommodationDetails from './AccommodationDetails';
-import BookingsList from './BookingsList';
-import BookingDetails from './BookingDetails';
-import SustainabilityPracticesList from './SustainabilityPracticesList';
-import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
+import React, { useState } from 'react';
+import { Routes, Route, useNavigate } from 'react-router-dom';
+import Navbar from './Navbar';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 import AiQueryBox from './AiQueryBox';
-import ServicesList from './ServicesList';
-import ServiceDetails from './ServiceDetails';
-import ServiceForm from './ServiceForm';
-import ReviewsList from './ReviewsList';
-import ReviewDetails from './ReviewDetails';
-import ReviewForm from './ReviewForm';
-import AwardsList from './AwardsList';
-import AwardDetails from './AwardDetails';
-import AwardForm from './AwardForm';
+import AccommodationsList from './AccommodationsList';
 import AccommodationForm from './AccommodationForm';
-import SustainabilityPracticeForm from './SustainabilityPracticeForm';
+import ActivitiesList from './ActivitiesList';
+import ActivityDetails from './ActivityDetails';
+import AwardsList from './AwardsList';
+import AwardForm from './AwardForm';
+import BookingsList from './BookingsList';
 import BookingForm from './BookingForm';
 // Location, Transport, CarbonFootprint components
 import LocationsList from './LocationsList';
@@ -37,157 +23,138 @@ import CarbonFootprintsList from './CarbonFootprintsList';
 import CarbonFootprintDetails from './CarbonFootprintDetails';
 import CarbonFootprintForm from './CarbonFootprintForm';
 
+import EventsList from './EventsList';
+import EventDetails from './EventDetails';
+import RecommendationsList from './RecommendationsList';
+import RecommendationDetails from './RecommendationDetails';
+import ReviewsList from './ReviewsList';
+import ReviewForm from './ReviewForm';
+import ServicesList from './ServicesList';
+import ServiceForm from './ServiceForm';
+import SustainabilityPracticesList from './SustainabilityPracticesList';
+import SustainabilityPracticeForm from './SustainabilityPracticeForm';
+import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
+import AccommodationDetails from './AccommodationDetails';
+import BookingDetails from './BookingDetails';
 
 function App() {
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const navigate = useNavigate();
+
+  const handleLogin = (jwt) => {
+    setToken(jwt);
+    navigate('/');
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+    navigate('/');
+  };
+  const handleRegister = () => {
+    navigate('/login');
+  };
+
+  // Decode JWT to get role (simple, not secure for production)
+  let role = null;
+  let jwtPayload = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      jwtPayload = payload;
+      // JWT payload structure: { sub: { username, role } }
+      if (payload.sub && payload.sub.role) {
+        role = payload.sub.role;
+      } else if (payload.role) {
+        role = payload.role;
+      }
+    } catch {}
+  }
+
   return (
-    <Router>
-      <div style={{maxWidth:700, margin:'2rem auto', padding:'1rem'}}>
-        <h1 style={{marginBottom:'2rem'}}>FairTravel</h1>
-        <nav
-          style={{
-            marginBottom: '2rem',
-            display: 'flex',
-            gap: '2rem',
-            flexWrap: 'wrap',
-          }}
-        >
-          <Link
-            to="/activities"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Activities
-          </Link>
+    <div style={{ minHeight: '100vh', background: 'linear-gradient(135deg, #e3f0ff 0%, #f5f7fa 100%)' }}>
+      <Navbar role={role} onLogout={handleLogout} />
+      <Routes>
+        <Route path="/" element={
+          <div style={{ display: 'flex', flexDirection: 'column', alignItems: 'center', marginTop: '5vh' }}>
+            <div style={{ background: 'white', padding: '2.5rem 2rem', borderRadius: 18, boxShadow: '0 8px 32px #0002', minWidth: 370, maxWidth: 600, textAlign: 'center' }}>
+              <h1 style={{ marginBottom: '2rem', fontSize: '2.5rem', fontWeight: 700, color: '#1976d2' }}>Welcome to FairTravel!</h1>
+              {role ? (
+                <>
+                  <p style={{ marginBottom: '2rem', color: '#555' }}>You are logged in.</p>
+                  <div style={{ marginBottom: '1rem', color: '#888', fontSize: '0.95rem' }}>Detected role: <b>{role}</b></div>
+                </>
+              ) : (
+                <>
+                  <p style={{ marginBottom: '2rem', color: '#555' }}>Please <a href="/login" style={{color:'#1976d2',fontWeight:600}}>login</a> or <a href="/register" style={{color:'#1976d2',fontWeight:600}}>register</a> to continue.</p>
+                </>
+              )}
+            </div>
+          </div>
+        } />
+        <Route path="/login" element={<LoginForm onLogin={handleLogin} />} />
+        <Route path="/register" element={<RegisterForm onRegister={handleRegister} />} />
+  <Route path="/ai-chat" element={(role === 'user' || role === 'admin') ? <AiQueryBox /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+        <Route path="/admin" element={role === 'admin' ? (
+          <div style={{margin:'2rem auto',maxWidth:900}}>
+            <h2 style={{fontSize:'1.4rem', fontWeight:700, color:'#1976d2', marginBottom:'1.2rem'}}>Admin Dashboard</h2>
+            <ul style={{listStyle:'none',padding:0}}>
+              <li><a href="/accommodations" style={{color:'#1976d2',fontWeight:600}}>Manage Accommodations</a></li>
+              <li><a href="/activities" style={{color:'#1976d2',fontWeight:600}}>Manage Activities</a></li>
+              <li><a href="/awards" style={{color:'#1976d2',fontWeight:600}}>Manage Awards</a></li>
+              <li><a href="/bookings" style={{color:'#1976d2',fontWeight:600}}>Manage Bookings</a></li>
+              <li><a href="/events" style={{color:'#1976d2',fontWeight:600}}>Manage Events</a></li>
+              <li><a href="/recommendations" style={{color:'#1976d2',fontWeight:600}}>Manage Recommendations</a></li>
+              <li><a href="/reviews" style={{color:'#1976d2',fontWeight:600}}>Manage Reviews</a></li>
+              <li><a href="/services" style={{color:'#1976d2',fontWeight:600}}>Manage Services</a></li>
+              <li><a href="/sustainability-practices" style={{color:'#1976d2',fontWeight:600}}>Manage Sustainability Practices</a></li>
+            </ul>
+          </div>
+        ) : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+        <Route path="/accommodations/*" element={role === 'admin' ? <AccommodationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations" element={role === 'admin' ? <AccommodationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/new" element={role === 'admin' ? <AccommodationForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/:id" element={role === 'admin' ? <AccommodationDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/accommodations/:id/edit" element={role === 'admin' ? <AccommodationForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/recommendations"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Recommendations
-          </Link>
+  <Route path="/activities" element={<ActivitiesList />} />
+  <Route path="/activities/:id" element={<ActivityDetails />} />
 
-          <Link
-            to="/events"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Events
-          </Link>
+    <Route path="/awards" element={role === 'admin' ? <AwardsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/awards/new" element={role === 'admin' ? <AwardForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/awards/:id" element={role === 'admin' ? <AwardForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/awards/:id/edit" element={role === 'admin' ? <AwardForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/accommodations"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Accommodations
-          </Link>
+  <Route path="/bookings" element={role === 'admin' ? <BookingsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/new" element={role === 'admin' ? <BookingForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/:id" element={role === 'admin' ? <BookingDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/bookings/:id/edit" element={role === 'admin' ? <BookingForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/bookings"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Bookings
-          </Link>
+    <Route path="/events" element={role === 'admin' ? <EventsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/events/new" element={role === 'admin' ? <EventDetails isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/events/:id" element={role === 'admin' ? <EventDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/events/:id/edit" element={role === 'admin' ? <EventDetails isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/sustainability-practices"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Sustainability
-          </Link>
+    <Route path="/recommendations" element={role === 'admin' ? <RecommendationsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/recommendations/new" element={role === 'admin' ? <RecommendationDetails isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/recommendations/:id" element={role === 'admin' ? <RecommendationDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/recommendations/:id/edit" element={role === 'admin' ? <RecommendationDetails isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/services"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Services
-          </Link>
+    <Route path="/reviews" element={role === 'admin' ? <ReviewsList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/reviews/new" element={role === 'admin' ? <ReviewForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/reviews/:id" element={role === 'admin' ? <ReviewForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/reviews/:id/edit" element={role === 'admin' ? <ReviewForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/reviews"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Reviews
-          </Link>
+    <Route path="/services" element={role === 'admin' ? <ServicesList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/services/new" element={role === 'admin' ? <ServiceForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/services/:id" element={role === 'admin' ? <ServiceForm /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+    <Route path="/services/:id/edit" element={role === 'admin' ? <ServiceForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
 
-          <Link
-            to="/awards"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Awards
-          </Link>
-        </nav>
-
-        <nav style={{ marginBottom: '2rem', display: 'flex', gap: '2rem', flexWrap: 'wrap' }}>
-          <Link to="/locations" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
-            Locations
-          </Link>
-          <Link to="/transports" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
-            Transports
-          </Link>
-          <Link to="/carbon-footprints" style={{ fontWeight: 'bold', color: '#388e3c', textDecoration: 'none' }}>
-            Carbon Footprints
-          </Link>
-        </nav>
-
-        <Routes>
-          {/* Location Routes */}
-          <Route path="/locations" element={<LocationsList />} />
-            <Route path="/locations/new" element={<LocationForm />} />
-            <Route path="/locations/:id" element={<LocationDetails />} />
-            <Route path="/locations/:item_id/edit" element={<LocationForm />} />
-
-          {/* Transport Routes */}
-          <Route path="/transports" element={<TransportsList />} />
-          <Route path="/transports/new" element={<TransportForm />} />
-          <Route path="/transports/:id" element={<TransportDetails />} />
-          <Route path="/transports/:id/edit" element={<TransportForm />} />
-
-          {/* Carbon Footprint Routes */}
-          <Route path="/carbon-footprints" element={<CarbonFootprintsList />} />
-          <Route path="/carbon-footprints/new" element={<CarbonFootprintForm />} />
-          <Route path="/carbon-footprints/:id" element={<CarbonFootprintDetails />} />
-          <Route path="/carbon-footprints/:id/edit" element={<CarbonFootprintForm />} />
-
-
-          <Route path="/activities" element={<ActivitiesList />} />
-          <Route path="/activities/:id" element={<ActivityDetails />} />
-            <Route path="/recommendations" element={<RecommendationsList />} />
-              <Route path="/recommendations/:id/*" element={<RecommendationDetails />} />
-            <Route path="/events" element={<EventsList />} />
-              <Route path="/events/:id/*" element={<EventDetails />} />
-            <Route path="/" element={<ActivitiesList />} />
-            <Route path="/accommodations" element={<AccommodationsList />} />
-            <Route path="/accommodations/:id" element={<AccommodationDetails />} />
-            <Route path="/accommodations/new" element={<AccommodationForm />} />
-            <Route path="/accommodations/:id/edit" element={<AccommodationForm />} />
-            <Route path="/bookings" element={<BookingsList />} />
-            <Route path="/bookings/:id" element={<BookingDetails />} />
-            <Route path="/bookings/new" element={<BookingForm />} />
-            <Route path="/bookings/:id/edit" element={<BookingForm />} />
-            <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
-            <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
-            <Route path="/sustainability-practices/new" element={<SustainabilityPracticeForm />} />
-            <Route path="/sustainability-practices/:id/edit" element={<SustainabilityPracticeForm />} />
-            
-            {/* Services Routes */}
-            <Route path="/services" element={<ServicesList />} />
-            <Route path="/services/new" element={<ServiceForm />} />
-            <Route path="/services/:id" element={<ServiceDetails />} />
-            <Route path="/services/:id/edit" element={<ServiceForm />} />
-            
-            {/* Reviews Routes */}
-            <Route path="/reviews" element={<ReviewsList />} />
-            <Route path="/reviews/new" element={<ReviewForm />} />
-            <Route path="/reviews/:id" element={<ReviewDetails />} />
-            <Route path="/reviews/:id/edit" element={<ReviewForm />} />
-            
-            {/* Awards Routes */}
-            <Route path="/awards" element={<AwardsList />} />
-            <Route path="/awards/new" element={<AwardForm />} />
-            <Route path="/awards/:id" element={<AwardDetails />} />
-            <Route path="/awards/:id/edit" element={<AwardForm />} />
-        </Routes>
-        <AiQueryBox />
-      </div>
-    </Router>
+  <Route path="/sustainability-practices" element={role === 'admin' ? <SustainabilityPracticesList /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/new" element={role === 'admin' ? <SustainabilityPracticeForm isNew /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/:id" element={role === 'admin' ? <SustainabilityPracticeDetails /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+  <Route path="/sustainability-practices/:id/edit" element={role === 'admin' ? <SustainabilityPracticeForm isEdit /> : <div style={{textAlign:'center',marginTop:'3rem',color:'red'}}>Access Denied</div>} />
+      </Routes>
+    </div>
   );
 }
 

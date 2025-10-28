@@ -15,12 +15,22 @@ function AccommodationForm() {
     starRating: "",
     description: "",
     availabilityStatus: true,
-    hasLocation: "",
+    locatedIn: "",
     hasSustainabilityPractice: ""
   });
 
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
+
+  // Get JWT and role
+  const token = localStorage.getItem('token');
+  let role = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      role = payload.sub && payload.sub.role ? payload.sub.role : null;
+    } catch {}
+  }
 
   // Load existing data when editing
   useEffect(() => {
@@ -51,8 +61,8 @@ function AccommodationForm() {
           description: data["http://www.fairtravel.com/fairtravel#description"] || "",
           availabilityStatus:
             data["http://www.fairtravel.com/fairtravel#availabilityStatus"] === "true",
-          hasLocation:
-            (data["http://www.fairtravel.com/fairtravel#hasLocation"] || "").split("#").pop() || "",
+          locatedIn:
+            (data["http://www.fairtravel.com/fairtravel#locatedIn"] || "").split("#").pop() || "",
           hasSustainabilityPractice:
             (data["http://www.fairtravel.com/fairtravel#hasSustainabilityPractice"] || "")
               .split("#")
@@ -66,6 +76,16 @@ function AccommodationForm() {
 
     load();
   }, [id, isEdit]);
+
+  // Conditional rendering after hooks
+  if (role !== 'admin') {
+    return (
+      <div style={{maxWidth:500,margin:'2rem auto',padding:'2rem',color:'red',textAlign:'center'}}>
+        <h2>Access Denied</h2>
+        <p>Only admins can create or edit accommodations.</p>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

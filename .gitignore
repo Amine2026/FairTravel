@@ -1,0 +1,11 @@
+# Ignore SQLite DB
+instance/users.db
+# Node modules
+fairtravel-frontend/node_modules/
+# Build output
+fairtravel-frontend/build/
+# Python cache
+__pycache__/
+*.pyc
+# Env files
+.env
