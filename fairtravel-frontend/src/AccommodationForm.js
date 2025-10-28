@@ -22,6 +22,16 @@ function AccommodationForm() {
   const [loading, setLoading] = useState(false);
   const [fetchError, setFetchError] = useState(null);
 
+  // Get JWT and role
+  const token = localStorage.getItem('token');
+  let role = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      role = payload.role || (payload.identity && payload.identity.role);
+    } catch {}
+  }
+
   // Load existing data when editing
   useEffect(() => {
     if (!isEdit) return;
@@ -66,6 +76,16 @@ function AccommodationForm() {
 
     load();
   }, [id, isEdit]);
+
+  // Conditional rendering after hooks
+  if (role !== 'admin') {
+    return (
+      <div style={{maxWidth:500,margin:'2rem auto',padding:'2rem',color:'red',textAlign:'center'}}>
+        <h2>Access Denied</h2>
+        <p>Only admins can create or edit accommodations.</p>
+      </div>
+    );
+  }
 
   const handleChange = (e) => {
     const { name, value, type, checked } = e.target;

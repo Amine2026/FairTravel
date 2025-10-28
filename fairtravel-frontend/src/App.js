@@ -1,151 +1,106 @@
-import React from 'react';
-import { BrowserRouter as Router, Routes, Route, Link } from 'react-router-dom';
-
-import ActivitiesList from './ActivitiesList';
-import RecommendationsList from './RecommendationsList';
-import EventsList from './EventsList';
-import ActivityDetails from './ActivityDetails';
-import RecommendationDetails from './RecommendationDetails';
-import EventDetails from './EventDetails';
-import AccommodationsList from './AccommodationsList';
-import AccommodationDetails from './AccommodationDetails';
-import BookingsList from './BookingsList';
-import BookingDetails from './BookingDetails';
-import SustainabilityPracticesList from './SustainabilityPracticesList';
-import SustainabilityPracticeDetails from './SustainabilityPracticeDetails';
+import React, { useState } from 'react';
+import LoginForm from './LoginForm';
+import RegisterForm from './RegisterForm';
 import AiQueryBox from './AiQueryBox';
-import ServicesList from './ServicesList';
-import ServiceDetails from './ServiceDetails';
-import ServiceForm from './ServiceForm';
-import ReviewsList from './ReviewsList';
-import ReviewDetails from './ReviewDetails';
-import ReviewForm from './ReviewForm';
-import AwardsList from './AwardsList';
-import AwardDetails from './AwardDetails';
-import AwardForm from './AwardForm';
-import AccommodationForm from './AccommodationForm';
-import SustainabilityPracticeForm from './SustainabilityPracticeForm';
-import BookingForm from './BookingForm';
 
 function App() {
-  return (
-    <Router>
-      <div style={{maxWidth:700, margin:'2rem auto', padding:'1rem'}}>
-        <h1 style={{marginBottom:'2rem'}}>FairTravel</h1>
-        <nav
-          style={{
-            marginBottom: '2rem',
-            display: 'flex',
-            gap: '2rem',
-            flexWrap: 'wrap',
-          }}
-        >
-          <Link
-            to="/activities"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Activities
-          </Link>
+  const [token, setToken] = useState(localStorage.getItem('token') || null);
+  const [showLogin, setShowLogin] = useState(false);
+  const [showRegister, setShowRegister] = useState(false);
 
-          <Link
-            to="/recommendations"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Recommendations
-          </Link>
+  const handleLogin = (jwt) => {
+    setToken(jwt);
+    setShowLogin(false);
+  };
+  const handleLogout = () => {
+    localStorage.removeItem('token');
+    setToken(null);
+  };
+  const handleRegister = () => {
+    setShowRegister(false);
+    setShowLogin(true);
+  };
 
-          <Link
-            to="/events"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Events
-          </Link>
+  // Decode JWT to get role (simple, not secure for production)
+  let role = null;
+  let jwtPayload = null;
+  if (token) {
+    try {
+      const payload = JSON.parse(atob(token.split('.')[1]));
+      jwtPayload = payload;
+      // JWT payload structure: { sub: { username, role } }
+      if (payload.sub && payload.sub.role) {
+        role = payload.sub.role;
+      } else if (payload.role) {
+        role = payload.role;
+      }
+    } catch {}
+  }
 
-          <Link
-            to="/accommodations"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Accommodations
-          </Link>
-
-          <Link
-            to="/bookings"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Bookings
-          </Link>
-
-          <Link
-            to="/sustainability-practices"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Sustainability
-          </Link>
-
-          <Link
-            to="/services"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Services
-          </Link>
-
-          <Link
-            to="/reviews"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Reviews
-          </Link>
-
-          <Link
-            to="/awards"
-            style={{ fontWeight: 'bold', color: '#1976d2', textDecoration: 'none' }}
-          >
-            Awards
-          </Link>
-        </nav>
-
-        <Routes>
-          <Route path="/activities" element={<ActivitiesList />} />
-          <Route path="/activities/:id" element={<ActivityDetails />} />
-            <Route path="/recommendations" element={<RecommendationsList />} />
-              <Route path="/recommendations/:id/*" element={<RecommendationDetails />} />
-            <Route path="/events" element={<EventsList />} />
-              <Route path="/events/:id/*" element={<EventDetails />} />
-            <Route path="/" element={<ActivitiesList />} />
-            <Route path="/accommodations" element={<AccommodationsList />} />
-            <Route path="/accommodations/:id" element={<AccommodationDetails />} />
-            <Route path="/accommodations/new" element={<AccommodationForm />} />
-            <Route path="/accommodations/:id/edit" element={<AccommodationForm />} />
-            <Route path="/bookings" element={<BookingsList />} />
-            <Route path="/bookings/:id" element={<BookingDetails />} />
-            <Route path="/bookings/new" element={<BookingForm />} />
-            <Route path="/bookings/:id/edit" element={<BookingForm />} />
-            <Route path="/sustainability-practices" element={<SustainabilityPracticesList />} />
-            <Route path="/sustainability-practices/:id" element={<SustainabilityPracticeDetails />} />
-            <Route path="/sustainability-practices/new" element={<SustainabilityPracticeForm />} />
-            <Route path="/sustainability-practices/:id/edit" element={<SustainabilityPracticeForm />} />
-            
-            {/* Services Routes */}
-            <Route path="/services" element={<ServicesList />} />
-            <Route path="/services/new" element={<ServiceForm />} />
-            <Route path="/services/:id" element={<ServiceDetails />} />
-            <Route path="/services/:id/edit" element={<ServiceForm />} />
-            
-            {/* Reviews Routes */}
-            <Route path="/reviews" element={<ReviewsList />} />
-            <Route path="/reviews/new" element={<ReviewForm />} />
-            <Route path="/reviews/:id" element={<ReviewDetails />} />
-            <Route path="/reviews/:id/edit" element={<ReviewForm />} />
-            
-            {/* Awards Routes */}
-            <Route path="/awards" element={<AwardsList />} />
-            <Route path="/awards/new" element={<AwardForm />} />
-            <Route path="/awards/:id" element={<AwardDetails />} />
-            <Route path="/awards/:id/edit" element={<AwardForm />} />
-        </Routes>
-        <AiQueryBox />
+  // Homepage: only login/register until logged in
+  if (!token) {
+    return (
+      <div style={{minHeight:'100vh', display:'flex', flexDirection:'column', justifyContent:'center', alignItems:'center', background:'#f5f7fa'}}>
+        <div style={{background:'white', padding:'2.5rem 2rem', borderRadius:12, boxShadow:'0 4px 24px #0001', minWidth:350, textAlign:'center'}}>
+          <h1 style={{marginBottom:'2rem', fontSize:'2.5rem', fontWeight:700, color:'#1976d2'}}>FairTravel</h1>
+          <p style={{marginBottom:'2rem', color:'#555'}}>Welcome! Please log in or register to continue.</p>
+          <div style={{marginBottom:'2rem', display:'flex', justifyContent:'center', gap:'1rem'}}>
+            <button onClick={() => setShowLogin(true)} style={{padding:'0.5rem 1.5rem', fontWeight:600, borderRadius:6, border:'none', background:'#1976d2', color:'white', cursor:'pointer'}}>Login</button>
+            <button onClick={() => setShowRegister(true)} style={{padding:'0.5rem 1.5rem', fontWeight:600, borderRadius:6, border:'none', background:'#43a047', color:'white', cursor:'pointer'}}>Register</button>
+          </div>
+          {showLogin && <LoginForm onLogin={handleLogin} />}
+          {showRegister && <RegisterForm onRegister={handleRegister} />}
+        </div>
       </div>
-    </Router>
+    );
+  }
+
+  // After login, show welcome, logout, and AI chat for users
+  return (
+    <div style={{
+      minHeight:'100vh',
+      display:'flex',
+      flexDirection:'column',
+      justifyContent:'flex-start',
+      alignItems:'center',
+      background:'linear-gradient(135deg, #e3f0ff 0%, #f5f7fa 100%)'
+    }}>
+      <div style={{
+        background:'white',
+        padding:'2.5rem 2rem',
+        borderRadius:18,
+        boxShadow:'0 8px 32px #0002',
+        minWidth:370,
+        minHeight:500,
+        textAlign:'center',
+        marginTop:'5vh',
+        transition:'box-shadow 0.2s'
+      }}>
+        <h1 style={{marginBottom:'2rem', fontSize:'2.5rem', fontWeight:700, color:'#1976d2'}}>Welcome to FairTravel!</h1>
+        <p style={{marginBottom:'2rem', color:'#555'}}>You are logged in.</p>
+        <div style={{marginBottom:'1rem', color:'#888', fontSize:'0.95rem'}}>Detected role: <b>{role ? role : 'none'}</b></div>
+  {role === 'user' && <AiQueryBox />}
+        <button
+          onClick={handleLogout}
+          style={{
+            padding:'0.5rem 1.5rem',
+            fontWeight:600,
+            borderRadius:8,
+            border:'none',
+            background:'#d32f2f',
+            color:'white',
+            cursor:'pointer',
+            marginTop:'1.5rem',
+            boxShadow:'0 2px 8px #d32f2f22',
+            transition:'background 0.2s'
+          }}
+          onMouseOver={e => e.currentTarget.style.background = '#b71c1c'}
+          onMouseOut={e => e.currentTarget.style.background = '#d32f2f'}
+        >
+          Logout
+        </button>
+      </div>
+    </div>
   );
 }
 

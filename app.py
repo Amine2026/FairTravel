@@ -5,6 +5,8 @@ from SPARQLWrapper import SPARQLWrapper, JSON
 from flask_cors import CORS
 from groq import Groq
 from dotenv import load_dotenv
+from flask_sqlalchemy import SQLAlchemy
+from flask_jwt_extended import JWTManager, create_access_token, jwt_required, get_jwt_identity
 
 # Load environment variables from .env file (includes GROQ_API_KEY)
 load_dotenv()
@@ -18,6 +20,49 @@ else:
 
 app = Flask(__name__)
 CORS(app)
+
+# Configure SQLAlchemy
+app.config['SQLALCHEMY_DATABASE_URI'] = 'sqlite:///users.db'
+app.config['JWT_SECRET_KEY'] = 'your-secret-key'  # Change this to a strong secret key
+db = SQLAlchemy(app)
+jwt = JWTManager(app)
+
+# User model
+class User(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    username = db.Column(db.String(80), unique=True, nullable=False)
+    password = db.Column(db.String(120), nullable=False)
+    role = db.Column(db.String(10), nullable=False)  # 'user' or 'admin'
+
+# User registration endpoint
+@app.route('/register', methods=['POST'])
+def register():
+    data = request.json
+    # Always set role to 'user' for public registration
+    user = User(username=data['username'], password=data['password'], role='user')
+    db.session.add(user)
+    db.session.commit()
+    return jsonify({"msg": "User registered"}), 201
+
+# User login endpoint
+@app.route('/login', methods=['POST'])
+def login():
+    data = request.json
+    user = User.query.filter_by(username=data['username'], password=data['password']).first()
+    if not user:
+        return jsonify({"msg": "Bad credentials"}), 401
+    access_token = create_access_token(identity={'username': user.username, 'role': user.role})
+    return jsonify(access_token=access_token)
+
+# Admin-only endpoint
+@app.route('/admin-only', methods=['GET'])
+@jwt_required()
+def admin_only():
+    identity = get_jwt_identity()
+    if identity['role'] != 'admin':
+        return jsonify({"msg": "Admins only!"}), 403
+    return jsonify({"msg": "Welcome, admin!"})
+
 
 # Change this to your Fuseki SPARQL endpoint
 FUSEKI_URL = "http://localhost:3030/FairTravel/sparql"
@@ -1405,4 +1450,6 @@ def delete_event(event_uri):
         return jsonify({'error': str(e)}), 500
 
 if __name__ == '__main__':
+    with app.app_context():
+        db.create_all()
     app.run(debug=True)
