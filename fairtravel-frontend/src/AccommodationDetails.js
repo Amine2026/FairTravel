@@ -25,14 +25,19 @@ function AccommodationDetails({ uri }) {
 
   const labels = {
     'http://www.fairtravel.com/fairtravel#accommodationName': 'Accommodation Name',
-    'http://www.fairtravel.com/fairtravel#availabilityStatus': 'Availability Status',
-    'http://www.fairtravel.com/fairtravel#description': 'Description',
-    'http://www.w3.org/1999/02/22-rdf-syntax-ns#type': 'Element Type',
     'http://www.fairtravel.com/fairtravel#pricePerNight': 'Price per Night',
     'http://www.fairtravel.com/fairtravel#capacity': 'Capacity',
     'http://www.fairtravel.com/fairtravel#starRating': 'Star Rating',
     'http://www.fairtravel.com/fairtravel#hasSustainabilityPractice': 'Sustainability Practice',
     'http://www.fairtravel.com/fairtravel#hasLocation': 'Location',
+  };
+
+  const valueToLabel = (v) => {
+    if (!v) return 'Unknown';
+    if (typeof v === 'string' && v.includes('http://www.fairtravel.com/fairtravel#')) {
+      return v.split('#')[1]; // extract the local name
+    }
+    return v;
   };
 
   const valueToLabel = (v) => {
